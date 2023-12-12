@@ -25,7 +25,7 @@ function App() {
         <div style={{marginTop:64}}>
             <Routes>
               {/* <Route path = '/login' element = {<Login/>}/> */}
-              <Route  path = '/' element = {<CompanyHome/>}/>
+              <Route  path = '/home' element = {<CompanyHome/>}/>
               
               <Route  path = '/login' element = {<Login/>}/>
               <Route  path = '/createjob' element = {<CreateNewJob/>}/>

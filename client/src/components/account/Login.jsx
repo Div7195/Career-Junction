@@ -63,11 +63,13 @@ const Error = styled(Typography)`
 `
 const loginIntialValues = {
     username : '',
-    password : ''
+    password : '',
+    role:'aspirant'
 }
 const signupInitialValues  = {
     username : '',
     password : '',
+    role:'aspirant'
 }
 const Login = ()=>{
     const imageUrl = "https://pbs.twimg.com/profile_images/1235105025069912064/9yAfb_Rg_400x400.jpg";
@@ -82,37 +84,110 @@ const Login = ()=>{
     }
     const onInputChange = (e) => {
         setSignup({...signup, [e.target.name] : e.target.value});
+        
     }
     const onValueChange = (e) => {
         setLogin({...login, [e.target.name] : e.target.value});
-        console.log(login)
+        
     }
+    const toAspirant = (e) => {
+        setSignup({...signup, role : 'aspirant'});
+            setLogin({...login, role : 'aspirant'});
+            
+            document.getElementById('aspirantB').style.backgroundColor = '#41ef1a';
+            document.getElementById('aspirantB').style.color = 'black';
+            document.getElementById('companyB').style.backgroundColor = 'black';
+            document.getElementById('companyB').style.color = '#41ef1a';
+            document.getElementById('adminB').style.backgroundColor = 'black';
+            document.getElementById('adminB').style.color = '#41ef1a';
+           
+    }
+    const toCompany = (e) => {
+        setSignup({...signup, role : 'company'});
+            setLogin({...login, role : 'company'});
+            
+            document.getElementById('companyB').style.backgroundColor = '#41ef1a';
+            document.getElementById('companyB').style.color = 'black';
+            document.getElementById('aspirantB').style.backgroundColor = 'black';
+            document.getElementById('aspirantB').style.color = '#41ef1a';
+            document.getElementById('adminB').style.backgroundColor = 'black';
+            document.getElementById('adminB').style.color = '#41ef1a';
+            
+    }
+    const toAdmin = (e) => {
+        setSignup({...signup, role : 'admin'});
+            setLogin({...login, role : 'admin'});
+           
+            document.getElementById('adminB').style.backgroundColor = '#41ef1a';
+            document.getElementById('adminB').style.color = 'black';
+            document.getElementById('aspirantB').style.backgroundColor = 'black';
+            document.getElementById('aspirantB').style.color = '#41ef1a';
+            document.getElementById('companyB').style.backgroundColor = 'black';
+            document.getElementById('companyB').style.color = '#41ef1a';
+            
+    }
+    
     const signupUser = async() =>{
-       let response;
-       if(response.isSuccess){
-        setSignup(signupInitialValues);
-        toggleAccount('login');
-       }else{
-        setError('Something went wrong, please try again later');
-       }
+        
+       const settings = {
+        method: "POST",
+        body: JSON.stringify(signup),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+        }
+        try {
+            console.log(settings.body)
+            const fetchResponse = await fetch(`http://localhost:8000/signup`, settings);
+            const response = await fetchResponse.json();
+            setSignup(signupInitialValues);
+            toggleAccount('login');
+            
+        } catch (e) {
+            setError('Something went wrong, please try again later');
+            return e;
+        }    
     }
     const loginUser = async() => {
-        let response  ;
-        if(response.isSuccess){
-            setError('');
+        const settings = {
+            method: "POST",
+            body: JSON.stringify(login),
+            headers: {
+                "Accept": "application/json, form-data", 
+            }
+            }
+            try {
+                const fetchResponse = await fetch(`http://localhost:8000/login`, settings);
+                const response = await fetchResponse.json();
+                setError('');
 
-            sessionStorage.setItem('accessToken', `Bearer ${response.data.accessToken}`);
-            sessionStorage.setItem('refreshToken', `Bearer ${response.data.refreshToken}`);
+                sessionStorage.setItem('accessToken', `Bearer ${response.data.accessToken}`);
+                sessionStorage.setItem('refreshToken', `Bearer ${response.data.refreshToken}`);
             
-            setAccount({username : response.data.username, loggedIn:true, id:response.data.mongoId});
+                setAccount({username : response.data.username, loggedIn:true, id:response.data.mongoId, role:response.data.role});
             
-            navigate('/');
-        }else{
-            setError('Something went wrong, please try again later');
-        }
+                navigate('/');
+                setLogin(signupInitialValues);
+                toggleAccount('signup');
+                
+            } catch (e) {
+                setError('Something went wrong, please try again later');
+                return e;
+            }
+            
+        
     }
     return (
+        
         <Component>
+        <Box display='flex' width='100%'>
+        <SignupButton id='aspirantB'  onClick={toAspirant}>Aspirant</SignupButton>
+
+        <SignupButton id='companyB' style={{margin:'auto'}} onClick={toCompany}>Company</SignupButton>
+
+        <SignupButton id='adminB'  onClick={toAdmin}>Admin</SignupButton>
+
+        </Box>
             <Image src = {imageUrl} />
             {
             account === 'login'?
