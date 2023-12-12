@@ -24,7 +24,10 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import CompanySidebar from '../sidebar/CompanySidebar';
-
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { useContext } from "react";
+import { DataContext } from '../../context/DataProvider';
 const drawerWidth = 240;
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -67,6 +70,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function CompanyHeader() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const {account}=useContext(DataContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -108,7 +114,7 @@ export default function CompanyHeader() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={() => { if(location.pathname.includes('login') === false) navigate('/login')}}>Logout</MenuItem>
     </Menu>
   );
 
@@ -129,21 +135,22 @@ export default function CompanyHeader() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+      <MenuItem >
+        <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={() => { if(location.pathname.includes('messaging') === false) navigate('/messaging')}} >
           <Badge badgeContent={4} color="error">
-            <MailIcon />
+            <MailIcon  />
           </Badge>
         </IconButton>
         <p>Messages</p>
       </MenuItem>
-      <MenuItem>
+      <MenuItem >
         <IconButton
           size="large"
           aria-label="show 17 new notifications"
           color="inherit"
+          
         >
-          <Badge badgeContent={17} color="error">
+          <Badge badgeContent={17} color="error" >
             <NotificationsIcon />
           </Badge>
         </IconButton>
@@ -165,7 +172,13 @@ export default function CompanyHeader() {
   );
 
   return (
-    <Box sx={{ display: "flex" }}>
+   
+
+    <div>
+    {
+      location.pathname.includes('login') === true?
+      account && account.loggedIn === true ?
+      <Box sx={{ display: "flex" }}>
     <Box sx={{ flexGrow: 1 }}>
       <AppBar  position="fixed"
         sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }} style={{backgroundColor:"#131c30"}}>
@@ -198,7 +211,7 @@ export default function CompanyHeader() {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit" style={{marginLeft:'10px'}}>
+            <IconButton size="large" aria-label="show 4 new mails" color="inherit" style={{marginLeft:'10px'}} onClick={() => { if(location.pathname.includes('messaging') === false) navigate('/messaging')}}>
               <Badge badgeContent={4} color="error">
                 <MailIcon style={{ color: '#00ecff' , fontSize:'30px'}} />
               </Badge>
@@ -208,6 +221,7 @@ export default function CompanyHeader() {
               aria-label="show 17 new notifications"
               color="inherit"
               style={{ color: '#00ecff' ,marginLeft:'10px'}}
+              onClick={() => { if(location.pathname.includes('notifications') === false) navigate('/notifications')}}
             >
               <Badge badgeContent={17} color="error">
                 <NotificationsIcon style={{ color: '#00ecff', fontSize:'30px'}} />
@@ -246,5 +260,96 @@ export default function CompanyHeader() {
     </Box>
     <CompanySidebar/>
     </Box>
-  );
-}
+    
+    :
+    <div></div>
+    :
+    <Box sx={{ display: "flex" }}>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar  position="fixed"
+        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }} style={{backgroundColor:"#131c30"}}>
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            sx={{ mr: 2 }}
+          >
+            
+          </IconButton>
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ display: { xs: 'none', sm: 'block' } }}
+          >
+           
+          </Typography>
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon style={{ color: '#00ecff' }} />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </Search>
+          <Box sx={{ flexGrow: 1 }} />
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+            <IconButton size="large" aria-label="show 4 new mails" color="inherit" style={{marginLeft:'10px'}} onClick={() => { if(location.pathname.includes('messaging') === false) navigate('/messaging')}}>
+              <Badge badgeContent={4} color="error">
+                <MailIcon style={{ color: '#00ecff' , fontSize:'30px'}} />
+              </Badge>
+            </IconButton>
+            <IconButton
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+              style={{ color: '#00ecff' ,marginLeft:'10px'}}
+              onClick={() => { if(location.pathname.includes('notifications') === false) navigate('/notifications')}}
+            >
+              <Badge badgeContent={17} color="error">
+                <NotificationsIcon style={{ color: '#00ecff', fontSize:'30px'}} />
+              </Badge>
+            </IconButton>
+            <IconButton
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={handleProfileMenuOpen}
+              color="inherit"
+              style={{ color: '#00ecff',marginLeft:'10px'}}
+            >
+              <AccountCircle style={{fontSize:'30px'}} />
+            </IconButton>
+          </Box>
+          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="show more"
+              aria-controls={mobileMenuId}
+              aria-haspopup="true"
+              onClick={handleMobileMenuOpen}
+              color="inherit"
+              style={{ color: '#00ecff' }}
+            >
+              <MoreIcon style={{ color: '#00ecff' }}/>
+            </IconButton>
+          </Box>
+        </Toolbar>
+      </AppBar>
+      {renderMobileMenu}
+      {renderMenu}
+    </Box>
+    <CompanySidebar/>
+    </Box>
+      
+    }
+    
+    </div>
+    );
+   }
+    

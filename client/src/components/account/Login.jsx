@@ -70,7 +70,7 @@ const signupInitialValues  = {
     password : '',
 }
 const Login = ()=>{
-    const imageUrl = 'https://yt3.googleusercontent.com/ytc/AGIKgqMOVIYWLE2aX9TLspohF2260AFRBnSwVJRuhB3b=s900-c-k-c0x00ffffff-no-rj';
+    const imageUrl = "https://pbs.twimg.com/profile_images/1235105025069912064/9yAfb_Rg_400x400.jpg";
     const [account, toggleAccount] = useState('login');
     const [signup, setSignup] = useState(signupInitialValues)
     const [login, setLogin] = useState(loginIntialValues);
@@ -113,7 +113,7 @@ const Login = ()=>{
     }
     return (
         <Component>
-            <Image src = {imageUrl} alt = 'login'/>
+            <Image src = {imageUrl} />
             {
             account === 'login'?
             <Wrapper>

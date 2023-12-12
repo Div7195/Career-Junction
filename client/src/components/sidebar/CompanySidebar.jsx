@@ -15,8 +15,12 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import WorkIcon from '@mui/icons-material/Work';
 import PeopleIcon from '@mui/icons-material/People';
 import BusinessIcon from '@mui/icons-material/Business';
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 const drawerWidth = 240;
 export default function CompanySidebar() {
+  const navigate  = useNavigate();
+  const location  = useLocation();
     return(
       
       <Drawer
@@ -43,12 +47,18 @@ export default function CompanySidebar() {
         <List>
           {["Create new opening", "Your openings"].map((text, index) => (
             <ListItem key={text} disablePadding>
-              <ListItemButton >
+            {index % 2 === 0 ? <ListItemButton onClick={() => { if(location.pathname.includes('createjob') === false) navigate('/createjob')}} >
                 <ListItemIcon style={{ color: '#00ecff' }} >
-                  {index % 2 === 0 ? <AddCircleIcon /> : <WorkIcon />}
+                   <AddCircleIcon />
                 </ListItemIcon>
                 <ListItemText primary={text} />
-              </ListItemButton>
+              </ListItemButton> : <ListItemButton onClick={() => { if(location.pathname.includes('youropenings') === false) navigate('/youropenings')}} >
+                <ListItemIcon style={{ color: '#00ecff' }} >
+                   <WorkIcon/>
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItemButton>}
+              
             </ListItem>
           ))}
         </List>
@@ -56,12 +66,17 @@ export default function CompanySidebar() {
         <List>
           {["Search people", "Search companies"].map((text, index) => (
             <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon style={{ color: '#00ecff' }}>
-                  {index % 2 === 0 ? <PeopleIcon /> : <BusinessIcon />}
+            {index % 2 === 0 ? <ListItemButton onClick={() => { if(location.pathname.includes('people') === false) navigate('/people')}} >
+                <ListItemIcon style={{ color: '#00ecff' }} >
+                   <PeopleIcon/>
                 </ListItemIcon>
                 <ListItemText primary={text} />
-              </ListItemButton>
+              </ListItemButton> : <ListItemButton onClick={() => { if(location.pathname.includes('companies') === false) navigate('/companies')}} >
+                <ListItemIcon style={{ color: '#00ecff' }} >
+                   <BusinessIcon/>
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItemButton>}
             </ListItem>
           ))}
         </List>

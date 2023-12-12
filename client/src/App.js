@@ -5,8 +5,13 @@ import DataProvider from './context/DataProvider';
 import CompanyHome from './components/home/CompanyHome.jsx';
 import { Route } from 'react-router-dom';
 import {BrowserRouter, Routes} from 'react-router-dom';
-
-
+import CompanyHeader from './components/header/CompanyHeader.jsx';
+import CreateNewJob from './components/jobs/CreateNewJob.jsx';
+import CompanyOpenings from './components/jobs/CompanyOpenings.jsx';
+import People from './components/people/People.jsx';
+import Companies from './components/companies/Companies.jsx';
+import Messaging from './components/messaging/Messaging.jsx';
+import Notifications from './components/notifs/Notifications.jsx';
 
 
 
@@ -16,14 +21,19 @@ function App() {
     
       <DataProvider>
         <BrowserRouter>
-          
-          <div >
+          <CompanyHeader/>
+        <div style={{marginTop:64}}>
             <Routes>
               {/* <Route path = '/login' element = {<Login/>}/> */}
               <Route  path = '/' element = {<CompanyHome/>}/>
               
               <Route  path = '/login' element = {<Login/>}/>
-              
+              <Route  path = '/createjob' element = {<CreateNewJob/>}/>
+              <Route  path = '/youropenings' element = {<CompanyOpenings/>}/>
+              <Route  path = '/people' element = {<People/>}/>
+              <Route  path = '/companies' element = {<Companies/>}/>
+              <Route  path = '/messaging' element = {<Messaging/>}/>
+              <Route  path = '/notifications' element = {<Notifications/>}/>
             </Routes>
           </div>
         </BrowserRouter>
