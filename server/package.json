@@ -1,0 +1,11 @@
+{
+  "name": "backend-career-junction",
+  "version": "1.0.0",
+  "description": "backend of career junction",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "DiV",
+  "license": "ISC"
+}

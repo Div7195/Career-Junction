@@ -1,0 +1,16 @@
+3 modules - company, admin, aspirant
+
+Company
+Browse people and companies(view details of company and people)
+Post Job oppurtunity
+Find people
+Edit company details
+
+Aspirant
+Browse companies(view details of company)
+Explore jobs(with various filters)
+Edit self details
+
+Admin
+Browse companies and people
+
