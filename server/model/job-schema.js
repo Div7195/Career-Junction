@@ -49,7 +49,15 @@ const jobSchema = mongoose.Schema({
         type:String,
         required:true
     },
-    aboutJob :{
+    jobRequirements :{
+        type:String,
+        required:true
+    },
+    reponsibilities :{
+        type:String,
+        required:true
+    },
+    hiringProcess :{
         type:String,
         required:true
     },
