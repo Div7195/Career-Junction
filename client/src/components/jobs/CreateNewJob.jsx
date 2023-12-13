@@ -7,9 +7,20 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import NativeSelect from '@mui/material/NativeSelect';
 import skills from "../../constants/skills.js";
+import { useState } from "react";
+import CloseIcon from '@mui/icons-material/Close';
 import { cleanDigitSectionValue } from "@mui/x-date-pickers/internals/hooks/useField/useField.utils";
 const CreateNewJob = () => {
-    
+    const [skillsChosen, setSkills] = useState([]);
+    console.log(skillsChosen)
+    const handleOptionClick = (e) => {
+        setSkills([...skillsChosen, e.target.value ])
+    }
+    const handleDeleteSkill = (skill) => {
+        setSkills(skillsChosen.filter((e)=>{
+            if(e !== skill) return e;
+        }))
+    }
     return(
         
         <div style={{
@@ -197,6 +208,9 @@ const CreateNewJob = () => {
                 <FormControl fullWidth>
                     
                     <NativeSelect
+                        onChange={(e) => {
+                            handleOptionClick(e);
+                        }}
                         defaultValue={30}
                         inputProps={{
                         name: 'age',
@@ -206,13 +220,53 @@ const CreateNewJob = () => {
                     {
                         skills.map((skill) =>
                         (
-                            
-                            <option value={skill.name}>{skill.name}</option>
+                            <option  value={skill.name}>{skill.name}</option>
                         ))
+                    
                     }
                         
                     </NativeSelect>
+
                 </FormControl>
+                <div style={{
+                    display:'flex',
+                    flexDirection:'row',
+                    width:400,
+                    flexWrap:'wrap'
+                }}>
+
+                        
+
+                {
+                    
+                    skillsChosen.map((skill) =>
+                        (
+                        <div>
+                        <div  style={{
+                        background:'black',
+                        color:'white',
+                        borderRadius:'20px',
+                        width:'fit-content',
+                        padding:'5px',
+                        display:'flex',
+                        flexDirection:'row'
+                    }}>
+                            <div>
+                                {skill}
+                            </div>
+                            <div>
+                            <CloseIcon onClick={() => {handleDeleteSkill(skill)}}  style={{
+                                cursor:'pointer'
+                            }}/>
+                            </div>
+                            </div>
+                        </div>
+                        ))
+                }
+                    
+                        
+                   
+                </div>
                 </div>
             </div>
             <div style={{
