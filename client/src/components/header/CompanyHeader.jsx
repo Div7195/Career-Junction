@@ -73,6 +73,7 @@ export default function CompanyHeader() {
   const navigate = useNavigate();
   const location = useLocation();
   const {account}=useContext(DataContext);
+  const {setAccount} = useContext(DataContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -114,7 +115,7 @@ export default function CompanyHeader() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={() => { if(location.pathname.includes('login') === false) navigate('/login')}}>Logout</MenuItem>
+      <MenuItem onClick={() => { if(location.pathname.includes('login') === false) setAccount({username :'', loggedIn:false, id:'', role:''}); navigate('/login')}}>Logout</MenuItem>
     </Menu>
   );
 

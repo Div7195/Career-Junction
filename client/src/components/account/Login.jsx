@@ -153,26 +153,27 @@ const Login = ()=>{
             method: "POST",
             body: JSON.stringify(login),
             headers: {
-                "Accept": "application/json, form-data", 
+                "Content-type": "application/json; charset=UTF-8"
             }
             }
             try {
                 const fetchResponse = await fetch(`http://localhost:8000/login`, settings);
                 const response = await fetchResponse.json();
                 setError('');
-
-                sessionStorage.setItem('accessToken', `Bearer ${response.data.accessToken}`);
-                sessionStorage.setItem('refreshToken', `Bearer ${response.data.refreshToken}`);
+                console.log(response)
+                sessionStorage.setItem('accessToken', `Bearer ${response.accessToken}`);
+                sessionStorage.setItem('refreshToken', `Bearer ${response.refreshToken}`);
             
-                setAccount({username : response.data.username, loggedIn:true, id:response.data.mongoId, role:response.data.role});
-            
-                navigate('/');
-                setLogin(signupInitialValues);
-                toggleAccount('signup');
+                setAccount({username : response.username, loggedIn:true, id:response.mongoId, role:response.role});
+                
+                navigate('/home');
+                
+                
                 
             } catch (e) {
+                
                 setError('Something went wrong, please try again later');
-                return e;
+                
             }
             
         

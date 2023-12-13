@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const dbConnection = async (username, password) =>{
-    const URL = `mongodb+srv://${username}:${password}@movieverse-app.tpux4jp.mongodb.net/?retryWrites=true&w=majority`
+    const URL = `mongodb+srv://${username}:${password}@movieverse-app.tpux4jp.mongodb.net/careerJunction?retryWrites=true&w=majority`
 
     try {
         await mongoose.connect(URL);
