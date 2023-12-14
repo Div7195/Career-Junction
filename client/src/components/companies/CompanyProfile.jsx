@@ -16,12 +16,47 @@ import {Button} from "@mui/material";
 import FormLabel from '@mui/material/FormLabel';
 import companyTypes from "../../constants/companyTypes.js";
 import industries from "../../constants/industries.js";
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { useContext } from "react";
+import { DataContext } from '../../context/DataProvider';
+import companySize from "../../constants/companySize.js";
+import { getAccessToken } from "../../utility functions/util.js";
+import { useEffect } from "react";
+
+
 const CompanyProfile = () => {
+    const {account}=useContext(DataContext);
+    const {setAccount} = useContext(DataContext);
+    const companyObj = {
+        companyAccountId:account.id,
+        companyName:'',
+        locationBased:'',
+        companySize:'',
+        industryType:'',
+        companyType:'',
+        aboutCompany:'',
+        introOfCompany:'',
+        jobsList:[],
+        employeesList:[],
+        status:''
+    }
     const [jobType, setJobType] = useState('Internship')
     const [skillsChosen, setSkills] = useState([]);
-    console.log(skillsChosen)
-    const handleOptionClick = (e) => {
-        setSkills([...skillsChosen, e.target.value ])
+    
+    const [company, setCompany] = useState(companyObj)
+    
+    const handleIndustryOptionClick = (e) => {
+        setCompany({...company, industryType:e.target.value })
+    }
+    const handleCompanyTypeOptionClick = (e) => {
+        setCompany({...company, companyType:e.target.value })
+    }
+    const handleCompanySizeOptionClick = (e) => {
+        setCompany({...company, companySize:e.target.value })
+    }
+    const handleTextFieldsChange = (e) => {
+        setCompany({...company, [e.target.name]:e.target.value})
     }
     const handleDeleteSkill = (skill) => {
         setSkills(skillsChosen.filter((e)=>{
@@ -29,8 +64,53 @@ const CompanyProfile = () => {
         }))
     }
     const handleRadio = (e) => {
-        setJobType(e.target.value);
+        setCompany({...company, status:e.target.value });
     }
+    const updateCompanyProfile = async() =>{
+        const settings = {
+         method: "POST",
+         body: JSON.stringify(company),
+         headers: {
+             "Content-type": "application/json; charset=UTF-8"
+         }
+         }
+         try {
+             console.log(settings.body)
+             const fetchResponse = await fetch(`http://localhost:8000/updateCompanyProfile`, settings);
+             const response = await fetchResponse.json();
+         } catch (e) {  
+             return e;
+         }    
+     }
+     
+
+     useEffect( () => {
+        const myFunction = async () => {
+            const url = `http://localhost:8000/getCompanyProfile?companyAccountId=${company.companyAccountId}`;
+            const settings = {
+            method: 'GET',
+            headers: {
+                accept: 'application/json',
+                authorization : getAccessToken()
+            }
+            };
+            try {
+                const fetchResponse = await fetch(url, settings);
+                const response = await fetchResponse.json();
+                setCompany(response);
+                
+                } catch (e) {
+                console.log(e);
+                }
+        };
+        myFunction();
+    },[]);
+        
+   
+
+
+
+    
     return(
         
         <div style={{
@@ -55,15 +135,13 @@ const CompanyProfile = () => {
         <FormControl>
       <FormLabel id="demo-row-radio-buttons-group-label">Status</FormLabel>
       <RadioGroup
-      onChange={(e) => {
-                            handleRadio(e);
-                        }}
+      onChange={(e) => {handleRadio(e);}}             
         row
         aria-labelledby="demo-row-radio-buttons-group-label"
         name="row-radio-buttons-group"
       >
-        <FormControlLabel value="Hiring" control={<Radio  />} label="Hiring" />
-        <FormControlLabel value="Freeze" control={<Radio />} label="Freeze" />
+        <FormControlLabel value="Hiring" control={<Radio checked={company.status==='Hiring'?true:false}  />} label="Hiring" />
+        <FormControlLabel value="Freeze" control={<Radio checked={company.status==='Freeze'?true:false}/>} label="Freeze" />
         
         
       </RadioGroup>
@@ -82,6 +160,11 @@ const CompanyProfile = () => {
 
                 <div>
                     <TextField
+                        name="companyName"
+                        value={company.companyName}
+                        onChange={(e) => {
+                            handleTextFieldsChange(e);
+                        }}
                         id="filled-multiline-flexible"
                         label="Multiline"
                         multiline
@@ -108,6 +191,11 @@ const CompanyProfile = () => {
                 <div>
                     <TextField
                         id="filled-multiline-flexible"
+                        name="locationBased"
+                        value={company.locationBased}
+                        onChange={(e) => {
+                            handleTextFieldsChange(e);
+                        }}
                         label="Multiline"
                         multiline
                         maxRows={4}
@@ -132,14 +220,30 @@ const CompanyProfile = () => {
                 </div>
 
                 <div>
-                    <TextField
-                        id="filled-multiline-flexible"
-                        label="Multiline"
-                        multiline
-                        maxRows={4}
-                        variant="filled"
-                        style={{width:400}}
-                        />
+                <FormControl fullWidth>
+                    
+                    <NativeSelect
+                        onChange={(e) => {
+                            handleCompanySizeOptionClick(e);
+                        }}
+                        defaultValue={30}
+                        value={company.companySize}
+                        inputProps={{
+                        name: 'age',
+                        id: 'uncontrolled-native',
+                        }}
+                    >
+                    {
+                        companySize.map((size) =>
+                        (
+                            <option  value={size}>{size}</option>
+                        ))
+                    
+                    }
+                        
+                    </NativeSelect>
+
+                </FormControl>
                 </div>
             </div>
             <div style={{
@@ -158,8 +262,9 @@ const CompanyProfile = () => {
                     
                     <NativeSelect
                         onChange={(e) => {
-                            
+                            handleIndustryOptionClick(e);
                         }}
+                        value={company.industryType}
                         defaultValue={30}
                         inputProps={{
                         name: 'age',
@@ -197,8 +302,9 @@ const CompanyProfile = () => {
                     
                     <NativeSelect
                         onChange={(e) => {
-                            
+                            handleCompanyTypeOptionClick(e);
                         }}
+                        value={company.companyType}
                         defaultValue={30}
                         inputProps={{
                         name: 'age',
@@ -232,6 +338,11 @@ const CompanyProfile = () => {
                 <div>
                     <TextField
                         id="filled-multiline-flexible"
+                        name="introOfCompany"
+                        value={company.introOfCompany}
+                        onChange={(e) => {
+                            handleTextFieldsChange(e);
+                        }}
                         label="Multiline"
                         multiline
                         maxRows={4}
@@ -254,6 +365,11 @@ const CompanyProfile = () => {
                 <div>
                     <TextField
                         id="filled-multiline-flexible"
+                        name="aboutCompany"
+                        value={company.aboutCompany}
+                        onChange={(e) => {
+                            handleTextFieldsChange(e);
+                        }}
                         label="Multiline"
                         multiline
                         maxRows={4}
@@ -267,7 +383,7 @@ const CompanyProfile = () => {
                 flexDirection:'column',
                 marginTop:'15px'
             }}>
-                <Button style={{
+                <Button onClick={() => {updateCompanyProfile()}} style={{
                     background:'#131c30',
                     color:'rgb(0, 236, 255)',
                     fontWeight: 'bold',

@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import dotenv from 'dotenv'
 import jwt from 'jsonwebtoken'
 import token from '../model/token-schema.js'
+import Company from "../model/company-schema.js";
 dotenv.config();
 
 export const signupUserController = async(request, response) => {
@@ -13,6 +14,22 @@ export const signupUserController = async(request, response) => {
         
         const newUser = new User(user);
         await newUser.save();
+        if(newUser.role === 'company'){
+            const newCompany = new Company({
+                companyAccountId:newUser._id,
+                companyName:'',
+                locationBased:'',
+                companySize:'',
+                industryType:'',
+                companyType:'',
+                aboutCompany:'',
+                introOfCompany:'',
+                jobsList:[],
+                employeesList:[],
+                status:''
+            })
+            await newCompany.save();
+        }
         return response.status(200).json({msg:'signup successfull'})
     } catch (error) {
         return response.status(500).json(error);

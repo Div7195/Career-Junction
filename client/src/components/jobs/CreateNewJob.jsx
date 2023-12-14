@@ -383,7 +383,7 @@ const CreateNewJob = () => {
                     background:'#131c30',
                     color:'rgb(0, 236, 255)',
                     fontWeight: 'bold',
-                }}  variant="contained">Save changes</Button>
+                }}  variant="contained">Create new opening</Button>
             </div>
             
 

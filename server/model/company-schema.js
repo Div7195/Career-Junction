@@ -3,28 +3,28 @@ const companySchema = mongoose.Schema({
     companyAccountId:{
         type:String,
         required:true,
-        unique:true
+        
     },
     companyName: {
         type:String,
-        required:true,
+        required:false,
         
     },
     locationBased :{
         type:String,
-        required:true
+        required:false
     },
     companySize :{
         type:String,
-        required:true
+        required:false
     },
     industryType :{
         type:String,
-        required:true
+        required:false
     },
     companyType :{
         type:String,
-        required:true
+        required:false
     },
     aboutCompany :{
         type:String,
@@ -32,19 +32,19 @@ const companySchema = mongoose.Schema({
     },
     introOfCompany:{
         type:String,
-        required:true
+        required:false
     },
     jobsList :{
         type:[String],
-        required:true
+        required:false
     },
     employeesList :{
         type:[String],
-        required:true
+        required:false
     },
     status :{
         type:String,
-        required:true
+        required:false
     },
     
     
