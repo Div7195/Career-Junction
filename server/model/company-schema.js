@@ -19,16 +19,20 @@ const companySchema = mongoose.Schema({
         required:true
     },
     industryType :{
-        type:Integer,
+        type:String,
         required:true
     },
     companyType :{
-        type:Integer,
+        type:String,
         required:true
     },
     aboutCompany :{
         type:String,
         required:false
+    },
+    introOfCompany:{
+        type:String,
+        required:true
     },
     jobsList :{
         type:[String],

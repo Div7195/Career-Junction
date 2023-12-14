@@ -10,10 +10,11 @@ const job = {
     companyBased:'Bangalore',
     jobTitle :'Frontend Developer',
     jobType :'Internship',
-    stipend :40000,
-    salary :50000,
-    duration :'4 months',
+    
+    salary :'Rs. 9K-12K',
+    duration :'3 months',
     location :'Remote',
+    openings:10,
     startDate :12/11/23,
     skillsRequired :['React', 'Javascript', 'HTML', 'Angular'],
     applyDeadlineDate :14/4/23,
@@ -64,7 +65,9 @@ return(
                     fontWeight: 'bold'
                     
                 }}>
-                    Mobile app developer internship
+                    
+                        {job.jobTitle}{job.jobType === 'Internship'?' internship':''}
+                    
                 </div>
                 <div style={{
                     fontSize:'10px',
@@ -75,7 +78,7 @@ return(
                     color: '#9eaab7',
                     fontFamily: "DM Sans"
                 }}>
-                    Microsoft | Bangalore
+                    {job.companyName} | {job.companyBased}
                 </div>
 
             </div>
@@ -155,7 +158,7 @@ return(
                             fontFamily:'DM Sans',
                             fontWeight:'bold'
                         }}>
-                            Rs. 9K-12K
+                            {job.salary}
                         </div>
                         
                         
@@ -195,7 +198,7 @@ return(
                             fontFamily:'DM Sans',
                             fontWeight:'bold'
                         }}>
-                            3 months
+                            {job.duration}
                         </div>
                     </div>:
                     <div></div>
@@ -234,7 +237,7 @@ return(
                             fontFamily:'DM Sans',
                             fontWeight:'bold'
                         }}>
-                            7-8 hours/day
+                            {job.workHours}
                         </div>
                     </div>
                     <div style={{
@@ -270,7 +273,7 @@ return(
                             fontFamily:'DM Sans',
                             fontWeight:'bold'
                         }}>
-                            13 jan 24
+                            {job.startDate.toString()}
                         </div>
                     </div>
                     <div style={{
@@ -306,7 +309,7 @@ return(
                             fontFamily:'DM Sans',
                             fontWeight:'bold'
                         }}>
-                            1
+                            {job.openings}
                         </div>
                     </div>
                 </div>
@@ -326,7 +329,7 @@ return(
                             lineHeight: '1.1rem',
                             minHeight: '28px',
                     }}>
-                    Apply by 25 December 2023 • Posted 4h ago
+                    Apply by {job.applyDeadlineDate.toString()} • Posted 4h ago
                     </div>
                     <div style={{
                         display:'flex',

@@ -3,7 +3,7 @@ const jobSchema = mongoose.Schema({
     companyId: {
         type:String,
         required:true,
-        unique:true
+        
     },
     jobTitle :{
         type:String,
@@ -15,6 +15,10 @@ const jobSchema = mongoose.Schema({
     },
     
     salary :{
+        type:String,
+        required:true
+    },
+    openings:{
         type:String,
         required:true
     },

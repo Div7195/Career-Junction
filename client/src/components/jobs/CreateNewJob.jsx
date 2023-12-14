@@ -12,7 +12,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-
+import {Button} from "@mui/material";
 import FormLabel from '@mui/material/FormLabel';
 
 const CreateNewJob = () => {
@@ -162,6 +162,28 @@ const CreateNewJob = () => {
                         label="Multiline"
                         multiline
                         maxRows={4}
+                        variant="filled"
+                        style={{width:400}}
+                        />
+                </div>
+            </div>
+            <div style={{
+                display:'flex',
+                flexDirection:'column',
+                marginTop:'15px'
+            }}>
+                <div style={{
+                    color:'black'
+                }}>
+                    Openings
+                </div>
+
+                <div>
+                    <TextField
+                        id="filled-multiline-flexible"
+                        label="Multiline"
+                        
+                        
                         variant="filled"
                         style={{width:400}}
                         />
@@ -351,6 +373,17 @@ const CreateNewJob = () => {
                         style={{width:400}}
                         />
                 </div>
+            </div>
+            <div style={{
+                display:'flex',
+                flexDirection:'column',
+                marginTop:'15px'
+            }}>
+                <Button style={{
+                    background:'#131c30',
+                    color:'rgb(0, 236, 255)',
+                    fontWeight: 'bold',
+                }}  variant="contained">Save changes</Button>
             </div>
             
 
