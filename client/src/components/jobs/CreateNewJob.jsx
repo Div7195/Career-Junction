@@ -9,8 +9,14 @@ import NativeSelect from '@mui/material/NativeSelect';
 import skills from "../../constants/skills.js";
 import { useState } from "react";
 import CloseIcon from '@mui/icons-material/Close';
-import { cleanDigitSectionValue } from "@mui/x-date-pickers/internals/hooks/useField/useField.utils";
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+
+import FormLabel from '@mui/material/FormLabel';
+
 const CreateNewJob = () => {
+    const [jobType, setJobType] = useState('Internship')
     const [skillsChosen, setSkills] = useState([]);
     console.log(skillsChosen)
     const handleOptionClick = (e) => {
@@ -20,6 +26,9 @@ const CreateNewJob = () => {
         setSkills(skillsChosen.filter((e)=>{
             if(e !== skill) return e;
         }))
+    }
+    const handleRadio = (e) => {
+        setJobType(e.target.value);
     }
     return(
         
@@ -31,6 +40,8 @@ const CreateNewJob = () => {
             color:'black'
 
         }}>
+        
+        
             <div style={{
                 display:'flex',
                 justifyContent:'center',
@@ -39,6 +50,24 @@ const CreateNewJob = () => {
                 fontSize:'15px'
                 
             }}>
+            <div>   
+        <FormControl>
+      <FormLabel id="demo-row-radio-buttons-group-label">Job type</FormLabel>
+      <RadioGroup
+      onChange={(e) => {
+                            handleRadio(e);
+                        }}
+        row
+        aria-labelledby="demo-row-radio-buttons-group-label"
+        name="row-radio-buttons-group"
+      >
+        <FormControlLabel value="Internship" control={<Radio  />} label="Internship" />
+        <FormControlLabel value="Fulltime" control={<Radio />} label="Fulltime" />
+        
+        
+      </RadioGroup>
+    </FormControl>
+        </div>
             <div style={{
                 display:'flex',
                 flexDirection:'column',
@@ -62,6 +91,8 @@ const CreateNewJob = () => {
                 </div>
             </div>
 
+            
+            
             <div style={{
                 display:'flex',
                 flexDirection:'column',
@@ -70,7 +101,9 @@ const CreateNewJob = () => {
                 <div style={{
                     color:'black'
                 }}>
-                    Job Type
+                    {
+                        jobType === 'Internship' ? 'Stipend': 'Job offer'
+                    }
                 </div>
 
                 <div>
@@ -84,51 +117,9 @@ const CreateNewJob = () => {
                         />
                 </div>
             </div>
-            <div style={{
-                display:'flex',
-                flexDirection:'column',
-                marginTop:'15px'
-            }}>
+            {
+                jobType === 'Internship' ?
                 <div style={{
-                    color:'black'
-                }}>
-                    Stipend
-                </div>
-
-                <div>
-                    <TextField
-                        id="filled-multiline-flexible"
-                        label="Multiline"
-                        multiline
-                        maxRows={4}
-                        variant="filled"
-                        style={{width:400}}
-                        />
-                </div>
-            </div>
-            <div style={{
-                display:'flex',
-                flexDirection:'column',
-                marginTop:'15px'
-            }}>
-                <div style={{
-                    color:'black'
-                }}>
-                    Salary
-                </div>
-
-                <div>
-                    <TextField
-                        id="filled-multiline-flexible"
-                        label="Multiline"
-                        multiline
-                        maxRows={4}
-                        variant="filled"
-                        style={{width:400}}
-                        />
-                </div>
-            </div>
-            <div style={{
                 display:'flex',
                 flexDirection:'column',
                 marginTop:'15px'
@@ -150,6 +141,10 @@ const CreateNewJob = () => {
                         />
                 </div>
             </div>
+            :
+            <div></div>
+            }
+            
             <div style={{
                 display:'flex',
                 flexDirection:'column',

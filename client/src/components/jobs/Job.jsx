@@ -3,12 +3,13 @@ import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import TagIcon from '@mui/icons-material/Tag';
+import { useState } from 'react';
 const job = {
     companyId: '3123123',
     companyName:'Microsoft',
     companyBased:'Bangalore',
     jobTitle :'Frontend Developer',
-    jobType :'internship',
+    jobType :'Internship',
     stipend :40000,
     salary :50000,
     duration :'4 months',
@@ -33,7 +34,7 @@ const job = {
 }
 
 const Job = () =>{
-
+    
 return(
     <div>
         <div style={{
@@ -142,7 +143,10 @@ return(
                         <div style={{
                             marginLeft:'2px'
                         }}>
-                        Stipend per month
+                        {
+                            job.jobType === 'Internship'? 'Salary per month' : 'Job offer'
+                        }
+                        
                         </div>
                         </div>
                         <div style={{
@@ -156,7 +160,9 @@ return(
                         
                         
                     </div>
-                    <div style={{
+                    {
+                        job.jobType === 'Internship' ?
+                        <div style={{
                         display:'flex',
                         flexDirection:'column',
                         marginRight:'50px'
@@ -191,7 +197,10 @@ return(
                         }}>
                             3 months
                         </div>
-                    </div>
+                    </div>:
+                    <div></div>
+                    }
+                    
                     <div style={{
                         display:'flex',
                         flexDirection:'column',

@@ -13,12 +13,9 @@ const jobSchema = mongoose.Schema({
         type:String,
         required:true
     },
-    stipend :{
-        type:Integer,
-        required:true
-    },
+    
     salary :{
-        type:Integer,
+        type:String,
         required:true
     },
     duration :{
@@ -27,7 +24,8 @@ const jobSchema = mongoose.Schema({
     },
     location :{
         type:String,
-        required:true
+        required:true,
+        default:''
     },
     startDate :{
         type:Date,
