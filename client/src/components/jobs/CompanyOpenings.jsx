@@ -4,8 +4,26 @@ import Job from "./Job"
 const CompanyOpenings = () => {
     
     return(
-        <div>
+        <div style={{
+            marginTop:'64px',
+            display:'flex',
+            justifyContent:'center',
+            
+            
+            
+        }}>
+        <div style={{
+            display:'flex',
+            flexDirection:'column'
+        }}>
+        <Job/>
+        <Job/>
+        <Job/>
+        </div>
+            
+            
 
+            
         </div>
     )
     
