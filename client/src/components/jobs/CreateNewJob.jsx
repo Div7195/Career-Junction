@@ -14,22 +14,51 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import {Button} from "@mui/material";
 import FormLabel from '@mui/material/FormLabel';
-
+import { useContext } from "react";
+import { DataContext } from '../../context/DataProvider';
+import dayjs from 'dayjs';
 const CreateNewJob = () => {
-    const [jobType, setJobType] = useState('Internship')
     const [skillsChosen, setSkills] = useState([]);
+    const {account}=useContext(DataContext);
+    const jobInitialValues = {
+        companyId:account.companyId,
+        jobTitle:'',
+        jobType:'',
+        salary:'',
+        openings:'',
+        duration:'',
+        location:'',
+        startDate:'',
+        applyDeadlineDate:'',
+        jobCreateDate:new Date(),
+        workHours:'',
+        jobRequirements:'',
+        responsibilities:'',
+        hiringProcess:'',
+        skillsRequired:[],
+    }
+    const {setAccount} = useContext(DataContext);
+    const [jobState, setJob] = useState(jobInitialValues)
+    const [jobType, setJobType] = useState('Internship')
+    const [dateValue, setDate] = useState(dayjs('2022-04-17'));
     console.log(skillsChosen)
     const handleOptionClick = (e) => {
         setSkills([...skillsChosen, e.target.value ])
+        setJob({...jobState, skillsRequired:skillsChosen});
     }
     const handleDeleteSkill = (skill) => {
         setSkills(skillsChosen.filter((e)=>{
             if(e !== skill) return e;
         }))
     }
+    const handleTextFieldsChange = (e) => {
+        setJob({...jobState, [e.target.name]: e.target.value});
+    }
     const handleRadio = (e) => {
         setJobType(e.target.value);
+        setJob({...jobState, jobType:e.target.value });
     }
+    
     return(
         
         <div style={{
@@ -82,6 +111,8 @@ const CreateNewJob = () => {
                 <div>
                     <TextField
                         id="filled-multiline-flexible"
+                        value={jobState.jobTitle}
+                        onChange={(e) => {handleTextFieldsChange(e)}}
                         label="Multiline"
                         multiline
                         maxRows={4}
@@ -109,6 +140,8 @@ const CreateNewJob = () => {
                 <div>
                     <TextField
                         id="filled-multiline-flexible"
+                        value={jobState.jobType}
+                        onChange={(e) => {handleTextFieldsChange(e)}}
                         label="Multiline"
                         multiline
                         maxRows={4}
@@ -133,6 +166,8 @@ const CreateNewJob = () => {
                 <div>
                     <TextField
                         id="filled-multiline-flexible"
+                        value={jobState.duration}
+                        onChange={(e) => {handleTextFieldsChange(e)}}
                         label="Multiline"
                         multiline
                         maxRows={4}
@@ -159,6 +194,8 @@ const CreateNewJob = () => {
                 <div>
                     <TextField
                         id="filled-multiline-flexible"
+                        value={jobState.location}
+                        onChange={(e) => {handleTextFieldsChange(e)}}
                         label="Multiline"
                         multiline
                         maxRows={4}
@@ -182,7 +219,8 @@ const CreateNewJob = () => {
                     <TextField
                         id="filled-multiline-flexible"
                         label="Multiline"
-                        
+                        value={jobState.openings}
+                        onChange={(e) => {handleTextFieldsChange(e)}}
                         
                         variant="filled"
                         style={{width:400}}
@@ -204,7 +242,29 @@ const CreateNewJob = () => {
                 
                 <LocalizationProvider dateAdapter={AdapterDayjs} >
                 <DemoContainer components={['DatePicker']} >
-                <DatePicker label="Basic date picker" />
+                <DatePicker label="Basic date picker" value={dateValue}
+          onChange={(newValue) => {setDate(newValue)}}/>{console.log(dateValue.$d)}
+                </DemoContainer>
+                </LocalizationProvider>
+                    
+                </div>
+            </div>
+            <div style={{
+                display:'flex',
+                flexDirection:'column',
+                marginTop:'15px'
+            }}>
+                <div style={{
+                    color:'black'
+                }}>
+                    Application deadline date
+                </div>
+
+                <div>
+                
+                <LocalizationProvider dateAdapter={AdapterDayjs} >
+                <DemoContainer components={['DatePicker']} >
+                <DatePicker onChange={(e)=>{console.log(e.target.value)}} label="Basic date picker" />
                 </DemoContainer>
                 </LocalizationProvider>
                     
@@ -300,6 +360,8 @@ const CreateNewJob = () => {
                 <div>
                     <TextField
                         id="filled-multiline-flexible"
+                        value={jobState.workHours}
+                        onChange={(e) => {handleTextFieldsChange(e)}}
                         label="Multiline"
                         multiline
                         maxRows={4}
@@ -322,6 +384,8 @@ const CreateNewJob = () => {
                 <div>
                     <TextField
                         id="filled-multiline-flexible"
+                        value={jobState.jobRequirements}
+                        onChange={(e) => {handleTextFieldsChange(e)}}
                         label="Multiline"
                         multiline
                         maxRows={4}
@@ -344,6 +408,8 @@ const CreateNewJob = () => {
                 <div>
                     <TextField
                         id="filled-multiline-flexible"
+                        value={jobState.responsibilities}
+                        onChange={(e) => {handleTextFieldsChange(e)}}
                         label="Multiline"
                         multiline
                         maxRows={4}
@@ -366,6 +432,8 @@ const CreateNewJob = () => {
                 <div>
                     <TextField
                         id="filled-multiline-flexible"
+                        value={jobState.hiringProcess}
+                        onChange={(e) => {handleTextFieldsChange(e)}}
                         label="Multiline"
                         multiline
                         maxRows={4}
