@@ -24,9 +24,9 @@ const jobSchema = mongoose.Schema({
     },
     duration :{
         type:String,
-        required:false
+        required:true
     },
-    
+
     location :{
         type:String,
         required:true,

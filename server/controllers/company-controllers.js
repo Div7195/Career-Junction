@@ -48,6 +48,7 @@ export const createJobController = async(request, response) => {
             jobType : request.body.jobType,
             salary : request.body.salary,
             openings : request.body.openings,
+            duration:request.body.duration,
             location : request.body.location,
             startDate : request.body.startDate,
             skillsRequired : request.body.skillsRequired,
@@ -76,8 +77,8 @@ export const getJobsController = async(request, response) => {
     try{
         let objArrayOfJobs = [];
         objArrayOfJobs = await Job.find({companyId:request.query.companyAccountId});
-        // let company = await Company.findOne({companyAccountId:request.query.companyAccountId});
-        return response.status(200).json(objArrayOfJobs);
+        let company = await Company.findOne({companyAccountId:request.query.companyAccountId});
+        return response.status(200).json({objArrayOfJobs, locationBased:company.locationBased, companyName:company.companyName});
 
     }catch(error){
         return response.status(500).json('failed job fetching');
