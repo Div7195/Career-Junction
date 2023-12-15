@@ -17,12 +17,13 @@ import FormLabel from '@mui/material/FormLabel';
 import { useContext } from "react";
 import { DataContext } from '../../context/DataProvider';
 import dayjs from 'dayjs';
+import { getAccessToken } from "../../utility functions/util.js";
 const CreateNewJob = () => {
     const {account}=useContext(DataContext);
     const jobInitialValues = {
-        companyId:account.companyId,
+        companyId:account.id,
         jobTitle:'',
-        jobType:'',
+        jobType:'Internship',
         salary:'',
         openings:'',
         duration:'',
@@ -62,9 +63,30 @@ const CreateNewJob = () => {
         
         setJob({...jobState, applyDeadlineDate:e.$d});
     }
-    const handleButtonClick = () => {
-        console.log(jobState);
-    }
+    
+    const createJob = async() =>{
+        console.log(jobState)
+        jobState.jobCreateDate = dayjs(new Date()).$d;
+        const settings = {
+         method: "POST",
+         body: JSON.stringify(jobState),
+         headers: {
+             "Content-type": "application/json; charset=UTF-8",
+             'authorization' : getAccessToken()
+         }
+         }
+         try {
+             console.log(settings.body)
+             const fetchResponse = await fetch(`http://localhost:8000/createJob`, settings);
+             const response = await fetchResponse.json();
+             setJob(jobInitialValues);
+            
+             
+         } catch (e) {
+             
+             return e;
+         }    
+     }
     
     
     return(
@@ -149,8 +171,8 @@ const CreateNewJob = () => {
                 <div>
                     <TextField
                         id="filled-multiline-flexible"
-                        name="jobType"
-                        value={jobState.jobType}
+                        name="salary"
+                        value={jobState.salary}
                         onChange={(e) => {handleTextFieldsChange(e)}}
                         label="Multiline"
                         multiline
@@ -375,6 +397,7 @@ const CreateNewJob = () => {
                     <TextField
                         id="filled-multiline-flexible"
                         value={jobState.workHours}
+                        name="workHours"
                         onChange={(e) => {handleTextFieldsChange(e)}}
                         label="Multiline"
                         multiline
@@ -399,6 +422,7 @@ const CreateNewJob = () => {
                     <TextField
                         id="filled-multiline-flexible"
                         value={jobState.jobRequirements}
+                        name="jobRequirements"
                         onChange={(e) => {handleTextFieldsChange(e)}}
                         label="Multiline"
                         multiline
@@ -423,6 +447,7 @@ const CreateNewJob = () => {
                     <TextField
                         id="filled-multiline-flexible"
                         value={jobState.responsibilities}
+                        name="responsibilities"
                         onChange={(e) => {handleTextFieldsChange(e)}}
                         label="Multiline"
                         multiline
@@ -447,6 +472,7 @@ const CreateNewJob = () => {
                     <TextField
                         id="filled-multiline-flexible"
                         value={jobState.hiringProcess}
+                        name="hiringProcess"
                         onChange={(e) => {handleTextFieldsChange(e)}}
                         label="Multiline"
                         multiline
@@ -462,7 +488,7 @@ const CreateNewJob = () => {
                 marginTop:'15px'
             }}>
                 <Button onClick={() => {
-                    handleButtonClick();
+                    createJob()
                 }} style={{
                     
                     background:'#131c30',

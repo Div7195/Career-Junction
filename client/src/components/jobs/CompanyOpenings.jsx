@@ -1,8 +1,41 @@
 import Job from "./Job"
-
+import { useEffect, useState } from "react"
+import { useContext } from "react"
+import { DataContext } from "../../context/DataProvider"
+import { getAccessToken } from "../../utility functions/util"
 
 const CompanyOpenings = () => {
+    const {account}=useContext(DataContext);
+    const {setAccount} = useContext(DataContext);
+    const [jobs, setJobs] = useState([])
+    useEffect(() => {
+        const myFunction = async() => {
+        const url = `http://localhost:8000/getJobs?companyAccountId=${account.id}`;
+        const settings = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            authorization : getAccessToken()
+        }
+        };
+        try {
+            const fetchResponse = await fetch(url, settings);
+            const response = await fetchResponse.json();
+            setJobs(response);
+            
+            } catch (e) {
+            console.log(e);
+            }
     
+        }
+        
+        myFunction()
+    }, [])
+
+    
+    
+    
+
     return(
         <div style={{
             marginTop:'64px',
@@ -16,9 +49,15 @@ const CompanyOpenings = () => {
             display:'flex',
             flexDirection:'column'
         }}>
-        <Job/>
-        <Job/>
-        <Job/>
+
+        {
+            jobs && jobs.length > 0 ? jobs.map(job => (
+                        <Job  job = {job}/>
+            ))
+            :
+            console.log('no data to show')
+        }
+        
         </div>
             
             

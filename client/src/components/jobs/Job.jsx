@@ -3,39 +3,42 @@ import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import TagIcon from '@mui/icons-material/Tag';
+import { DataContext } from '../../context/DataProvider';
 import { useState } from 'react';
-const job = {
-    companyId: '3123123',
-    companyName:'Microsoft',
-    companyBased:'Bangalore',
-    jobTitle :'Frontend Developer',
-    jobType :'Internship',
+import { useContext } from 'react';
+// const job = {
+//     companyId: '3123123',
+//     companyName:'Microsoft',
+//     companyBased:'Bangalore',
+//     jobTitle :'Frontend Developer',
+//     jobType :'Internship',
     
-    salary :'Rs. 9K-12K',
-    duration :'3 months',
-    location :'Remote',
-    openings:10,
-    startDate :12/11/23,
-    skillsRequired :['React', 'Javascript', 'HTML', 'Angular'],
-    applyDeadlineDate :14/4/23,
-    jobCreateDate :11/3/22,
-    workHours :'7-8 hours',
-    reponsibilities :`Algorithm Development: Collaborate with the Computer Vision team to design, implement, and optimize state-of-the-art computer vision algorithms for 3D scanning applications.
-    Image Processing: Work on enhancing image quality, feature extraction, and pattern recognition to improve the overall performance of the 3D scanning system.
-    Documentation: Create comprehensive documentation for implemented algorithms, procedures, and system configurations
-    `,
-    hiringProcess:`Shortlisted candidates will get a short assignment
-    Candidates with decent submissions will be interviewed on Zoom
-    Selected candidates will be intimated via email/telephone` ,
-    jobRequirements:`Currently pursuing or recently completed a degree in Computer Science, Computer Engineering, or a related field.
-    Strong programming skills, with expertise in Python. Familiarity with C++ is a plus.
-    Proficiency in computer vision libraries, especially OpenCV and Open3D.
-    Familiarity with Point Cloud Library (PCL) for advanced 3D processing is a plus.
-    Desirable experience with CUDA for parallel computing tasks.`,
-}
+//     salary :'Rs. 9K-12K',
+//     duration :'3 months',
+//     location :'Remote',
+//     openings:10,
+//     startDate :12/11/23,
+//     skillsRequired :['React', 'Javascript', 'HTML', 'Angular'],
+//     applyDeadlineDate :14/4/23,
+//     jobCreateDate :11/3/22,
+//     workHours :'7-8 hours',
+//     reponsibilities :`Algorithm Development: Collaborate with the Computer Vision team to design, implement, and optimize state-of-the-art computer vision algorithms for 3D scanning applications.
+//     Image Processing: Work on enhancing image quality, feature extraction, and pattern recognition to improve the overall performance of the 3D scanning system.
+//     Documentation: Create comprehensive documentation for implemented algorithms, procedures, and system configurations
+//     `,
+//     hiringProcess:`Shortlisted candidates will get a short assignment
+//     Candidates with decent submissions will be interviewed on Zoom
+//     Selected candidates will be intimated via email/telephone` ,
+//     jobRequirements:`Currently pursuing or recently completed a degree in Computer Science, Computer Engineering, or a related field.
+//     Strong programming skills, with expertise in Python. Familiarity with C++ is a plus.
+//     Proficiency in computer vision libraries, especially OpenCV and Open3D.
+//     Familiarity with Point Cloud Library (PCL) for advanced 3D processing is a plus.
+//     Desirable experience with CUDA for parallel computing tasks.`,
+// }
 
-const Job = () =>{
-    
+const Job = ({job}) =>{
+    const {account}=useContext(DataContext);
+    const {setAccount} = useContext(DataContext);
 return(
     <div>
         <div style={{
@@ -78,7 +81,7 @@ return(
                     color: '#9eaab7',
                     fontFamily: "DM Sans"
                 }}>
-                    {job.companyName} | {job.companyBased}
+                    {job.companyName} | 
                 </div>
 
             </div>
@@ -353,7 +356,9 @@ return(
                         }}>
                         View Details
                         </div>
-                        <div style={{
+                        {
+                            account.role !== 'company'?
+                            <div style={{
                     
                             marginLeft:'10px',
                             fontSize:'16px',
@@ -364,9 +369,14 @@ return(
                             cursor:'pointer',
                             padding: '8px 20px 8px 16px',
                             color:'white'
-                        }}>
-                        Apply Now
-                        </div>
+                        }}></div>
+                            :
+                            <div></div>
+                
+                        }
+                
+                        
+                        
                     </div>
                 </div>
 

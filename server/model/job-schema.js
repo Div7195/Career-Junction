@@ -26,10 +26,11 @@ const jobSchema = mongoose.Schema({
         type:String,
         required:false
     },
+    
     location :{
         type:String,
         required:true,
-        default:''
+        default:'Remote|home|remote|Home'
     },
     startDate :{
         type:Date,
@@ -55,7 +56,7 @@ const jobSchema = mongoose.Schema({
         type:String,
         required:true
     },
-    reponsibilities :{
+    responsibilities :{
         type:String,
         required:true
     },
@@ -66,5 +67,5 @@ const jobSchema = mongoose.Schema({
     
 })
 
-const job = mongoose.model('jobs', jobSchema);
+const job = mongoose.model('job', jobSchema);
 export default job;
