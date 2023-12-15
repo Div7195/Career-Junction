@@ -7,7 +7,7 @@ import { getAccessToken } from "../../utility functions/util"
 const CompanyOpenings = () => {
     const {account}=useContext(DataContext);
     const {setAccount} = useContext(DataContext);
-    const [jobs, setJobs] = useState([])
+    const [jobs, setJobs] = useState({})
     useEffect(() => {
         const myFunction = async() => {
         const url = `http://localhost:8000/getJobs?companyAccountId=${account.id}`;
@@ -51,8 +51,12 @@ const CompanyOpenings = () => {
         }}>
 
         {
-            jobs && jobs.length > 0 ? jobs.map(job => (
-                        <Job  job = {job}/>
+            jobs.objArrayOfJobs && jobs.objArrayOfJobs.length > 0 ? jobs.objArrayOfJobs.map(job => (
+                        <Job  job = {job}
+                            locationBased={jobs.locationBased}
+                            companyName={jobs.companyName}
+
+                        />
             ))
             :
             console.log('no data to show')

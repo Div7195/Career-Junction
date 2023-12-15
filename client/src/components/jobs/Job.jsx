@@ -6,6 +6,7 @@ import TagIcon from '@mui/icons-material/Tag';
 import { DataContext } from '../../context/DataProvider';
 import { useState } from 'react';
 import { useContext } from 'react';
+import monthMap from '../../constants/monthMap.js';
 // const job = {
 //     companyId: '3123123',
 //     companyName:'Microsoft',
@@ -36,9 +37,11 @@ import { useContext } from 'react';
 //     Desirable experience with CUDA for parallel computing tasks.`,
 // }
 
-const Job = ({job}) =>{
+const Job = ({job, locationBased, companyName}) =>{
     const {account}=useContext(DataContext);
     const {setAccount} = useContext(DataContext);
+
+    
 return(
     <div>
         <div style={{
@@ -81,7 +84,7 @@ return(
                     color: '#9eaab7',
                     fontFamily: "DM Sans"
                 }}>
-                    {job.companyName} | 
+                    {companyName} | {locationBased}
                 </div>
 
             </div>
@@ -276,7 +279,7 @@ return(
                             fontFamily:'DM Sans',
                             fontWeight:'bold'
                         }}>
-                            {job.startDate.toString()}
+                            {new Date(job.startDate).getDate()} {monthMap[new Date(job.startDate).getMonth()+1]} {new Date(job.startDate).getFullYear() %2000}
                         </div>
                     </div>
                     <div style={{
@@ -332,7 +335,7 @@ return(
                             lineHeight: '1.1rem',
                             minHeight: '28px',
                     }}>
-                    Apply by {job.applyDeadlineDate.toString()} • Posted 4h ago
+                    Apply by {new Date(job.applyDeadlineDate).getDate()} {monthMap[new Date(job.applyDeadlineDate).getMonth()+1]} {new Date(job.applyDeadlineDate).getFullYear()} • Posted {new Date().getDate() === new Date(job.jobCreateDate).getDate() ? new Date().getHours() - new Date(job.jobCreateDate).getHours():''} ago
                     </div>
                     <div style={{
                         display:'flex',
