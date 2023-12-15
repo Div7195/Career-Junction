@@ -14,6 +14,10 @@ const aspirantSchema = mongoose.Schema({
         type:String,
         required:true
     },
+    aspirantLocation :{
+        type:String,
+        required:true
+    },
     education :[{
         schoolName : {
             

@@ -13,6 +13,7 @@ import Companies from './components/companies/Companies.jsx';
 import Messaging from './components/messaging/Messaging.jsx';
 import Notifications from './components/notifs/Notifications.jsx';
 import CompanyProfile from './components/companies/CompanyProfile.jsx';
+import DetailedJob from './components/jobs/DetailedJob.jsx';
 
 
 
@@ -32,7 +33,7 @@ function App() {
               <Route  path = '/createjob' element = {<CreateNewJob/>}/>
               <Route  path = '/youropenings' element = {<CompanyOpenings/>}/>
               <Route  path = '/companyprofile' element = {<CompanyProfile/>}/>
-
+              <Route  path = '/job/:id' element = {<DetailedJob/>}/>
               <Route  path = '/people' element = {<People/>}/>
               <Route  path = '/companies' element = {<Companies/>}/>
               <Route  path = '/messaging' element = {<Messaging/>}/>

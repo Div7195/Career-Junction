@@ -7,6 +7,12 @@ import { DataContext } from '../../context/DataProvider';
 import { useState } from 'react';
 import { useContext } from 'react';
 import monthMap from '../../constants/monthMap.js';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { getAccessToken } from '../../utility functions/util.js';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // const job = {
 //     companyId: '3123123',
 //     companyName:'Microsoft',
@@ -40,7 +46,25 @@ import monthMap from '../../constants/monthMap.js';
 const Job = ({job, locationBased, companyName}) =>{
     const {account}=useContext(DataContext);
     const {setAccount} = useContext(DataContext);
-
+    const navigate = useNavigate();
+    const deleteJob = async(jobId) => {
+        const url = `http://localhost:8000/deleteJob?jobId=${jobId}`;
+        const settings = {
+        method: 'DELETE',
+        headers: {
+            accept: 'application/json',
+            authorization : getAccessToken()
+        }
+        };
+        try {
+            const fetchResponse = await fetch(url, settings);
+            const response = await fetchResponse.json();
+            navigate('/youropenings')
+            } catch (e) {
+            console.log(e);
+            }
+    
+        }
     
 return(
     <div>
@@ -56,6 +80,13 @@ return(
             borderRadius: '10px 10px 10px 10px',
 
         }}>
+            <div style={{
+                display:'flex',
+                flexDirection:'row',
+
+            }}>
+
+            
             <div style={{
                 display:'flex',
                 flexDirection:'column',
@@ -87,6 +118,43 @@ return(
                     {companyName} | {locationBased}
                 </div>
 
+            </div>
+            <div style={{
+                        marginRight:'10px',
+                        marginLeft:'auto'
+            }}>
+           {
+            account.role === 'aspirant' ?
+            <BookmarkIcon style={{
+                cursor:'pointer'
+            }}/>
+            :
+            <div style={{
+                display:'flex',
+                flexDirection:'row',
+                color:'#131c30',
+                fontSize:'24px',
+            }}>
+            <Link to={`/job/${job._id}`} style={{textDecoration:'none' , color:'inherit'}}>
+            <EditIcon style={{
+                    cursor:'pointer',
+                    
+                    
+                    marginRight:'10px'
+                }}/>
+        </Link>
+                
+                <DeleteIcon style={{
+                    cursor:'pointer',
+                    marginRight:'10px'
+                }}
+                onCLick = {() => {deleteJob(job._id)}}
+                />
+            </div>
+           }
+            
+
+            </div>
             </div>
             <div style={{
                 display:'flex',

@@ -90,9 +90,38 @@ export const getSingleJobController = async(request, response) => {
     try {
         
         let jobObj = await Job.findOne({_id:request.query.jobId});
-        return response.status(200).json(jobObj);
+        let company = await Company.findOne({companyAccountId:jobObj.companyId});
+        return response.status(200).json({jobObj, locationBased:company.locationBased, companyName:company.companyName});
     } catch (error) {
         return response.status(500).json('failed single job fetching');
         
+    }
+}
+
+export const updateJobController = async(request, response) => {
+
+    try {
+        let temp = Job.findOne({_id:request.query.jobId});
+        if(!temp){
+            return response.status(404).json('failed job update not found');
+        }
+        await Job.findOneAndReplace({_id:request.query.jobId}, request.body);
+        return response.status(200).json('success job update');
+    } catch (error) {
+        return response.status(500).json('failed job updating');
+    }
+}
+
+export const deleteJobController = async(request, response) => {
+
+    try {
+        let temp = Job.findOne({_id:request.query.jobId});
+        if(!temp){
+            return response.status(404).json('failed job delete not found');
+        }
+        await Job.findOneAndDelete({_id:request.query.jobId}, request.body);
+        return response.status(200).json('success job delete');
+    } catch (error) {
+        return response.status(500).json('failed job delete');
     }
 }
