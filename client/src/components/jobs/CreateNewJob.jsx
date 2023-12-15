@@ -18,7 +18,6 @@ import { useContext } from "react";
 import { DataContext } from '../../context/DataProvider';
 import dayjs from 'dayjs';
 const CreateNewJob = () => {
-    const [skillsChosen, setSkills] = useState([]);
     const {account}=useContext(DataContext);
     const jobInitialValues = {
         companyId:account.companyId,
@@ -28,8 +27,8 @@ const CreateNewJob = () => {
         openings:'',
         duration:'',
         location:'',
-        startDate:'',
-        applyDeadlineDate:'',
+        startDate:dayjs(new Date()),
+        applyDeadlineDate:dayjs(new Date()),
         jobCreateDate:new Date(),
         workHours:'',
         jobRequirements:'',
@@ -39,25 +38,34 @@ const CreateNewJob = () => {
     }
     const {setAccount} = useContext(DataContext);
     const [jobState, setJob] = useState(jobInitialValues)
-    const [jobType, setJobType] = useState('Internship')
-    const [dateValue, setDate] = useState(dayjs('2022-04-17'));
-    console.log(skillsChosen)
+    console.log(jobState)
     const handleOptionClick = (e) => {
-        setSkills([...skillsChosen, e.target.value ])
-        setJob({...jobState, skillsRequired:skillsChosen});
+        setJob({...jobState, skillsRequired:[...jobState.skillsRequired, e.target.value]});
     }
     const handleDeleteSkill = (skill) => {
-        setSkills(skillsChosen.filter((e)=>{
+        setJob({...jobState, skillsRequired:jobState.skillsRequired.filter((e)=>{
             if(e !== skill) return e;
-        }))
+        })});
     }
     const handleTextFieldsChange = (e) => {
         setJob({...jobState, [e.target.name]: e.target.value});
     }
     const handleRadio = (e) => {
-        setJobType(e.target.value);
         setJob({...jobState, jobType:e.target.value });
     }
+    const handleStartDateChange = (e) => {
+        
+        setJob({...jobState, startDate:e.$d});
+        
+    }
+    const handleDeadlineChange = (e) => {
+        
+        setJob({...jobState, applyDeadlineDate:e.$d});
+    }
+    const handleButtonClick = () => {
+        console.log(jobState);
+    }
+    
     
     return(
         
@@ -111,6 +119,7 @@ const CreateNewJob = () => {
                 <div>
                     <TextField
                         id="filled-multiline-flexible"
+                        name="jobTitle"
                         value={jobState.jobTitle}
                         onChange={(e) => {handleTextFieldsChange(e)}}
                         label="Multiline"
@@ -133,13 +142,14 @@ const CreateNewJob = () => {
                     color:'black'
                 }}>
                     {
-                        jobType === 'Internship' ? 'Stipend': 'Job offer'
+                        jobState.jobType === 'Internship' ? 'Stipend': 'Job offer'
                     }
                 </div>
 
                 <div>
                     <TextField
                         id="filled-multiline-flexible"
+                        name="jobType"
                         value={jobState.jobType}
                         onChange={(e) => {handleTextFieldsChange(e)}}
                         label="Multiline"
@@ -151,7 +161,7 @@ const CreateNewJob = () => {
                 </div>
             </div>
             {
-                jobType === 'Internship' ?
+                jobState.jobType === 'Internship' ?
                 <div style={{
                 display:'flex',
                 flexDirection:'column',
@@ -166,6 +176,7 @@ const CreateNewJob = () => {
                 <div>
                     <TextField
                         id="filled-multiline-flexible"
+                        name="duration"
                         value={jobState.duration}
                         onChange={(e) => {handleTextFieldsChange(e)}}
                         label="Multiline"
@@ -194,6 +205,7 @@ const CreateNewJob = () => {
                 <div>
                     <TextField
                         id="filled-multiline-flexible"
+                        name="location"
                         value={jobState.location}
                         onChange={(e) => {handleTextFieldsChange(e)}}
                         label="Multiline"
@@ -218,6 +230,7 @@ const CreateNewJob = () => {
                 <div>
                     <TextField
                         id="filled-multiline-flexible"
+                        name="openings"
                         label="Multiline"
                         value={jobState.openings}
                         onChange={(e) => {handleTextFieldsChange(e)}}
@@ -242,8 +255,8 @@ const CreateNewJob = () => {
                 
                 <LocalizationProvider dateAdapter={AdapterDayjs} >
                 <DemoContainer components={['DatePicker']} >
-                <DatePicker label="Basic date picker" value={dateValue}
-          onChange={(newValue) => {setDate(newValue)}}/>{console.log(dateValue.$d)}
+                <DatePicker  label="Basic date picker" value={jobState.startDate}
+          onChange={(e) => {handleStartDateChange(e)}}/>
                 </DemoContainer>
                 </LocalizationProvider>
                     
@@ -264,7 +277,7 @@ const CreateNewJob = () => {
                 
                 <LocalizationProvider dateAdapter={AdapterDayjs} >
                 <DemoContainer components={['DatePicker']} >
-                <DatePicker onChange={(e)=>{console.log(e.target.value)}} label="Basic date picker" />
+                <DatePicker  label="Basic date picker" value={jobState.applyDeadlineDate} onChange={(e) => {handleDeadlineChange(e)}}/>
                 </DemoContainer>
                 </LocalizationProvider>
                     
@@ -288,6 +301,7 @@ const CreateNewJob = () => {
                         onChange={(e) => {
                             handleOptionClick(e);
                         }}
+                        value={jobState.skillsRequired[jobState.skillsRequired.length-1]}
                         defaultValue={30}
                         inputProps={{
                         name: 'age',
@@ -316,7 +330,7 @@ const CreateNewJob = () => {
 
                 {
                     
-                    skillsChosen.map((skill) =>
+                    jobState.skillsRequired.map((skill) =>
                         (
                         <div>
                         <div  style={{
@@ -447,7 +461,10 @@ const CreateNewJob = () => {
                 flexDirection:'column',
                 marginTop:'15px'
             }}>
-                <Button style={{
+                <Button onClick={() => {
+                    handleButtonClick();
+                }} style={{
+                    
                     background:'#131c30',
                     color:'rgb(0, 236, 255)',
                     fontWeight: 'bold',
