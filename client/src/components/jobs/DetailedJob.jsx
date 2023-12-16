@@ -73,14 +73,23 @@ const DetailedJob = () => {
                     padding:'5px',
                     border:'2px solid green'
                 }}>
-                    <div>
+                    <div style={{
+                            fontWeight: 'bold',
+                            color: '#222f3e',
+                            fontFamily: 'DM Sans, sans-serif',
+                            fontSize:'18px'
+                    }}>
                     Full stack developer internship
                     </div>
 
                     <div style={{
                         marginRight:'0px',
                         marginLeft:'auto',
-                        
+                        borderRadius: '5px',
+                        color: '#445ee2',
+                        backgroundColor: '#dcddde',
+                        fontFamily: 'DM Sans, sans-serif',
+                        padding: '5px 10px'
                     }}>
                     Work From home
 
@@ -90,6 +99,9 @@ const DetailedJob = () => {
                 <div style={{
                     border:'2px solid blue',
                     padding:'5px',
+                    color: '#566474',
+                    fontSize:'16px',
+                    fontFamily: 'DM Sans, sans-serif',
                 }}>
                 Web3Scope | India
                 </div>
@@ -103,7 +115,7 @@ const DetailedJob = () => {
                     <div style={{
                         border:'2px solid green',
                         color: '#445ee2',
-                        
+                        fontFamily: 'DM Sans, sans-serif',
                     }}>
                         Apply by 27 December 2023 • Posted 14h ago
                     </div>
@@ -116,13 +128,14 @@ const DetailedJob = () => {
                     
                     marginLeft:'10px',
                     fontSize:'16px',
-                    fontFamily:'DM Sans',
+                    fontFamily: 'DM Sans, sans-serif',
                     backgroundColor:'#142683',
                     borderRadius:'5px',
                     fontWeight:700,
                     cursor:'pointer',
                     padding: '8px 20px 8px 16px',
                     color:'white'
+                    
                 }}>Apply Now</div>
                     </div>
                     
@@ -361,36 +374,57 @@ const DetailedJob = () => {
                         <div style={{
                             marginTop:'10px',
                             border:'2px solid green',
+                            fontFamily: 'DM Sans, sans-serif',
+                            fontSize:'18px',
+                            textDecoration:'underline',
+                            fontWeight: 'bold',
                         }}>
                             Job requirements
                         </div>
                         <div style={{
                             marginTop:'5px',
                             border:'2px solid green',
+                            color:'#566474',
+                            fontSize:'16px',
+                            fontFamily:'DM Sans'
                         }}>
                             fsdsdsfadfsfsdsdfsfsdfsdfsfdsfsdfsfsdfsdfsdfsdfsdfsfsdffafsdfsdfsfsdfsdfsdfsdf
                         </div>
                         <div style={{
                             marginTop:'10px',
                             border:'2px solid green',
+                            fontSize:'18px',
+                            textDecoration:'underline',
+                            fontWeight: 'bold',
+                            fontFamily: 'DM Sans, sans-serif',
                         }}>
                             Job responsibilities
                         </div >
                         <div style={{
                             marginTop:'5px',
                             border:'2px solid green',
+                            color:'#566474',
+                            fontSize:'16px',
+                            fontFamily:'DM Sans'
                         }}>
                             fsdsdsfadfsfsdsdfsfsdfsdfsfdsfsdfsfsdfsdfsdfsdfsdfsfsdffafsdfsdfsfsdfsdfsdfsdf
                         </div>
                         <div style={{
                             marginTop:'10px',
                             border:'2px solid green',
+                            fontSize:'18px',
+                            textDecoration:'underline',
+                            fontWeight: 'bold',
+                            fontFamily: 'DM Sans, sans-serif',
                         }}>
                             Hiring process
                         </div>
                         <div style={{
                             marginTop:'5px',
                             border:'2px solid green',
+                            color:'#566474',
+                            fontSize:'16px',
+                            fontFamily:'DM Sans'
                         }}>
                             fsdsdsfadfsfsdsdfsfsdfsdfsfdsfsdfsfsdfsdfsdfsdfsdfsfsdffafsdfsdfsfsdfsdfsdfsdf
                         </div>
@@ -407,7 +441,13 @@ const DetailedJob = () => {
                             marginRight:'10px',
                             marginLeft:'auto'
                         }}>
-                        <div>
+                        <div style={{
+                            marginTop:'20px',
+                            fontFamily: 'DM Sans, sans-serif',
+                            fontSize:'18px',
+                            textDecoration:'underline',
+                            fontWeight: 'bold',
+                        }}>
                             Skills required
                         </div>
                         <div style={{
@@ -452,16 +492,35 @@ const DetailedJob = () => {
                         border:'2px solid black',
                         marginTop:'10px'
                     }}>
-                    <div>
+                    <div style={{
+
+                            fontSize:'18px',
+                            textDecoration:'underline',
+                            fontWeight: 'bold',
+                            fontFamily: 'DM Sans, sans-serif',
+                    }}>
                         About company
                     </div>
-                    <div>
+                    <div style={{
+                    color: '#566474',
+                    fontSize:'16px',
+                    fontFamily: 'DM Sans, sans-serif',
+                    }}>
                         Microsoft
                     </div>
-                    <div>
+                    <div style={{
+                        color: '#445ee2',
+                        fontFamily: 'DM Sans, sans-serif',
+                    }}>
                         Profile
                     </div>
-                    <div>
+                    <div style={{
+                        marginTop:'5px',
+                            border:'2px solid green',
+                            color:'#566474',
+                            fontSize:'16px',
+                            fontFamily:'DM Sans'
+                    }}>
                         fsdfsafsdfsdfsfafsdfsafsadfsafdsfsdf
                     </div>
 
