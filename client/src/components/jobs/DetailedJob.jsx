@@ -5,7 +5,15 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import TagIcon from '@mui/icons-material/Tag';
 import monthMap from "../../constants/monthMap";
-
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { DataContext } from "../../context/DataProvider";
+import { useContext } from "react";
+import { getAccessToken } from "../../utility functions/util.js";
 const job = {
     companyId: '3123123',
     companyName:'Microsoft',
@@ -18,7 +26,7 @@ const job = {
     location :'Remote',
     openings:10,
     startDate :12/11/23,
-    skillsRequired :['React', 'Javascript', 'HTML', 'Angular'],
+    skillsRequired :['React', 'Javascript', 'HTML', 'Angular','React', 'Javascript', 'HTML', 'Angular'],
     applyDeadlineDate :14/4/23,
     jobCreateDate :11/3/22,
     workHours :'7-8 hours',
@@ -38,6 +46,64 @@ const job = {
 
 
 const DetailedJob = () => {
+    const navigate = useNavigate();
+    const {id} = useParams();
+    const {account}=useContext(DataContext);
+    const jobInitialValues = {
+        companyId:'',
+        jobTitle:'',
+        jobType:'Internship',
+        salary:'',
+        openings:'',
+        duration:'',
+        location:'',
+        startDate:'',
+        applyDeadlineDate:'',
+        jobCreateDate:'',
+        workHours:'',
+        jobRequirements:'',
+        responsibilities:'',
+        hiringProcess:'',
+        skillsRequired:[],
+    }
+
+    const companyIntialValues = {
+        companyName :'',
+        locationBased:'',
+        aboutCompany:'',
+        companyAccountId:''
+    }
+    const {setAccount} = useContext(DataContext);
+    const [jobState, setJob] = useState(jobInitialValues)
+    const [companyState, setCompanyState] = useState(companyIntialValues)
+    console.log(jobState)
+    useEffect(() => {
+        const myFunction = async() => {
+        const url = `http://localhost:8000/getSingleJobAndCompany?jobId=${id}`;
+        const settings = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            authorization : getAccessToken()
+        }
+        };
+        try {
+            const fetchResponse = await fetch(url, settings);
+            const response = await fetchResponse.json();
+            
+            console.log(response.jobObj)
+            setJob(response.jobObj);
+            setCompanyState({companyName:response.companyName, locationBased:response.locationBased, aboutCompany:response.aboutCompany, companyAccountId:jobState.companyId});
+            } catch (e) {
+            console.log(e);
+            }
+        }
+        myFunction()
+      
+    }, [])
+    
+
+
 
     return(
         <>
@@ -56,7 +122,7 @@ const DetailedJob = () => {
                     flexDirection:'column',
                     flexWrap:'wrap',
                     flexBasis:'95%',
-                    border:'2px solid red',
+                    // border:'2px solid red',
                     padding:'10px'
                 }}>
 
@@ -64,14 +130,17 @@ const DetailedJob = () => {
                 <div style={{
                     display:'flex',
                     flexDirection:'column',
-                    border:'2px solid black',
+                    border: '2px solid #ebf0f5',
+                    boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)',
+                    boxSizing: 'border-box',
+                    borderRadius: '5px 5px 5px 5px',
                     padding:'10px'
                 }}>
                 <div style={{
                     display:'flex',
                     flexDirection:'row',
                     padding:'5px',
-                    border:'2px solid green'
+                    // border:'2px solid green'
                 }}>
                     <div style={{
                             fontWeight: 'bold',
@@ -79,7 +148,7 @@ const DetailedJob = () => {
                             fontFamily: 'DM Sans, sans-serif',
                             fontSize:'18px'
                     }}>
-                    Full stack developer internship
+                    {jobState.jobTitle}{jobState.jobType === 'Internship'?' internship':''}
                     </div>
 
                     <div style={{
@@ -91,33 +160,33 @@ const DetailedJob = () => {
                         fontFamily: 'DM Sans, sans-serif',
                         padding: '5px 10px'
                     }}>
-                    Work From home
+                    {jobState.location.includes('remote') || jobState.location.toLowerCase().includes('home') ? 'Work From Home':'In-Office'}
 
                     </div>
                 </div>
 
                 <div style={{
-                    border:'2px solid blue',
+                    // border:'2px solid blue',
                     padding:'5px',
                     color: '#566474',
                     fontSize:'16px',
                     fontFamily: 'DM Sans, sans-serif',
                 }}>
-                Web3Scope | India
+                {companyState.companyName} | {companyState.locationBased}
                 </div>
 
                 <div style={{
                     display:'flex',
                     flexDirection:'row',
                     padding:'5px',
-                    border:'2px solid orange'
+                    // border:'2px solid orange'
                 }}>
                     <div style={{
-                        border:'2px solid green',
+                        // border:'2px solid green',
                         color: '#445ee2',
                         fontFamily: 'DM Sans, sans-serif',
                     }}>
-                        Apply by 27 December 2023 • Posted 14h ago
+                        Apply by {new Date(jobState.applyDeadlineDate).getDate()} {monthMap[new Date(jobState.applyDeadlineDate).getMonth()+1]} {new Date(jobState.applyDeadlineDate).getFullYear()} • Posted {new Date().getDate() === new Date(jobState.jobCreateDate).getDate() ? new Date().getHours() - new Date(jobState.jobCreateDate).getHours():''} ago
                     </div>
                     
                     <div style={{
@@ -154,9 +223,12 @@ const DetailedJob = () => {
                     flexDirection:'row',
                     justifyContent:'space-between',
                     marginBottom:'10px',
-                    border:'2px solid black',
-                    marginTop:'20px',
-                    padding:'10px'
+                    marginTop:'30px',
+                    padding:'10px',
+                    border: '2px solid #ebf0f5',
+                    boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)',
+                    boxSizing: 'border-box',
+                    borderRadius: '5px 5px 5px 5px',
                 }}>
                     <div style={{
                         display:'flex',
@@ -185,7 +257,7 @@ const DetailedJob = () => {
                             marginLeft:'2px'
                         }}>
                         {
-                            job.jobType === 'Internship'? 'Salary per month' : 'Job offer'
+                            jobState.jobType === 'Internship'? 'Salary per month' : 'Job offer'
                         }
                         
                         </div>
@@ -196,13 +268,13 @@ const DetailedJob = () => {
                             fontFamily:'DM Sans',
                             fontWeight:'bold'
                         }}>
-                            {job.salary}
+                            {jobState.salary}
                         </div>
                         
                         
                     </div>
                     {
-                        job.jobType === 'Internship' ?
+                        jobState.jobType === 'Internship' ?
                         <div style={{
                         display:'flex',
                         flexDirection:'column',
@@ -236,7 +308,7 @@ const DetailedJob = () => {
                             fontFamily:'DM Sans',
                             fontWeight:'bold'
                         }}>
-                            {job.duration}
+                            {jobState.duration}
                         </div>
                     </div>:
                     <div></div>
@@ -275,7 +347,7 @@ const DetailedJob = () => {
                             fontFamily:'DM Sans',
                             fontWeight:'bold'
                         }}>
-                            {job.workHours}
+                            {jobState.workHours}
                         </div>
                     </div>
                     <div style={{
@@ -311,7 +383,7 @@ const DetailedJob = () => {
                             fontFamily:'DM Sans',
                             fontWeight:'bold'
                         }}>
-                            {new Date(job.startDate).getDate()} {monthMap[new Date(job.startDate).getMonth()+1]} {new Date(job.startDate).getFullYear() %2000}
+                            {new Date(jobState.startDate).getDate()} {monthMap[new Date(jobState.startDate).getMonth()+1]} {new Date(jobState.startDate).getFullYear() %2000}
                         </div>
                     </div>
                     <div style={{
@@ -341,13 +413,54 @@ const DetailedJob = () => {
                         Openings
                         </div>
                         </div>
+
+                        
                         <div style={{
                             color:'#566474',
                             fontSize:'16px',
                             fontFamily:'DM Sans',
                             fontWeight:'bold'
                         }}>
-                            {job.openings}
+                            {jobState.openings}
+                        </div>
+                    </div>
+
+                    <div style={{
+                        display:'flex',
+                        flexDirection:'column',
+                        
+                    }}>
+                        <div style={{
+                            display:'flex',
+                            flexDirection:'row',
+                            fontSize: '16px',
+                            fontStyle: 'normal',
+                            lineHeight: '1.75rem',
+                            letterSpacing: '-.02em',
+                            fontWeight: '500',
+                            color: '#9eaab7',
+                            fontFamily: "DM Sans"
+                        }}>
+                        <div>
+                        <LocationOnIcon style={{
+                            margin:-5
+                        }}/>
+                        </div>
+                        <div style={{
+                            marginLeft:'2px'
+                        }}>
+                        Office location
+                        </div>
+                        </div>
+
+                        
+                        <div style={{
+                            color:'#566474',
+                            fontSize:'16px',
+                            fontFamily:'DM Sans',
+                            fontWeight:'bold'
+                        }}>
+                            {jobState.location}
                         </div>
                     </div>
                 </div>
@@ -358,22 +471,26 @@ const DetailedJob = () => {
                     <div style={{
                         display:'flex',
                         flexDirection:'row',
-                        marginTop:'10px',
-                        border:'2px solid black',
-                        padding:'10px'
+                        marginTop:'30px',
+                        
+                        
                     }}> 
 
                     {/* Start of job desc div */}
                         <div style={{
                             display:'flex',
                             flexDirection:'column',
-                            border:'2px solid red',
+                            border: '2px solid #ebf0f5',
+                            boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)',
+                            boxSizing: 'border-box',
+                            borderRadius: '5px 5px 5px 5px',
+                            
                             width:'100%',
                             padding:'10px'
                         }}>
                         <div style={{
                             marginTop:'10px',
-                            border:'2px solid green',
+                            // border:'2px solid green',
                             fontFamily: 'DM Sans, sans-serif',
                             fontSize:'18px',
                             textDecoration:'underline',
@@ -383,16 +500,16 @@ const DetailedJob = () => {
                         </div>
                         <div style={{
                             marginTop:'5px',
-                            border:'2px solid green',
+                            // border:'2px solid green',
                             color:'#566474',
                             fontSize:'16px',
                             fontFamily:'DM Sans'
                         }}>
-                            fsdsdsfadfsfsdsdfsfsdfsdfsfdsfsdfsfsdfsdfsdfsdfsdfsfsdffafsdfsdfsfsdfsdfsdfsdf
+                            {jobState.jobRequirements}
                         </div>
                         <div style={{
                             marginTop:'10px',
-                            border:'2px solid green',
+                            // border:'2px solid green',
                             fontSize:'18px',
                             textDecoration:'underline',
                             fontWeight: 'bold',
@@ -402,16 +519,16 @@ const DetailedJob = () => {
                         </div >
                         <div style={{
                             marginTop:'5px',
-                            border:'2px solid green',
+                            // border:'2px solid green',
                             color:'#566474',
                             fontSize:'16px',
                             fontFamily:'DM Sans'
                         }}>
-                            fsdsdsfadfsfsdsdfsfsdfsdfsfdsfsdfsfsdfsdfsdfsdfsdfsfsdffafsdfsdfsfsdfsdfsdfsdf
+                            {jobState.responsibilities}
                         </div>
                         <div style={{
                             marginTop:'10px',
-                            border:'2px solid green',
+                            // border:'2px solid green',
                             fontSize:'18px',
                             textDecoration:'underline',
                             fontWeight: 'bold',
@@ -421,12 +538,12 @@ const DetailedJob = () => {
                         </div>
                         <div style={{
                             marginTop:'5px',
-                            border:'2px solid green',
+                            // border:'2px solid green',
                             color:'#566474',
                             fontSize:'16px',
                             fontFamily:'DM Sans'
                         }}>
-                            fsdsdsfadfsfsdsdfsfsdfsdfsfdsfsdfsfsdfsdfsdfsdfsdfsfsdffafsdfsdfsfsdfsdfsdfsdf
+                            {jobState.hiringProcess}
                         </div>
                     
                         </div>
@@ -437,8 +554,11 @@ const DetailedJob = () => {
                         <div style={{
                             display:'flex',
                             flexDirection:'column',
-                            border:'2px solid black',
-                            marginRight:'10px',
+                            border: '2px solid #ebf0f5',
+                            boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)',
+                            boxSizing: 'border-box',
+                            borderRadius: '5px 5px 5px 5px',
+                            marginRight:'0px',
                             marginLeft:'auto'
                         }}>
                         <div style={{
@@ -453,10 +573,11 @@ const DetailedJob = () => {
                         <div style={{
                             display:'flex',
                             flexDirection:'row',
+                            flexWrap:'wrap'
                         }}>
                     {
                     
-                    job.skillsRequired.map((skill) =>
+                    jobState.skillsRequired.map((skill) =>
                         (
                         <div>
                         <div  style={{
@@ -469,7 +590,8 @@ const DetailedJob = () => {
                         display:'flex',
                         flexDirection:'row',
                         fontFamily: "DM Sans",
-                        marginRight:'5px'
+                        marginRight:'5px',
+                        marginTop:'10px'
                     }}>
                              <div>
                                 {skill}
@@ -489,8 +611,11 @@ const DetailedJob = () => {
                     <div style={{
                         display:'flex',
                         flexDirection:'column',
-                        border:'2px solid black',
-                        marginTop:'10px'
+                        border: '2px solid #ebf0f5',
+                        boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)',
+                        boxSizing: 'border-box',
+                        borderRadius: '5px 5px 5px 5px',
+                        marginTop:'30px'
                     }}>
                     <div style={{
 
@@ -506,7 +631,7 @@ const DetailedJob = () => {
                     fontSize:'16px',
                     fontFamily: 'DM Sans, sans-serif',
                     }}>
-                        Microsoft
+                        {companyState.companyName}
                     </div>
                     <div style={{
                         color: '#445ee2',
@@ -516,12 +641,12 @@ const DetailedJob = () => {
                     </div>
                     <div style={{
                         marginTop:'5px',
-                            border:'2px solid green',
+                            // border:'2px solid green',
                             color:'#566474',
                             fontSize:'16px',
                             fontFamily:'DM Sans'
                     }}>
-                        fsdfsafsdfsdfsfafsdfsafsadfsafdsfsdf
+                        {companyState.aboutCompany}
                     </div>
 
                     </div>

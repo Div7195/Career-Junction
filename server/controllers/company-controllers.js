@@ -125,3 +125,14 @@ export const deleteJobController = async(request, response) => {
         return response.status(500).json('failed job delete');
     }
 }
+
+export const getSingleJobSecondController = async(request, response) => {
+
+    try {
+        let jobObj = await Job.findOne({_id:request.query.jobId});
+        let company = await Company.findOne({companyAccountId:jobObj.companyId});
+        return response.status(200).json({jobObj, locationBased:company.locationBased, companyName:company.companyName, aboutCompany:company.aboutCompany, introOfCompany:company.introOfCompany});
+    } catch (error) {
+        return response.status(500).json('failed single job and company fetch');
+    }
+}
