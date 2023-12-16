@@ -191,7 +191,6 @@ return(
                 <div style={{
                     display:'flex',
                     flexDirection:'row',
-                    
                     marginBottom:'10px'
                 }}>
                     <div style={{
@@ -442,7 +441,7 @@ return(
                             cursor:'pointer',
                             padding: '8px 20px 8px 16px',
                             color:'white'
-                        }}></div>
+                        }}>Apply Now</div>
                             :
                             <div></div>
                 
