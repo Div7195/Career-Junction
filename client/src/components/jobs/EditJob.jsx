@@ -15,11 +15,16 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import {Button} from "@mui/material";
 import FormLabel from '@mui/material/FormLabel';
 import { useContext } from "react";
-import { DataContext } from '../../context/DataProvider';
+import { DataContext } from '../../context/DataProvider.jsx';
 import dayjs from 'dayjs';
 import { getAccessToken } from "../../utility functions/util.js";
+import { useNavigate, useParams, Link } from 'react-router-dom'
+import { useEffect } from "react";
 import CompanySidebar from "../sidebar/CompanySidebar.jsx";
-const CreateNewJob = () => {
+const EditJob = () => {
+    
+    const navigate = useNavigate();
+    const {id} = useParams();
     const {account}=useContext(DataContext);
     const jobInitialValues = {
         companyId:account.id,
@@ -29,9 +34,9 @@ const CreateNewJob = () => {
         openings:'',
         duration:'',
         location:'',
-        startDate:dayjs(new Date()),
-        applyDeadlineDate:dayjs(new Date()),
-        jobCreateDate:new Date(),
+        startDate:'',
+        applyDeadlineDate:'',
+        jobCreateDate:'',
         workHours:'',
         jobRequirements:'',
         responsibilities:'',
@@ -65,9 +70,8 @@ const CreateNewJob = () => {
         setJob({...jobState, applyDeadlineDate:e.$d});
     }
     
-    const createJob = async() =>{
+    const updateJob = async() =>{
         console.log(jobState)
-        jobState.jobCreateDate = dayjs(new Date()).$d;
         const settings = {
          method: "POST",
          body: JSON.stringify(jobState),
@@ -78,9 +82,8 @@ const CreateNewJob = () => {
          }
          try {
              console.log(settings.body)
-             const fetchResponse = await fetch(`http://localhost:8000/createJob`, settings);
+             const fetchResponse = await fetch(`http://localhost:8000/updateJob?jobId=${id}`, settings);
              const response = await fetchResponse.json();
-             setJob(jobInitialValues);
             
              
          } catch (e) {
@@ -88,6 +91,33 @@ const CreateNewJob = () => {
              return e;
          }    
      }
+     
+
+     useEffect(() => {
+        const myFunction = async() => {
+        const url = `http://localhost:8000/getSingleJob?jobId=${id}`;
+        const settings = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            authorization : getAccessToken()
+        }
+        };
+        try {
+            const fetchResponse = await fetch(url, settings);
+            const response = await fetchResponse.json();
+            console.log(response.jobObj)
+            setJob(response.jobObj);
+            
+            } catch (e) {
+            console.log(e);
+            }
+    
+        }
+        
+        myFunction()
+    }, [])
+     
     
     
     return(
@@ -97,10 +127,12 @@ const CreateNewJob = () => {
             flexDirection:'row'
           }}>
           <CompanySidebar/>
+          
         <div style={{
+            
             display:'flex',
-            justifyContent:'center',
             width:'100%',
+            justifyContent:'center',
             fontSize:'20px',
             color:'black'
 
@@ -126,8 +158,8 @@ const CreateNewJob = () => {
         aria-labelledby="demo-row-radio-buttons-group-label"
         name="row-radio-buttons-group"
       >
-        <FormControlLabel value="Internship" control={<Radio  />} label="Internship" />
-        <FormControlLabel value="Fulltime" control={<Radio />} label="Fulltime" />
+        <FormControlLabel value="Internship" control={<Radio checked = {jobState.jobType === 'Internship'?true:false} />} label="Internship" />
+        <FormControlLabel value="Fulltime" control={<Radio checked = {jobState.jobType === 'Fulltime'?true:false} />} label="Fulltime" />
         
         
       </RadioGroup>
@@ -283,7 +315,7 @@ const CreateNewJob = () => {
                 
                 <LocalizationProvider dateAdapter={AdapterDayjs} >
                 <DemoContainer components={['DatePicker']} >
-                <DatePicker  label="Basic date picker" value={jobState.startDate}
+                <DatePicker  label="Basic date picker" value={dayjs(jobState.startDate)}
           onChange={(e) => {handleStartDateChange(e)}}/>
                 </DemoContainer>
                 </LocalizationProvider>
@@ -305,7 +337,7 @@ const CreateNewJob = () => {
                 
                 <LocalizationProvider dateAdapter={AdapterDayjs} >
                 <DemoContainer components={['DatePicker']} >
-                <DatePicker  label="Basic date picker" value={jobState.applyDeadlineDate} onChange={(e) => {handleDeadlineChange(e)}}/>
+                <DatePicker  label="Basic date picker" value={dayjs(jobState.applyDeadlineDate)} onChange={(e) => {handleDeadlineChange(e)}}/>
                 </DemoContainer>
                 </LocalizationProvider>
                     
@@ -494,13 +526,13 @@ const CreateNewJob = () => {
                 marginTop:'15px'
             }}>
                 <Button onClick={() => {
-                    createJob()
+                    updateJob()
                 }} style={{
                     
                     background:'#131c30',
                     color:'rgb(0, 236, 255)',
                     fontWeight: 'bold',
-                }}  variant="contained">Create new opening</Button>
+                }}  variant="contained">Update opening</Button>
             </div>
             
 
@@ -515,4 +547,4 @@ const CreateNewJob = () => {
         </>
     );
 }
-export default CreateNewJob
+export default EditJob

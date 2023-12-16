@@ -23,7 +23,7 @@ import { DataContext } from '../../context/DataProvider';
 import companySize from "../../constants/companySize.js";
 import { getAccessToken } from "../../utility functions/util.js";
 import { useEffect } from "react";
-
+import CompanySidebar from "../sidebar/CompanySidebar.jsx";
 
 const CompanyProfile = () => {
     const {account}=useContext(DataContext);
@@ -113,10 +113,17 @@ const CompanyProfile = () => {
 
     
     return(
-        
+        <>
+
         <div style={{
-            marginTop:'64px',
             display:'flex',
+            flexDirection:'row'
+          }}>
+          <CompanySidebar/>
+        <div style={{
+            
+            display:'flex',
+            width:'100%',
             justifyContent:'center',
             fontSize:'20px',
             color:'black'
@@ -171,7 +178,7 @@ const CompanyProfile = () => {
                         multiline
                         maxRows={4}
                         variant="filled"
-                            style={{width:400}}
+                            style={{width:800}}
                         />
                 </div>
             </div>
@@ -201,7 +208,7 @@ const CompanyProfile = () => {
                         multiline
                         maxRows={4}
                         variant="filled"
-                        style={{width:400}}
+                        style={{width:800}}
                         />
                 </div>
             </div>
@@ -348,7 +355,7 @@ const CompanyProfile = () => {
                         multiline
                         maxRows={4}
                         variant="filled"
-                        style={{width:400}}
+                        style={{width:800}}
                         />
                 </div>
             </div>
@@ -375,7 +382,7 @@ const CompanyProfile = () => {
                         multiline
                         maxRows={4}
                         variant="filled"
-                        style={{width:400}}
+                        style={{width:800}}
                         />
                 </div>
             </div>
@@ -400,8 +407,9 @@ const CompanyProfile = () => {
             
         
             
-        
         </div>
+        </div>
+        </>
     );
 }
 export default CompanyProfile

@@ -412,7 +412,7 @@ return(
                         marginLeft:'auto'
                     }}>
 
-                    
+                <Link to={`/job/details/${job._id}`} style={{textDecoration:'none' , color:'inherit'}}>
                         <div style={{
                                 border: '1px solid #ebf0f5',
                                 borderRadius: '5px',
@@ -425,8 +425,10 @@ return(
                                 cursor:'pointer',
                                 height:'44px'
                         }}>
+                        
                         View Details
                         </div>
+                        </Link>
                         {
                             account.role !== 'company'?
                             <div style={{

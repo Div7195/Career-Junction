@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { useContext } from "react"
 import { DataContext } from "../../context/DataProvider"
 import { getAccessToken } from "../../utility functions/util"
-
+import CompanySidebar from "../sidebar/CompanySidebar"
 const CompanyOpenings = () => {
     const {account}=useContext(DataContext);
     const {setAccount} = useContext(DataContext);
@@ -37,8 +37,15 @@ const CompanyOpenings = () => {
     
 
     return(
+        <>
         <div style={{
-            marginTop:'64px',
+            display:'flex',
+            flexDirection:'row'
+          }}>
+          <CompanySidebar/>
+          
+        <div style={{
+            width:'100%',
             display:'flex',
             justifyContent:'center',
             
@@ -68,6 +75,8 @@ const CompanyOpenings = () => {
 
             
         </div>
+        </div>
+        </>
     )
     
 }

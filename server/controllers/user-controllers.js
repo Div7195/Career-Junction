@@ -45,7 +45,7 @@ export const loginUserController = async(request, response) => {
     try {
         let match = await bcrypt.compare(request.body.password, user.password);
         if(match){
-             const accessToken = jwt.sign(user.toJSON(), process.env.ACCESS_SECRET_KEY, {expiresIn :'30m' });
+             const accessToken = jwt.sign(user.toJSON(), process.env.ACCESS_SECRET_KEY, {expiresIn :'200m' });
              const refreshToken = jwt.sign(user.toJSON(), process.env.REFRESH_SECRET_KEY);
              const newToken = new token({token:refreshToken});
              await newToken.save();

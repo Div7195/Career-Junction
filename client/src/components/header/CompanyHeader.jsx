@@ -179,7 +179,7 @@ export default function CompanyHeader() {
     {
       location.pathname.includes('login') === true?
       account && account.loggedIn === true ?
-      <Box sx={{ display: "flex" }}>
+      <Box sx={{ display: "flex", flexDirection:'column' }}>
     <Box sx={{ flexGrow: 1 }}>
       <AppBar  position="fixed"
         sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }} style={{backgroundColor:"#131c30"}}>
@@ -259,7 +259,13 @@ export default function CompanyHeader() {
       {renderMobileMenu}
       {renderMenu}
     </Box>
+    <div style={{
+      display:'flex',
+      flexDirection:'row'
+    }}>
     <CompanySidebar/>
+    </div>
+    
     </Box>
     
     :

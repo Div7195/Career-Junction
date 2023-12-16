@@ -22,6 +22,8 @@ export default function CompanySidebar() {
   const navigate  = useNavigate();
   const location  = useLocation();
     return(
+      <div>
+
       
       <Drawer
         sx={{
@@ -81,5 +83,6 @@ export default function CompanySidebar() {
           ))}
         </List>
       </Drawer>
+      </div>
     )
 }
