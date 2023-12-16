@@ -399,13 +399,21 @@ const DetailedJob = () => {
                         {/* End of job desc div */}
                         {/* Start of skills div */}
                         
+                        
                         <div style={{
                             display:'flex',
-                            flexDirection:'row',
+                            flexDirection:'column',
                             border:'2px solid black',
                             marginRight:'10px',
                             marginLeft:'auto'
-                        }}>Skills required
+                        }}>
+                        <div>
+                            Skills required
+                        </div>
+                        <div style={{
+                            display:'flex',
+                            flexDirection:'row',
+                        }}>
                     {
                     
                     job.skillsRequired.map((skill) =>
@@ -431,6 +439,7 @@ const DetailedJob = () => {
                         ))
                 }
                 
+                        </div>
                         </div>
                         {/* End of skills div */}
                         

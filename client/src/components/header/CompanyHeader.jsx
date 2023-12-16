@@ -259,12 +259,7 @@ export default function CompanyHeader() {
       {renderMobileMenu}
       {renderMenu}
     </Box>
-    <div style={{
-      display:'flex',
-      flexDirection:'row'
-    }}>
-    <CompanySidebar/>
-    </div>
+    
     
     </Box>
     
