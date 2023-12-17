@@ -2,133 +2,132 @@ import mongoose from "mongoose";
 const aspirantSchema = mongoose.Schema({
     aspirantAccountId:{
         type:String,
-        required:true,
-        unique:true
+        required:false,
     },
     aspirantName: {
         type:String,
-        required:true,
+        required:false,
         
     },
     aspirantEmail :{
         type:String,
-        required:true
+        required:false
     },
     aspirantLocation :{
         type:String,
-        required:true
+        required:false
+    },
+    appliedJobs:{
+        type:[String],
+        required:false
+    },
+    savedJobs:{
+        type:[String],
+        required:false
     },
     education :[{
         schoolName : {
             
             type:String,
-            required:true,
+            required:false,
 
         },
         course:{
             type:String,
-            required:true,
+            required:false,
 
         },
         startYear:{
-            type:Integer,
-            required:true
+            type:String,
+            required:false
         },
-        finishYear:{
-            type:Integer,
-            required:true
+        finishYear:{ 
+            type:String,
+            required:false
         },
         grade:{
-            type:Integer,
-            required:true
+            type:String,
+            required:false
         }
 }],
     projects:[{
         projectTitle:{
             type:String,
-            required:true
+            required:false
         },
-        skills:[
-                {
-                    skill:{
-                        type:String,
-                        required:true
-                    }
-                    
-                }
-            ],
+        projectsSkills:[String],
         repoLink:{
             type:String,
-            required:true
+            required:false
         },
         liveLink:{
             type:String,
-            required:true
+            required:false
         },
         aboutProject:{
             type:String,
-            required:true
+            required:false
         }
 }],
     positionsOfResp:[{
         positionTitle:{
             type:String,
-            required:true
+            required:false
         },
     descriptionOfPosition:{
         type:String,
-        required:true
+        required:false
     }
     }   
     ],
     workExperiences:[{
         companyName:{
             type:String,
-            required:true
+            required:false
         },
         workType:{
             type:String,
-            required:true
+            required:false
         },
         workTitle:{
             type:String,
-            required:true
+            required:false
         },
         location:{
             type:String,
-            required:true
+            required:false
         },
         startDate:{
             type:Date,
-            required:true
+            required:false
         },
         endDate:{
             type:Date,
-            required:true
+            required:false
         }
 }],
     achievements:[{
-        achievement:{
+        achievementDesc:{
             type:String,
-            required:true
+            required:false
         }
 }],
     certifications:[{
         certificationTitle:{
             type:String,
-            required:true
+            required:false
         },
-        certificatinDesc:{
+        certificationDesc:{
             type:String,
-            required:true
+            required:false
         },
         certificationLink:{
             type:String,
-            required:true
+            required:false
         },
         certificateIssueDate:{
             type:Date,
-            required:true
+            required:false
         }
 }],
     linkedinLink:{

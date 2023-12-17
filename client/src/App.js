@@ -15,6 +15,9 @@ import Notifications from './components/notifs/Notifications.jsx';
 import CompanyProfile from './components/companies/CompanyProfile.jsx';
 import DetailedJob from './components/jobs/DetailedJob.jsx';
 import EditJob from './components/jobs/EditJob.jsx';
+import ExploreJobs from './components/jobs/ExploreJobs.jsx';
+import AppliedJobs from './components/jobs/AppliedJobs.jsx';
+import SavedJobs from './components/jobs/SavedJobs.jsx';
 
 
 
@@ -39,6 +42,9 @@ function App() {
               <Route  path = '/companies' element = {<Companies/>}/>
               <Route  path = '/messaging' element = {<Messaging/>}/>
               <Route  path = '/notifications' element = {<Notifications/>}/>
+              <Route  path = '/explore/jobs' element = {<ExploreJobs/>}/>
+              <Route  path = '/applied' element = {<AppliedJobs/>}/>
+              <Route  path = '/saved/jobs' element = {<SavedJobs/>}/>
             </Routes>
           </div>
         </BrowserRouter>

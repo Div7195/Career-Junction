@@ -28,6 +28,8 @@ import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useContext } from "react";
 import { DataContext } from '../../context/DataProvider';
+import AspirantSidebar from '../sidebar/AspirantSidebar';
+import { useEffect } from 'react';
 const drawerWidth = 240;
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -44,6 +46,7 @@ const Search = styled('div')(({ theme }) => ({
     width: 'auto',
   },
 }));
+
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
@@ -76,7 +79,7 @@ export default function CompanyHeader() {
   const {setAccount} = useContext(DataContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
+  
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -96,6 +99,14 @@ export default function CompanyHeader() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+  useEffect(() => {
+    if(account.loggedIn === false){
+      navigate('/login');
+    }
+  }, [])
+  
+
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -172,8 +183,11 @@ export default function CompanyHeader() {
     </Menu>
   );
 
+  
+
   return (
    
+<>
 
     <div>
     {
@@ -346,12 +360,16 @@ export default function CompanyHeader() {
       {renderMobileMenu}
       {renderMenu}
     </Box>
-    <CompanySidebar/>
+    {
+      account.role === 'aspirant'?<AspirantSidebar/>:<CompanySidebar/>
+    }
+    
     </Box>
       
     }
     
     </div>
+    </>
     );
    }
     
