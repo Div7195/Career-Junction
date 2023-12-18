@@ -39,44 +39,16 @@ export const signupUserController = async(request, response) => {
                 aspirantLocation:'',
                 appliedJobs:[],
                 savedJobs:[],
-                education:[{
-                    schoolName:'',
-                    course:'',
-                    startYear:'',
-                    finishYear:'',
-                    grade:''
-                }],
-                projects:[{
-                    projectTitle:'',
-                    projectsSkills:[],
-                    repoLink:'',
-                    liveLink:'',
-                    aboutProject:'',
-
-                }],
-                positionsOfResp:[{
-                    positionTitle:'',
-                    descriptionOfPosition:''
-                }],
-                workExperiences:[{
-                    companyName:'',
-                    workType:'',
-                    workTitle:'',
-                    location:'',
-                    
-                }],
-                achivements:[{
-                    achievementDesc:''
-                }],
-                certifications:[{
-                    certificationTitle:'',
-                    certificationDesc:'',
-                    certificationLink:'',
-                    
-
-                }],
+                domains:[],
+                education:[],
+                projects:[],
+                positionsOfResp:[],
+                workExperiences:[],
+                achivements:[],
+                certifications:[],
                 linkedinLink:'',
                 githubLink:'',
+                status:''
             })
             temp = newAspirant
             await newAspirant.save();

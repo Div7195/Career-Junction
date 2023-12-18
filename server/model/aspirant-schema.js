@@ -17,11 +17,19 @@ const aspirantSchema = mongoose.Schema({
         type:String,
         required:false
     },
+    aspirantDomains:{
+        type:[String],
+        required:false
+    },
     appliedJobs:{
         type:[String],
         required:false
     },
     savedJobs:{
+        type:[String],
+        required:false
+    },
+    domains :{
         type:[String],
         required:false
     },
@@ -38,11 +46,11 @@ const aspirantSchema = mongoose.Schema({
 
         },
         startYear:{
-            type:String,
+            type:Date,
             required:false
         },
         finishYear:{ 
-            type:String,
+            type:Date,
             required:false
         },
         grade:{
@@ -137,7 +145,12 @@ const aspirantSchema = mongoose.Schema({
     githubLink:{
         type:String,
         required:false
+    },
+    status:{
+        type:String,
+        required:false
     }
+    
 
     
     

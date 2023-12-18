@@ -14,3 +14,50 @@ Edit self details
 Admin
 Browse companies and people
 
+ aspirantAccountId:newUser._id,
+                aspirantName:'',
+                aspirantEmail:'',
+                aspirantLocation:'',
+                appliedJobs:[],
+                savedJobs:[],
+                domains:[],
+                education:[{
+                    schoolName:'',
+                    course:'',
+                    startYear:'',
+                    finishYear:'',
+                    grade:''
+                }],
+                projects:[{
+                    projectTitle:'',
+                    projectsSkills:[],
+                    repoLink:'',
+                    liveLink:'',
+                    aboutProject:'',
+
+                }],
+                positionsOfResp:[{
+                    positionTitle:'',
+                    descriptionOfPosition:''
+                }],
+                workExperiences:[{
+                    companyName:'',
+                    workType:'',
+                    workTitle:'',
+                    location:'',
+                    
+                }],
+                achivements:[{
+                    achievementDesc:''
+                }],
+                certifications:[{
+                    certificationTitle:'',
+                    certificationDesc:'',
+                    certificationLink:'',
+                    
+
+                }],
+                linkedinLink:'',
+                githubLink:'',
+                status:''
+

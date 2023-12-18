@@ -18,6 +18,7 @@ import EditJob from './components/jobs/EditJob.jsx';
 import ExploreJobs from './components/jobs/ExploreJobs.jsx';
 import AppliedJobs from './components/jobs/AppliedJobs.jsx';
 import SavedJobs from './components/jobs/SavedJobs.jsx';
+import AspirantProfile from './components/people/AspirantProfile.jsx';
 
 
 
@@ -36,6 +37,7 @@ function App() {
               <Route  path = '/createjob' element = {<CreateNewJob/>}/>
               <Route  path = '/youropenings' element = {<CompanyOpenings/>}/>
               <Route  path = '/companyprofile' element = {<CompanyProfile/>}/>
+              <Route  path = '/aspirantprofile' element = {<AspirantProfile/>}/>
               <Route  path = '/job/:id' element = {<EditJob/>}/>
               <Route  path = '/job/details/:id' element = {<DetailedJob/>}/>
               <Route  path = '/people' element = {<People/>}/>
