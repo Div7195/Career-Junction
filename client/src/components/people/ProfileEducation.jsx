@@ -25,37 +25,22 @@ import { DataContext } from '../../context/DataProvider.jsx';
 import dayjs from 'dayjs';
 import { DatePicker } from '@mui/x-date-pickers';
 import { useContext } from 'react';
-const educationList = [
-    {
-        schoolName:'Indian Institute of Information Technology',
-        course:'BTECH in CSE',
-        startYear:2021,
-        finishYear:2025,
-        grade:'7 CGPA'
-    },
-    {
-        schoolName:'Indian Institute of Information Technology',
-        course:'BTECH in CSE',
-        startYear:2021,
-        finishYear:2025,
-        grade:'7 CGPA'
-    }
-]
-
 const ProfileEducation = ({aspirant, onUpdate}) =>{
     const {account}=useContext(DataContext);
     const {setAccount} = useContext(DataContext);
     const educationObjInitial = {
         schoolName:'',
-        courseName:'',
+        course:'',
         grade:'',
         startYear:'',
-        finishYear:''
+        finishYear:'',
+        _id:''
     }
     const [open, setOpen] = useState(false);
     const [open2, setOpen2] = useState(false);
     const [tempEducation, setTempEducation] = useState(educationObjInitial)
     const handleClickOpen = () => {
+        setTempEducation(educationObjInitial)
         setOpen(true);
     };
     const handleClickOpen2 = (education) => {
@@ -64,9 +49,11 @@ const ProfileEducation = ({aspirant, onUpdate}) =>{
     };
 
     const handleClose = () => {
+        setTempEducation(educationObjInitial)
         setOpen(false);
   };
   const handleClose2 = () => {
+    setTempEducation(educationObjInitial)
     setOpen2(false);
 };
   const handleStartDateChange = (e) => {
@@ -80,7 +67,7 @@ const handleFinishDateChange = (e) => {
 }
 
 const addNewEducationApi = async(field)=> {
-    if(!aspirant.education ) return
+    
     let tempArray = aspirant.education;
     
     tempArray.push(field);
@@ -102,15 +89,20 @@ const addNewEducationApi = async(field)=> {
             onUpdate(response)
             handleClose()
         } catch (e) {
-            
+            setTempEducation(educationObjInitial)
             return e;
         }    
 }
 
-const editEducationApi = async(field, index) => {
-    if(!aspirant.education) return
+const editEducationApi = async(field, id) => {
     let tempArray = aspirant.education;
-    tempArray[index] = field;
+    for(let i = 0;i<tempArray.length;i++){
+        if(tempArray[i]._id === id){
+            tempArray[i] = field
+            break;
+        }
+    }
+
     const settings = {
         method: "POST",
         body: JSON.stringify({
@@ -122,14 +114,15 @@ const editEducationApi = async(field, index) => {
         }
         }
         try {
-            console.log(settings.body)
+           
             const fetchResponse = await fetch(`http://localhost:8000/updateAspirantProfile?aspirantAccountId=${account.id}`, settings);
             const response = await fetchResponse.json();
             setTempEducation(educationObjInitial)
             onUpdate(response)
+            console.log(aspirant)
             handleClose2()
         } catch (e) {
-            
+            setTempEducation(educationObjInitial)
             return e;
         }    
 }
@@ -295,7 +288,7 @@ const deleteEducationApi = () => {
                 
                 <LocalizationProvider dateAdapter={AdapterDayjs} >
                 <DemoContainer components={['DatePicker']} >
-                <DatePicker  label="Select start date" value={dayjs(tempEducation.finishYear)}
+                <DatePicker  label="Select start date" value={dayjs(tempEducation.startYear)}
           onChange={(e) => {handleStartDateChange(e)}}/>
                 </DemoContainer>
                 </LocalizationProvider>
@@ -343,8 +336,8 @@ const deleteEducationApi = () => {
 
                 {/* Start of list of educations */}
                 {
-                    aspirant.education &&  aspirant.education.length > 0 ? aspirant.education.map((education, i) => (
-                    
+                    aspirant.education &&  aspirant.education.length > 0 ? aspirant.education.map((education) => (
+                        
                         <div style={{
                             display:'flex',
                             flexDirection:'column',
@@ -384,7 +377,7 @@ const deleteEducationApi = () => {
                             fontSize:'14px',
                             marginTop: '5px'
                         }}>
-                            {education.startYear}-{education.finishYear}
+                            {new Date(education.startYear).getFullYear()}-{new Date(education.finishYear).getFullYear()}
                         </div>
                         </div>
                         <div style={{
@@ -433,6 +426,7 @@ const deleteEducationApi = () => {
                                 value={tempEducation.schoolName}
                                 onChange={(e) => {
                                     setTempEducation({...tempEducation, [e.target.name]: e.target.value})
+                                    
                                 }}
                                 id="filled-multiline-flexible"
                                 label="Multiline"
@@ -460,6 +454,7 @@ const deleteEducationApi = () => {
                                 value={tempEducation.course}
                                 onChange={(e) => {
                                     setTempEducation({...tempEducation, [e.target.name]: e.target.value})
+                                    
                                 }}
                                 id="filled-multiline-flexible"
                                 label="Multiline"
@@ -487,6 +482,7 @@ const deleteEducationApi = () => {
                                 value={tempEducation.grade}
                                 onChange={(e) => {
                                     setTempEducation({...tempEducation, [e.target.name]: e.target.value})
+                                    
                                 }}
                                 id="filled-multiline-flexible"
                                 label="Multiline"
@@ -552,7 +548,7 @@ const deleteEducationApi = () => {
                     </DialogContent>
                     <DialogActions>
                     <Button onClick={handleClose2}>Cancel</Button>
-                    <Button onClick={()=>{editEducationApi(tempEducation, i)}}>Save</Button>
+                    <Button onClick={()=>{editEducationApi(tempEducation, tempEducation._id)}}>Save</Button>
                     </DialogActions>
              </Dialog>
                             
