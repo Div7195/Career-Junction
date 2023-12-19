@@ -63,7 +63,7 @@ const aspirantSchema = mongoose.Schema({
             type:String,
             required:false
         },
-        projectsSkills:[String],
+        projectSkills:[String],
         repoLink:{
             type:String,
             required:false
@@ -74,6 +74,14 @@ const aspirantSchema = mongoose.Schema({
         },
         aboutProject:{
             type:String,
+            required:false
+        },
+        startDate:{
+            type:Date,
+            required:false
+        },
+        finishDate:{
+            type:Date,
             required:false
         }
 }],
