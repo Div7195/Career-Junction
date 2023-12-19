@@ -105,11 +105,11 @@ const aspirantSchema = mongoose.Schema({
             type:String,
             required:false
         },
-        workType:{
+        workTitle:{
             type:String,
             required:false
         },
-        workTitle:{
+        aboutWork:{
             type:String,
             required:false
         },
@@ -121,7 +121,7 @@ const aspirantSchema = mongoose.Schema({
             type:Date,
             required:false
         },
-        endDate:{
+        finishDate:{
             type:Date,
             required:false
         },
