@@ -152,6 +152,10 @@ const aspirantSchema = mongoose.Schema({
         certificateIssueDate:{
             type:Date,
             required:false
+        },
+        certificateSkills:{
+            type:[String],
+            required:false
         }
 }],
     linkedinLink:{
