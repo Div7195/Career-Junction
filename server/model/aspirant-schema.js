@@ -90,10 +90,14 @@ const aspirantSchema = mongoose.Schema({
             type:String,
             required:false
         },
-    descriptionOfPosition:{
-        type:String,
-        required:false
-    }
+        descriptionOfPosition:{
+            type:String,
+            required:false
+        },
+        positionSkills:{
+            type:[String],
+            required:false
+        }
     }   
     ],
     workExperiences:[{
@@ -119,6 +123,10 @@ const aspirantSchema = mongoose.Schema({
         },
         endDate:{
             type:Date,
+            required:false
+        },
+        workSkills:{
+            type:[String],
             required:false
         }
 }],
