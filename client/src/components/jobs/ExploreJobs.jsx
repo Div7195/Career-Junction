@@ -25,9 +25,8 @@ const ExploreJobs = () => {
     const jobFilterInitial = {
         jobType:'',
         minSalary:'',
-        sortByDate:'',
+        sortBy:'',
         location:'',
-        sortBySalary:'',
         skillsRequired:[]
     }
     const {account}=useContext(DataContext);
@@ -52,17 +51,38 @@ const ExploreJobs = () => {
         setJobFilter({...jobFilter, jobType:e.target.value });
         console.log(jobFilter)
     }
-    const handleRadioSortDate = (e) => {
-        setJobFilter({...jobFilter, sortByDate:e.target.value });
+    
+    const handleRadioSortBy = (e) => {
+        setJobFilter({...jobFilter, sortBy:e.target.value });
         console.log(jobFilter)
     }
-    const handleRadioSortSalary = (e) => {
-        setJobFilter({...jobFilter, sortBySalary:e.target.value });
+
+    const applyFilter = async() =>{
         console.log(jobFilter)
-    }
+        const settings = {
+            method: 'GET',
+            headers: {
+                accept: 'application/json',
+                authorization : getAccessToken()
+            }
+         }
+         try {
+             console.log(settings.body)
+             
+             const fetchResponse = await fetch(`http://localhost:8000/getAllJobs?jobType=${jobFilter.jobType}&minSalary=${jobFilter.minSalary}&sortBy=${jobFilter.sortBy}&location=${jobFilter.location}&skillsRequired=${jobFilter.skillsRequired}`, settings);
+             const response = await fetchResponse.json();
+             setJobs(response);
+             
+         } catch (e) {
+             
+             return e;
+         }    
+     }
+
+
     useEffect(() => {
         const myFunction = async() => {
-        const url = `http://localhost:8000/getAllJobs`;
+        const url = `http://localhost:8000/getAllJobs?jobType=${jobFilter.jobType}&minSalary=${jobFilter.minSalary}&sortBy=${jobFilter.sortBy}&location=${jobFilter.location}&skillsRequired=${jobFilter.skillsRequired}`;
         const settings = {
         method: 'GET',
         headers: {
@@ -84,6 +104,8 @@ const ExploreJobs = () => {
         
         myFunction()
     }, [])
+
+    
 
     
     
@@ -153,7 +175,9 @@ const ExploreJobs = () => {
                     cursor:'pointer',
                     padding: '4px 4px 4px 4px',
                     color:'white'
-                }}>Apply Filter</div>
+                }}
+                onClick={() => {applyFilter()}}
+                >Apply Filter</div>
                 <div style={{
                     marginRight:'5px',
                     marginLeft:'auto',
@@ -197,43 +221,26 @@ const ExploreJobs = () => {
                     marginTop:'5px'
                 }}>
                     <FormControl>
-                    <FormLabel id="demo-row-radio-buttons-group-label">Sort by Salary</FormLabel>
+                    <FormLabel id="demo-row-radio-buttons-group-label">Sort</FormLabel>
                     <RadioGroup
                     onChange={(e) => {
-                                            handleRadioSortSalary(e);
+                                            handleRadioSortBy(e);
                                         }}
                         row
                         aria-labelledby="demo-row-radio-buttons-group-label"
                         name="row-radio-buttons-group"
                     >
-                        <FormControlLabel value="Old To New" control={<Radio checked = {jobFilter.sortBySalary === 'Old To New'?true:false} />} label="Old To New" />
-                        <FormControlLabel value="New To Old" control={<Radio checked = {jobFilter.sortBySalary === 'New To Old'?true:false} />} label="New To Old" />
+                        <FormControlLabel value="Old To New" control={<Radio checked = {jobFilter.sortBy === 'Old To New'?true:false} />} label="Old To New" />
+                        <FormControlLabel value="New To Old" control={<Radio checked = {jobFilter.sortBy === 'New To Old'?true:false} />} label="New To Old" />
+                        <FormControlLabel value="Ascending Salary" control={<Radio checked = {jobFilter.sortBy === 'Ascending Salary'?true:false} />} label="Ascending Salary" />
+                        <FormControlLabel value="Descending Salary" control={<Radio checked = {jobFilter.sortBy === 'Descending Salary'?true:false}/>} label="Descending Salary" />
                         
                         
                     </RadioGroup>
                     </FormControl>
                 </div>
 
-                <div style={{
-                    marginTop:'5px'
-                }}>
-                    <FormControl>
-                    <FormLabel id="demo-row-radio-buttons-group-label">Sort by date</FormLabel>
-                    <RadioGroup
-                    onChange={(e) => {
-                                            handleRadioSortDate(e);
-                                        }}
-                        row
-                        aria-labelledby="demo-row-radio-buttons-group-label"
-                        name="row-radio-buttons-group"
-                    >
-                        <FormControlLabel value="Ascending" control={<Radio checked = {jobFilter.sortByDate === 'Ascending'?true:false} />} label="Ascending" />
-                        <FormControlLabel value="Descending" control={<Radio checked = {jobFilter.sortByDate === 'Descending'?true:false}/>} label="Descending" />
-                        
-                        
-                    </RadioGroup>
-                    </FormControl>
-                </div>
+               
 
 
                 <div style={{
