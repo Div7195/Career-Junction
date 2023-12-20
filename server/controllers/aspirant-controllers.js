@@ -37,4 +37,21 @@ export const updateAspirantProfileController = async(request, response) => {
         return response.status(500).json(error);
     }
 }
+export const getAllJobsController = async(request, response) => {
+
+    try{
+        let objArrayOfJobs = [];
+        objArrayOfJobs = await Job.find({});
+        for(let i = 0;i<objArrayOfJobs.length;i++){
+            let tempCompany = await Company.findOne({companyAccountId:objArrayOfJobs[i].companyId});
+            objArrayOfJobs[i] = {...objArrayOfJobs[i]._doc,companyName:tempCompany.companyName, locationBased:tempCompany.locationBased};
+            
+        }
+        return response.status(200).json({objArrayOfJobs});
+
+    }catch(error){
+        return response.status(500).json('failed job fetching');
+    }
+}
+
 

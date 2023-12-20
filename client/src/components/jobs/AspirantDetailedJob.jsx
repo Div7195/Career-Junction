@@ -14,6 +14,7 @@ import { useParams } from "react-router-dom";
 import { DataContext } from "../../context/DataProvider";
 import { useContext } from "react";
 import { getAccessToken } from "../../utility functions/util.js";
+import AspirantSidebar from "../sidebar/AspirantSidebar.jsx";
 const job = {
     companyId: '3123123',
     companyName:'Microsoft',
@@ -45,7 +46,7 @@ const job = {
 }
 
 
-const DetailedJob = () => {
+const AspirantDetailedJob = () => {
     const navigate = useNavigate();
     const {id} = useParams();
     const {account}=useContext(DataContext);
@@ -111,7 +112,7 @@ const DetailedJob = () => {
             display:'flex',
             flexDirection:'row'
           }}>
-          <CompanySidebar/>
+          <AspirantSidebar/>
             <div style={{
                 display:'flex',
                 width:'100%',
@@ -670,4 +671,4 @@ const DetailedJob = () => {
         </>
     )
 }
-export default DetailedJob
+export default AspirantDetailedJob

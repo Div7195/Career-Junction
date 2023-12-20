@@ -30,7 +30,8 @@ const EditJob = () => {
         companyId:account.id,
         jobTitle:'',
         jobType:'Internship',
-        salary:'',
+        lowerSalary:0,
+        upperSalary:0,
         openings:'',
         duration:'',
         location:'',
@@ -200,21 +201,46 @@ const EditJob = () => {
             }}>
                 <div style={{
                     color:'black'
-                }}>
+                }}>Lower Range of
                     {
-                        jobState.jobType === 'Internship' ? 'Stipend': 'Job offer'
+                        jobState.jobType === 'Internship' ? ' Stipend': ' Job offer'
                     }
                 </div>
 
                 <div>
                     <TextField
-                        id="filled-multiline-flexible"
-                        name="salary"
-                        value={jobState.salary}
+                        id="standard-number"
+                        label="Number"
+                        type="number"
+                        name="lowerSalary"
+                        value={jobState.lowerSalary}
                         onChange={(e) => {handleTextFieldsChange(e)}}
-                        label="Multiline"
-                        multiline
-                        maxRows={4}
+                        variant="filled"
+                        style={{width:800}}
+                        />
+                </div>
+            </div>
+            <div style={{
+                display:'flex',
+                flexDirection:'column',
+                marginTop:'15px'
+            }}>Upper Range of
+                <div style={{
+                    color:'black'
+                }}>
+                    {
+                        jobState.jobType === 'Internship' ? ' Stipend': ' Job offer'
+                    }
+                </div>
+
+                <div>
+                    <TextField
+                        id="standard-number"
+                        label="Number"
+                        type="number"
+                        name="upperSalary"
+                        value={jobState.upperSalary}
+                        onChange={(e) => {handleTextFieldsChange(e)}}
                         variant="filled"
                         style={{width:800}}
                         />
@@ -235,13 +261,12 @@ const EditJob = () => {
 
                 <div>
                     <TextField
-                        id="filled-multiline-flexible"
+                        id="standard-number"
+                        label="Number"
+                        type="number"
                         name="duration"
                         value={jobState.duration}
                         onChange={(e) => {handleTextFieldsChange(e)}}
-                        label="Multiline"
-                        multiline
-                        maxRows={4}
                         variant="filled"
                         style={{width:800}}
                         />

@@ -43,7 +43,7 @@ import { useNavigate } from 'react-router-dom';
 //     Desirable experience with CUDA for parallel computing tasks.`,
 // }
 
-const Job = ({job, locationBased, companyName}) =>{
+const Job = ({job}) =>{
     const {account}=useContext(DataContext);
     const {setAccount} = useContext(DataContext);
     const navigate = useNavigate();
@@ -115,7 +115,7 @@ return(
                     color: '#9eaab7',
                     fontFamily: "DM Sans"
                 }}>
-                    {companyName} | {locationBased}
+                    {job.companyName} | {job.locationBased}
                 </div>
 
             </div>
@@ -135,6 +135,7 @@ return(
                 color:'#131c30',
                 fontSize:'24px',
             }}>
+            
             <Link to={`/job/${job._id}`} style={{textDecoration:'none' , color:'inherit'}}>
             <EditIcon style={{
                     cursor:'pointer',
@@ -231,7 +232,20 @@ return(
                             fontFamily:'DM Sans',
                             fontWeight:'bold'
                         }}>
-                            {job.salary}
+                        
+                        {
+                            
+                            job.jobType === 'Internship'? 
+                            <>
+                            Rs {job.lowerSalary/1000.0}K - {job.upperSalary/1000.0}K 
+                            </>
+                            : 
+                            <>
+                            Rs {job.lowerSalary/100000.0}LPA - {job.upperSalary/100000.0}LPA
+                            </>
+                            
+                        }
+                           
                         </div>
                         
                         
@@ -411,7 +425,10 @@ return(
                         marginLeft:'auto'
                     }}>
 
-                <Link to={`/job/details/${job._id}`} style={{textDecoration:'none' , color:'inherit'}}>
+                    {
+                        account.role === 'company'?
+                        <>
+                        <Link to={`/job/details/${job._id}`} style={{textDecoration:'none' , color:'inherit'}}>
                         <div style={{
                                 border: '1px solid #ebf0f5',
                                 borderRadius: '5px',
@@ -428,6 +445,30 @@ return(
                         View Details
                         </div>
                         </Link>
+                        </>
+                        :
+                        <>
+                        <Link to={`/aspirant/job/details/${job._id}`} style={{textDecoration:'none' , color:'inherit'}}>
+                        <div style={{
+                                border: '1px solid #ebf0f5',
+                                borderRadius: '5px',
+                                display:'flex',
+                                justifyContent:'center',
+                                color: '#566474',
+                                fontSize:'16px',
+                                fontFamily:'DM Sans',
+                                alignItems:'center',
+                                cursor:'pointer',
+                                height:'44px'
+                        }}>
+                        
+                        View Details
+                        </div>
+                        </Link>
+                        </>
+                    }
+
+                
                         {
                             account.role !== 'company'?
                             <div style={{
