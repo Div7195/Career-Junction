@@ -37,6 +37,23 @@ export const updateAspirantProfileController = async(request, response) => {
         return response.status(500).json(error);
     }
 }
+export const saveJobsController = async(request, response) => {
+    
+    try{
+        let temp = await Aspirant.findOne({aspirantAccountId:request.query.aspirantAccountId});
+        console.log(temp)
+        if(!temp){
+            return response.status(409).json({msg:'unsuccessfull'});
+        }
+        temp = {...temp._doc, savedJobs:[...temp._doc.savedJobs, request.query.jobId]};
+        
+        await Aspirant.findOneAndReplace({aspirantAccountId:request.query.aspirantAccountId}, temp);
+        return response.status(200).json({msg:'success'});
+    }
+    catch(error){
+        return response.status(500).json(error);
+    }
+}
 export const getAllJobsController = async(request, response) => {
 
     try{

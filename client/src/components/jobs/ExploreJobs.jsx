@@ -22,6 +22,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 import skills from "../../constants/skills"
 const ExploreJobs = () => {
+    const {account}=useContext(DataContext);
     const jobFilterInitial = {
         jobType:'',
         minSalary:'',
@@ -29,8 +30,9 @@ const ExploreJobs = () => {
         location:'',
         skillsRequired:[]
     }
-    const {account}=useContext(DataContext);
+    
     const {setAccount} = useContext(DataContext);
+    const [aspirantSavedJobs, setAspirantSaved] = useState([])
     const [jobs, setJobs] = useState({})
     const [jobFilter, setJobFilter] = useState(jobFilterInitial)
     const handleOptionClick = (e) => {
@@ -101,8 +103,27 @@ const ExploreJobs = () => {
             }
     
         }
+        const myFunctionSecond = async() => {
+            const url = `http://localhost:8000/getAspirantProfile?aspirantAccountId=${account.id}`;
+        const settings = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            authorization : getAccessToken()
+        }
+        };
+        try {
+            const fetchResponse = await fetch(url, settings);
+            const response = await fetchResponse.json();
+            setAspirantSaved(response.savedJobs);
+            
+            } catch (e) {
+            console.log(e);
+            }
+        }
         
         myFunction()
+        myFunctionSecond()
     }, [])
 
     
@@ -134,9 +155,11 @@ const ExploreJobs = () => {
         }}>
 
         {
+            
             jobs.objArrayOfJobs && jobs.objArrayOfJobs.length > 0 ? jobs.objArrayOfJobs.map((job) => (
-                        <Job  job = {job}
-
+                        <Job  
+                        job = {job} 
+                        saved = {aspirantSavedJobs && aspirantSavedJobs.length > 0 ? aspirantSavedJobs.includes(job._id) === true?true:false:false}
                         />
             ))
             :

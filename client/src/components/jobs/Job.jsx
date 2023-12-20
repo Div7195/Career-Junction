@@ -7,12 +7,13 @@ import { DataContext } from '../../context/DataProvider';
 import { useState } from 'react';
 import { useContext } from 'react';
 import monthMap from '../../constants/monthMap.js';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { getAccessToken } from '../../utility functions/util.js';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 // const job = {
 //     companyId: '3123123',
 //     companyName:'Microsoft',
@@ -43,9 +44,12 @@ import { useNavigate } from 'react-router-dom';
 //     Desirable experience with CUDA for parallel computing tasks.`,
 // }
 
-const Job = ({job}) =>{
+const Job = ({job, saved}) =>{
     const {account}=useContext(DataContext);
     const {setAccount} = useContext(DataContext);
+    const [aspirant, setAspirant] = useState({})
+    const [company, setCompany] = useState({})
+    const [savedBool, setSaved] = useState(saved)
     const navigate = useNavigate();
     const deleteJob = async(jobId) => {
         const url = `http://localhost:8000/deleteJob?jobId=${jobId}`;
@@ -65,6 +69,32 @@ const Job = ({job}) =>{
             }
     
         }
+
+        
+        
+
+        const saveJob = async() => {
+            const settings = {
+                method: "POST",
+                body: JSON.stringify({}),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                    'authorization' : getAccessToken()
+                }
+                }
+                try {
+                    console.log(settings.body)
+                    const fetchResponse = await fetch(`http://localhost:8000/saveJobs?aspirantAccountId=${account.id}&jobId=${job._id}`, settings);
+                    const response = await fetchResponse.json();
+                    if(response.msg === 'success'){
+                        setSaved(true)
+                    }
+                    
+                } catch (e) {
+                    
+                    return e;
+                } 
+        }   
     
 return(
     <div>
@@ -122,12 +152,33 @@ return(
             <div style={{
                         marginRight:'10px',
                         marginLeft:'auto'
-            }}>
+            }}
+            
+            >
            {
             account.role === 'aspirant' ?
+            savedBool === true ? 
+            <div style={{
+
+            }}
+            onClick={() => {console.log('fdsfs')}}
+            >
             <BookmarkIcon style={{
                 cursor:'pointer'
-            }}/>
+            }}
+            />
+            </div>
+            :
+            <div style={{
+
+            }}
+            onClick={() => {saveJob()}}>
+            <BookmarkBorderIcon 
+            style={{
+                cursor:'pointer'
+            }}
+            />
+            </div>
             :
             <div style={{
                 display:'flex',
