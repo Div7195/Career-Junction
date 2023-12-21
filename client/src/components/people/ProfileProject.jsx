@@ -178,7 +178,9 @@ const deleteProjectApi = () => {
                 </div>
                 
                 </div>
-                <div onClick={handleClickOpen} style={{
+                {
+                    account.role !== 'company'?
+                    <div onClick={handleClickOpen} style={{
                     marginLeft:'auto',
                     marginRight:'0px',
                     borderRadius:'5px',
@@ -189,6 +191,11 @@ const deleteProjectApi = () => {
                 }}>
                 <AddCircleOutlineIcon/> Add New
                 </div>
+
+                    :
+                    <div></div>
+                    }
+                
 
                 {/* Start of form dialog form */}
 
@@ -484,6 +491,8 @@ const deleteProjectApi = () => {
                             {project.projectTitle}
                             </div>
 
+                            {
+                            account.role !== 'company'?
                             <div style={{
                             marginLeft:'auto',
                             marginRight:'0px',
@@ -502,6 +511,11 @@ const deleteProjectApi = () => {
                         >
                             <EditOutlinedIcon/> Edit
                             </div>
+
+                            :
+                            <div></div>
+                            }
+                            
 
 
                         </div>

@@ -175,6 +175,8 @@ const SavedJobs = () => {
                                 <Job  
                                 job = {job} 
                                 saved = {aspirantSavedJobs && aspirantSavedJobs.length > 0 ? aspirantSavedJobs.includes(job._id) === true?true:false:false}
+                                locationBased={''}
+                                companyName={''}
                                 />
                     ))
             :

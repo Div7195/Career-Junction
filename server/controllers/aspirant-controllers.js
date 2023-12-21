@@ -135,6 +135,33 @@ export const getAllJobsController = async(request, response) => {
     }
 }
 
+export const applyJobController = async(request, response) => {
+    try {
+        let job = await Job.findOne({_id:request.body.jobId});
+        if(!job){
+            return response.status(404).json('cant find job');
+        }
+        let aspirant = await Aspirant.findOne({aspirantAccountId:request.body.aspirantAccountId});
+        console.log(aspirant)
+        if(!aspirant){
+            return response.status(404).json('cant find aspirant')
+        }
+        job = {...job._doc, appliedAspirantsId:[...job._doc.appliedAspirantsId, request.body.aspirantAccountId]};
+        aspirant._doc.applications.push({
+            jobId:request.body.jobId,
+            applicationStatus:'Applied',
+            messages:[]
+        })
+        await Job.findOneAndReplace({_id:request.body.jobId}, job);
+        await Aspirant.findOneAndReplace({aspirantAccountId:request.body.aspirantAccountId}, aspirant)
+        return response.status(200).json({msg:'success job update'});
+    } catch (error) {
+        return response.status(500).json(error);
+    }
+}
+
+
+
 
 
 

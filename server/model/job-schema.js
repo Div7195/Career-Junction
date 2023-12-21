@@ -44,6 +44,10 @@ const jobSchema = mongoose.Schema({
         type:[String],
         required:true
     },
+    appliedAspirantsId :{
+        type:[String],
+        required:false
+    },
     applyDeadlineDate :{
         type:Date,
         required:true

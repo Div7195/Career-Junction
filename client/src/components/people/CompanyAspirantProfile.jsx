@@ -25,6 +25,8 @@ import ProfilePositions from "./ProfilePositions";
 import ProfileAchievements from "./ProfileAchievements";
 import ProfileExperience from "./ProfileExperience";
 import ProfileCertifications from "./ProfileCertifications";
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -61,9 +63,11 @@ function CustomTabPanel(props) {
 
 
 
-const AspirantProfile = () => {
+const CompanyAspirantProfile = () => {
     const {account}=useContext(DataContext);
     const {setAccount} = useContext(DataContext);
+    const navigate = useNavigate();
+    const {id} = useParams();
     const aspirantObj = {
         aspirantAccountId:account.id,
                 aspirantName:'',
@@ -114,7 +118,7 @@ const AspirantProfile = () => {
          }
          try {
              console.log(settings.body)
-             const fetchResponse = await fetch(`http://localhost:8000/updateAspirantProfile?aspirantAccountId=${account.id}`, settings);
+             const fetchResponse = await fetch(`http://localhost:8000/updateAspirantProfile?aspirantAccountId=${id}`, settings);
              const response = await fetchResponse.json();
             
              
@@ -126,7 +130,7 @@ const AspirantProfile = () => {
 
     useEffect(() => {
       const myFunction = async() => {
-        const url = `http://localhost:8000/getAspirantProfile?aspirantAccountId=${account.id}`;
+        const url = `http://localhost:8000/getAspirantProfile?aspirantAccountId=${id}`;
         const settings = {
         method: 'GET',
         headers: {
@@ -186,9 +190,7 @@ const AspirantProfile = () => {
                     <TextField
                         name="aspirantName"
                         value={aspirant.aspirantName}
-                        onChange={(e) => {
-                            handleTextFieldsChange(e)
-                        }}
+                        
                         id="filled-multiline-flexible"
                         label="Multiline"
                         multiline
@@ -216,9 +218,7 @@ const AspirantProfile = () => {
                 <FormControl fullWidth>
                     
                     <NativeSelect
-                        onChange={(e) => {
-                            handleDomainSelect(e)
-                        }}
+                        
                         value={aspirant.domains[aspirant.domains.length-1]}
                         defaultValue={30}
                         inputProps={{
@@ -263,11 +263,18 @@ const AspirantProfile = () => {
                             <div>
                                 {domain}
                             </div>
+                            {
+                            account.role !== 'company'?
                             <div>
                             <CloseIcon  onClick={() => {handleDeleteDomain(domain)}} style={{
                                 cursor:'pointer'
                             }}/>
                             </div>
+
+                            :
+                            <div></div>
+                            }
+                            
                             </div>
                         </div>
                         ))
@@ -278,7 +285,9 @@ const AspirantProfile = () => {
                 </div>
                 </div>
             </div>
-            <div style={{
+            {
+                account.role !== 'company'?
+                <div style={{
                     fontSize:'16px',
                     fontFamily:'DM Sans',
                     marginTop:'10px',
@@ -290,8 +299,13 @@ const AspirantProfile = () => {
                     color:'white',
                     width:'fit-content'
                 }}
-                onClick={()=>{updateProfile()}}
+                // onClick={()=>{updateProfile()}}
                 >Save Changes</div>
+
+                :
+                <div></div>
+                }
+            
 
             <Box style = {{
                 width:'100%',
@@ -356,4 +370,4 @@ const AspirantProfile = () => {
         </>
      )
 }
-export default AspirantProfile
+export default CompanyAspirantProfile

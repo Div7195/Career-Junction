@@ -43,6 +43,7 @@ const EditJob = () => {
         responsibilities:'',
         hiringProcess:'',
         skillsRequired:[],
+        appliedAspirantsId:[],
     }
     const {setAccount} = useContext(DataContext);
     const [jobState, setJob] = useState(jobInitialValues)

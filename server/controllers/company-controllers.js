@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import dotenv from 'dotenv'
 import jwt from 'jsonwebtoken'
 import token from '../model/token-schema.js'
-
+import Aspirant from '../model/aspirant-schema.js';
 export const updateCompanyProfileController=async(request , response)=>{
     try {
         console.log(request.body.companyAccountId);
@@ -133,6 +133,26 @@ export const getSingleJobSecondController = async(request, response) => {
         let jobObj = await Job.findOne({_id:request.query.jobId});
         let company = await Company.findOne({companyAccountId:jobObj.companyId});
         return response.status(200).json({jobObj, locationBased:company.locationBased, companyName:company.companyName, aboutCompany:company.aboutCompany, introOfCompany:company.introOfCompany});
+    } catch (error) {
+        return response.status(500).json('failed single job and company fetch');
+    }
+}
+
+export const getJobApplicants = async(request, response) => {
+    try {
+        let aspirantObjList = []
+        let jobObj = await Job.findOne({_id:request.query.jobId});
+        
+        // let company = await Company.findOne({companyAccountId:jobObj.companyId});
+
+        for(let i = 0;i<jobObj.appliedAspirantsId.length;i++){
+            
+            let temp = await Aspirant.findOne({aspirantAccountId:jobObj.appliedAspirantsId[i]});
+           
+            aspirantObjList.push(temp)
+        }
+        console.log(aspirantObjList)
+        return response.status(200).json({applicants:aspirantObjList});
     } catch (error) {
         return response.status(500).json('failed single job and company fetch');
     }

@@ -65,6 +65,7 @@ const DetailedJob = () => {
         responsibilities:'',
         hiringProcess:'',
         skillsRequired:[],
+        appliedAspirantsId:[],
     }
 
     const companyIntialValues = {

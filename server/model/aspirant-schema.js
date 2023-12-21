@@ -21,10 +21,6 @@ const aspirantSchema = mongoose.Schema({
         type:[String],
         required:false
     },
-    appliedJobs:{
-        type:[String],
-        required:false
-    },
     savedJobs:{
         type:[String],
         required:false
@@ -33,6 +29,32 @@ const aspirantSchema = mongoose.Schema({
         type:[String],
         required:false
     },
+    applications:[{
+    
+        jobId:{
+            type:String,
+            required:false
+        },
+        applicationStatus:{
+            type:String,
+            required:false
+        },
+        messages:[{
+            senderRole:{
+                type:String,
+                required:false
+            },
+            messageBody:{
+                type:String,
+                required:false
+            },
+            messageTimestamp:{
+                type:Date,
+                required:false
+            }
+    }]
+    }],
+
     education :[{
         schoolName : {
             

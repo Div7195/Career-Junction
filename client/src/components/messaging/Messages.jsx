@@ -2,7 +2,7 @@
 
 
 
-const Messaging = () => {
+const Messages = () => {
     return(
         <div>
 
@@ -10,4 +10,4 @@ const Messaging = () => {
     )
 
 }
-export default Messaging;
+export default Messages;

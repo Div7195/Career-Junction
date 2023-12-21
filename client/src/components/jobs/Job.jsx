@@ -50,6 +50,7 @@ const Job = ({job, saved, locationBased, companyName}) =>{
     const [aspirant, setAspirant] = useState({})
     const [company, setCompany] = useState({})
     const [savedBool, setSaved] = useState(saved)
+    const [appliedOrNot, setAppliedOrNot] = useState('Apply Now')
     const navigate = useNavigate();
     const deleteJob = async(jobId) => {
         const url = `http://localhost:8000/deleteJob?jobId=${jobId}`;
@@ -95,6 +96,32 @@ const Job = ({job, saved, locationBased, companyName}) =>{
                     return e;
                 } 
         }   
+
+const applyToJob = async() => {
+    const settings = {
+        method: "POST",
+        body: JSON.stringify({
+            jobId:job._id,
+            aspirantAccountId:account.id
+        }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            'authorization' : getAccessToken()
+        }
+        }
+        try {
+            console.log(settings.body)
+            const fetchResponse = await fetch(`http://localhost:8000/applyToJob`, settings);
+            const response = await fetchResponse.json();
+            if(response.msg === 'success job update'){
+                setAppliedOrNot('Applied')
+            }
+            
+        } catch (e) {
+            
+            return e;
+        } 
+}
     
 return(
     <div>
@@ -169,16 +196,22 @@ return(
             />
             </div>
             :
-            <div style={{
+            job.appliedAspirantsId.includes(account.id)?
+                    <div></div>
+                    :
+                    <div style={{
 
-            }}
-            onClick={() => {saveJob()}}>
-            <BookmarkBorderIcon 
-            style={{
-                cursor:'pointer'
-            }}
-            />
-            </div>
+                    }}
+                    onClick={() => {saveJob()}}
+                    >
+                    <BookmarkBorderIcon 
+                    style={{
+                        cursor:'pointer'
+                    }}
+                    />
+                    </div>
+            
+            
             :
             <div style={{
                 display:'flex',
@@ -479,6 +512,24 @@ return(
                     {
                         account.role === 'company'?
                         <>
+                        <Link to={`/job/${job._id}/applicants`} style={{textDecoration:'none' , color:'inherit'}}>
+                        <div style={{
+                                border: '1px solid #ebf0f5',
+                                borderRadius: '5px',
+                                display:'flex',
+                                justifyContent:'center',
+                                color: '#566474',
+                                fontSize:'16px',
+                                fontFamily:'DM Sans',
+                                alignItems:'center',
+                                cursor:'pointer',
+                                height:'44px',
+                                marginRight:'10px'
+                        }}>
+                        
+                        View Applicants
+                        </div>
+                        </Link>
                         <Link to={`/job/details/${job._id}`} style={{textDecoration:'none' , color:'inherit'}}>
                         <div style={{
                                 border: '1px solid #ebf0f5',
@@ -522,6 +573,10 @@ return(
                 
                         {
                             account.role !== 'company'?
+                            job.appliedAspirantsId.includes(account.id)?
+                            <div></div>
+                            :
+
                             <div style={{
                     
                             marginLeft:'10px',
@@ -533,7 +588,11 @@ return(
                             cursor:'pointer',
                             padding: '8px 20px 8px 16px',
                             color:'white'
-                        }}>Apply Now</div>
+                        }}
+                        onClick={() => {
+                            applyToJob()
+                        }}
+                        >{appliedOrNot}</div>
                             :
                             <div></div>
                 

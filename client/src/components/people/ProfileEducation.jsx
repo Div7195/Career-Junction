@@ -165,7 +165,9 @@ const deleteEducationApi = () => {
                 </div>
                 
                 </div>
-                <div onClick={handleClickOpen} style={{
+                {
+                    account.role !== 'company'?
+                    <div onClick={handleClickOpen} style={{
                     marginLeft:'auto',
                     marginRight:'0px',
                     borderRadius:'5px',
@@ -176,6 +178,11 @@ const deleteEducationApi = () => {
                 }}>
                 <AddCircleOutlineIcon/> Add New
                 </div>
+
+                    :
+                    <div></div>
+                    }
+                
 
                 {/* Start of form dialog form */}
 
@@ -380,7 +387,9 @@ const deleteEducationApi = () => {
                             {new Date(education.startYear).getFullYear()}-{new Date(education.finishYear).getFullYear()}
                         </div>
                         </div>
-                        <div style={{
+                        {
+                            account.role !== 'company'?
+                            <div style={{
                             marginLeft:'auto',
                             marginRight:'0px',
                             borderRadius:'5px',
@@ -398,6 +407,11 @@ const deleteEducationApi = () => {
                         >
                             <EditOutlinedIcon/> Edit
                             </div>
+
+                            :
+                            <div></div>
+                            }
+                        
                             <Dialog open={open2} onClose={handleClose2}>
                     <DialogTitle>Edit education</DialogTitle>
                     <DialogContent>

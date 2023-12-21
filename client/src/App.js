@@ -10,7 +10,7 @@ import CreateNewJob from './components/jobs/CreateNewJob.jsx';
 import CompanyOpenings from './components/jobs/CompanyOpenings.jsx';
 import People from './components/people/People.jsx';
 import Companies from './components/companies/Companies.jsx';
-import Messaging from './components/messaging/Messaging.jsx';
+
 import Notifications from './components/notifs/Notifications.jsx';
 import CompanyProfile from './components/companies/CompanyProfile.jsx';
 import DetailedJob from './components/jobs/DetailedJob.jsx';
@@ -20,6 +20,10 @@ import AppliedJobs from './components/jobs/AppliedJobs.jsx';
 import SavedJobs from './components/jobs/SavedJobs.jsx';
 import AspirantProfile from './components/people/AspirantProfile.jsx';
 import AspirantDetailedJob from './components/jobs/AspirantDetailedJob.jsx';
+import Messages from './components/messaging/Messages.jsx';
+import JobMessages from './components/messaging/JobMessages.jsx';
+import CompanyApplicants from './components/people/CompanyApplicants.jsx';
+import CompanyAspirantProfile from './components/people/CompanyAspirantProfile.jsx';
 
 
 
@@ -44,11 +48,14 @@ function App() {
               <Route  path = 'aspirant/job/details/:id' element = {<AspirantDetailedJob/>}/>
               <Route  path = '/people' element = {<People/>}/>
               <Route  path = '/companies' element = {<Companies/>}/>
-              <Route  path = '/messaging' element = {<Messaging/>}/>
+              <Route  path = '/messages' element = {<Messages/>}/>
               <Route  path = '/notifications' element = {<Notifications/>}/>
               <Route  path = '/explore/jobs' element = {<ExploreJobs/>}/>
               <Route  path = '/applied' element = {<AppliedJobs/>}/>
               <Route  path = '/saved/jobs' element = {<SavedJobs/>}/>
+              <Route  path = '/job/:id/messages' element = {<JobMessages/>}/>
+              <Route  path = '/job/:id/applicants' element = {<CompanyApplicants/>}/>
+              <Route  path = '/company/aspirantprofile/:id' element = {<CompanyAspirantProfile/>}/>
             </Routes>
           </div>
         </BrowserRouter>
