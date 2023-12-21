@@ -62,7 +62,7 @@ const CompanyOpenings = () => {
                         <Job  job = {job}
                             locationBased={jobs.locationBased}
                             companyName={jobs.companyName}
-                            
+                            saved = {false}
                         />
             ))
             :

@@ -44,7 +44,7 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 //     Desirable experience with CUDA for parallel computing tasks.`,
 // }
 
-const Job = ({job, saved}) =>{
+const Job = ({job, saved, locationBased, companyName}) =>{
     const {account}=useContext(DataContext);
     const {setAccount} = useContext(DataContext);
     const [aspirant, setAspirant] = useState({})
@@ -145,7 +145,7 @@ return(
                     color: '#9eaab7',
                     fontFamily: "DM Sans"
                 }}>
-                    {job.companyName} | {job.locationBased}
+                    {companyName !== ''?companyName:job.companyName} | {locationBased !== ''?locationBased:job.locationBased}
                 </div>
 
             </div>
