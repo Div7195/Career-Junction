@@ -182,15 +182,17 @@ export const getJobMessages = async(request, response) => {
 export const updateJobMessages = async(request, response) => {
     try {
         let aspirantObj = await Aspirant.findOne({aspirantAccountId:request.body.aspirantAccountId});
+        
         // let company = await Company.findOne({companyAccountId:jobObj.companyId});
 
         for(let i = 0;i<aspirantObj.applications.length;i++){
             if(request.body.jobId === aspirantObj.applications[i].jobId){
-                aspirantObj.applications[i].messaages.push(request.body.newMessage);
+                aspirantObj.applications[i].messages.push(request.body.newMessage);
                 break;
             }
         }
-        await Aspirant.findOneAndReplace({_id:request.body.aspirantAccountId});
+        console.log(aspirantObj)
+        await Aspirant.findOneAndReplace({aspirantAccountId:request.body.aspirantAccountId}, aspirantObj);
         
         
         return response.status(200).json({msg:'success'});

@@ -4,7 +4,9 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { DataContext } from "../../context/DataProvider";
 import { getAccessToken } from "../../utility functions/util";
 import { TextField } from "@mui/material";
+import dayjs from "dayjs";
 import SendIcon from '@mui/icons-material/Send';
+import AspirantSidebar from "../sidebar/AspirantSidebar";
 const JobMessages = () => {
     const {account}=useContext(DataContext);
     const newMessageInitial = {
@@ -19,8 +21,10 @@ const JobMessages = () => {
     const [data, setData] = useState({})
     const [newMessage, setNewMessage] = useState(newMessageInitial)
     const sendMessage = async() => {
+        newMessage.messageTimestamp = dayjs(new Date()).$d
         const settings = {
          method: "POST",
+         
          body: JSON.stringify({
             aspirantAccountId:aspirantAccountId,
             jobId:id,
@@ -36,7 +40,10 @@ const JobMessages = () => {
              const fetchResponse = await fetch(`http://localhost:8000/updateJobMessages`, settings);
              const response = await fetchResponse.json();
             if(response.msg === 'success'){
-                setData({...data, messages:[...data.messages, newMessage]});
+                data.messages.reverse();
+                data.messages.push(newMessage);
+                data.messages.reverse();
+                setData({...data, messages:data.messages});
                 setNewMessage(newMessageInitial)
             }else{
 
@@ -62,7 +69,8 @@ const JobMessages = () => {
         try {
             const fetchResponse = await fetch(url, settings);
             const response = await fetchResponse.json();
-            setData(response)
+            response.messagesObj.messages.reverse();
+            setData(response.messagesObj)
             
             } catch (e) {
             console.log(e);
@@ -82,7 +90,10 @@ const JobMessages = () => {
             flexDirection:'row',
             justifyContent:'center'
             }}>
-            <CompanySidebar/>
+            {
+                account.role === 'company'?<CompanySidebar/>:<AspirantSidebar/>
+            }
+            
             <div style={{
             display:'flex',
             flexBasis:"70%",
@@ -100,42 +111,47 @@ const JobMessages = () => {
             <div style={{
                 display:'flex',
                 flexDirection:'column-reverse',
-                maxHeight:'70%',
+                maxHeight:'580px',
                 overflowY:'auto',
+                
                 
             }}>
                 {
                     data.messages && data.messages.length > 0 ? data.messages.map((e =>(
                         <>
-                            <div style={{
-                                marginTop:'10px'
-                            }}>
+                            
                                 {
-                                    e.role === account.role?
+                                    e.senderRole === account.role?
                                     <div style={{
-                                        marginRight:'5px',
+                                        marginBottom:'10px',
+                                        marginRight:'0px',
                                         marginLeft:'auto',
                                         borderRadius:'5px',
-                                        background:'#f6f8ff',
+                                        background:'rgb(186 201 255)',
                                         maxWidth:'60%',
-                                        color:'#142683'
+                                        padding:'10px',
+                                        fontFamily:'DM Sans',
+                                        color:'rgb(7 10 10)'
                                     }}>
                                     {e.messageBody}
                                     </div>
                                     :
                                     <div style={{
+                                        marginBottom:'10px',
                                         marginRight:'auto',
                                         marginLeft:'5px',
+                                        padding:'10px',
                                         borderRadius:'5px',
-                                        background:'#f6f8ff',
+                                        background:'rgb(255 186 247)',
                                         maxWidth:'60%',
-                                        color:'#142683'
+                                        fontFamily:'DM Sans',
+                                        color:'rgb(7 10 10)'
                                     }}>
                                     {e.messageBody}
                                     </div>
                                 }
 
-                            </div>
+                            
                         </>
                     )))
                     :
@@ -145,9 +161,10 @@ const JobMessages = () => {
             <div style={{
                 display:'flex',
                 flexDirection:'row',
+                
             }}>
                 <div style={{
-                    flexBasis:'90%',
+                    flexBasis:'98%',
                     border:'1px solid #ebf0f5',
                     borderRadius:'5px',
                     
@@ -155,6 +172,9 @@ const JobMessages = () => {
                     <TextField style={{
                         width:'100%'
                     }} 
+                    name="messageBody"
+                    value={newMessage.messageBody}
+                    onChange={(e) => {setNewMessage({...newMessage, [e.target.name]:e.target.value}); console.log(newMessage)}}
                     id="filled-multiline-flexible" 
                     variant="filled" 
                     label="Multiline"
@@ -162,6 +182,7 @@ const JobMessages = () => {
                     />
                 </div>
                 <div style={{
+                    flexBasis:'2%',
                     marginBottom:'0px',
                     marginTop:'auto',
                     background:"rgb(66 142 81)",
@@ -170,7 +191,9 @@ const JobMessages = () => {
                     color:'white',
                     height:'fit-content',
                     cursor:'pointer'
-                }}>
+                }}
+                onClick={() => {sendMessage()}}
+                >
                 <SendIcon/>
                 </div>
             </div>

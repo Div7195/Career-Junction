@@ -574,7 +574,22 @@ return(
                         {
                             account.role !== 'company'?
                             job.appliedAspirantsId.includes(account.id)?
-                            <div></div>
+                            <div style={{
+                                marginRight:'10px',
+                                background:"rgb(66 142 81)",
+                                borderRadius:'5px',
+                                fontSize:'16px',
+                                padding:'5px',
+                                color:'white',
+                                cursor:'pointer',
+                                
+                            }}
+                            onClick={() => {
+                                navigate(`/company/job/${job._id}/messages/${account.id}`)
+                            }}
+                            >
+                               View Messages
+                            </div>
                             :
 
                             <div style={{
