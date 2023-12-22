@@ -61,7 +61,10 @@ const CompanyApplicants = () => {
             
             applicants && applicants.length > 0 ?
             applicants.map((applicant => (
-                <Applicant applicant={applicant}/>
+                <Applicant 
+                applicant={applicant}
+                jobId = {id}
+                />
             )))
             :
             <div></div>

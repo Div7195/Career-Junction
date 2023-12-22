@@ -151,9 +151,50 @@ export const getJobApplicants = async(request, response) => {
            
             aspirantObjList.push(temp)
         }
-        console.log(aspirantObjList)
+        
         return response.status(200).json({applicants:aspirantObjList});
     } catch (error) {
         return response.status(500).json('failed single job and company fetch');
+    }
+}
+
+export const getJobMessages = async(request, response) => {
+    try {
+        
+        let aspirantObj = await Aspirant.findOne({aspirantAccountId:request.query.aspirantAccountId});
+        let messagesObj = {};
+        
+        // let company = await Company.findOne({companyAccountId:jobObj.companyId});
+
+        for(let i = 0;i<aspirantObj.applications.length;i++){
+            if(request.query.jobId === aspirantObj.applications[i].jobId){
+                messagesObj = aspirantObj.applications[i];
+                break;
+            }
+        }
+        console.log(messagesObj)
+        return response.status(200).json({messagesObj});
+    } catch (error) {
+        return response.status(500).json('failed messages fetch');
+    }
+}
+
+export const updateJobMessages = async(request, response) => {
+    try {
+        let aspirantObj = await Aspirant.findOne({aspirantAccountId:request.body.aspirantAccountId});
+        // let company = await Company.findOne({companyAccountId:jobObj.companyId});
+
+        for(let i = 0;i<aspirantObj.applications.length;i++){
+            if(request.body.jobId === aspirantObj.applications[i].jobId){
+                aspirantObj.applications[i].messaages.push(request.body.newMessage);
+                break;
+            }
+        }
+        await Aspirant.findOneAndReplace({_id:request.body.aspirantAccountId});
+        
+        
+        return response.status(200).json({msg:'success'});
+    } catch (error) {
+        return response.status(500).json('failed messages update');
     }
 }

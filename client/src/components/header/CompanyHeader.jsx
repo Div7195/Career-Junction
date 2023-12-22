@@ -360,9 +360,9 @@ export default function CompanyHeader() {
       {renderMobileMenu}
       {renderMenu}
     </Box>
-    {
+    {/* {
       account.role === 'aspirant'?<AspirantSidebar/>:<CompanySidebar/>
-    }
+    } */}
     
     </Box>
       

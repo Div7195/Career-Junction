@@ -157,7 +157,7 @@ const CompanyAspirantProfile = () => {
             display:'flex',
             flexDirection:'row'
           }}>
-                
+                <CompanySidebar/>
                 <div style={{
             
                 display:'flex',

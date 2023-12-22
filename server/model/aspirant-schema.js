@@ -51,6 +51,10 @@ const aspirantSchema = mongoose.Schema({
             messageTimestamp:{
                 type:Date,
                 required:false
+            },
+            seenFlag:{
+                type:Boolean,
+                required:false
             }
     }]
     }],
