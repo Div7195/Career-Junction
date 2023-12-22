@@ -1,4 +1,4 @@
-import AspirantSidebar from "../sidebar/AspirantSidebar"
+import CompanySidebar from "../sidebar/CompanySidebar"
 import { useEffect } from "react";
 import { useContext } from "react";
 import { useLocation } from "react-router-dom";
@@ -157,7 +157,7 @@ const CompanyAspirantProfile = () => {
             display:'flex',
             flexDirection:'row'
           }}>
-                <AspirantSidebar/>
+                
                 <div style={{
             
                 display:'flex',

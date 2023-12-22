@@ -37,6 +37,18 @@ const Applicant = ({applicant}) => {
                         {applicant.aspirantName}
                     
                 </div>
+
+                <div style={{
+                    marginLeft:'auto',
+                    marginRight:'5px',
+                    background:"rgb(66 142 81)",
+                    borderRadius:'5px',
+                    fontSize:'16px',
+                    padding:'5px',
+                    color:'white'
+                }}>
+                    Messages
+                </div>
             </div>
         </div>
         </Link>
