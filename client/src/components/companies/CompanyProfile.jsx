@@ -24,10 +24,13 @@ import companySize from "../../constants/companySize.js";
 import { getAccessToken } from "../../utility functions/util.js";
 import { useEffect } from "react";
 import CompanySidebar from "../sidebar/CompanySidebar.jsx";
-
+import { styled } from '@mui/material/styles';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import Image from "@mui/icons-material/Image.js"
 const CompanyProfile = () => {
     const {account}=useContext(DataContext);
     const {setAccount} = useContext(DataContext);
+    const [imageFile, setImageFile] = useState(null)
     const companyObj = {
         companyAccountId:account.id,
         companyName:'',
@@ -35,8 +38,10 @@ const CompanyProfile = () => {
         companySize:'',
         industryType:'',
         companyType:'',
+        companyImage:'',
         aboutCompany:'',
         introOfCompany:'',
+        companyImage:'',
         jobsList:[],
         employeesList:[],
         status:''
@@ -107,7 +112,35 @@ const CompanyProfile = () => {
         myFunction();
     },[]);
         
-   
+    useEffect(() => {
+        const storeImageAndGetLink = async() => {
+          
+          if(imageFile){
+              const data = new FormData();
+              data.append("name", imageFile.name);
+              data.append("file", imageFile);
+              
+              const settings = {
+                  method: "POST",
+                  body: data,
+                  headers: {
+                      'authorization' : getAccessToken()
+                  },
+                  
+                  }
+                  try {
+                      const fetchResponse = await fetch(`http://localhost:8000/image/upload`, settings);
+                      const response = await fetchResponse.json();
+                      setCompany({...company, companyImage:response});
+                      
+                  } catch (e) {
+                      
+                      return e;
+                  }
+          }
+        }
+        storeImageAndGetLink();
+      }, [imageFile])
 
 
 
@@ -155,6 +188,80 @@ const CompanyProfile = () => {
       </RadioGroup>
     </FormControl>
         </div>
+        <div style={{
+                display:'flex',
+                flexDirection:'column',  
+                marginLeft:'20px'
+            }}>
+                <div style={{
+                    color:'black'
+                }}>
+                     Add a company profile picture 
+                </div>
+
+                <div style={{
+                    display:'flex',
+                    flexDirection:'row'
+                }}>
+
+                
+                <div style={{
+                    background:'black',
+                    borderRadius:'30px',
+                    width:'fit-content',
+                    height:'fit-content',
+                    padding:'5px 5px 1px 3px',
+                    cursor:'pointer'
+                }}>
+                <FormControl>
+                    <label htmlFor="fileInput">
+                        <CameraAltIcon style={{
+                            color: '#00ecff',
+                            fontSize:'40px',
+                            margin:0
+                        }}/>
+                            <input type="file"
+                                id="fileInput"
+                                
+                                style={{
+                                    display:'none'
+                                }}
+                                onChange={(e) => setImageFile(e.target.files[0])}
+                                >
+                                
+                                </input>
+                    </label>
+
+                </FormControl>
+                    
+                    
+                </div>
+                <div style={{
+                    
+                    borderRadius:'50px',
+                    
+                    background:'#cda8ff',
+                    padding:'1px'
+                }}>
+                    <img src={company.companyImage && company.companyImage !== ""?company.companyImage:'https://e7.pngegg.com/pngimages/178/595/png-clipart-user-profile-computer-icons-login-user-avatars-monochrome-black.png'}alt="Company Image" style={{
+                    width:'100%',
+                    height:'100%',
+                    borderRadius:'50px',
+                    height:'100px',
+                    width:'100px',
+                    objectFit:'cover'
+                    // display: 'block',     
+                    // width: '100%',
+                    // minWidth: '100%',
+                    // height: '100%',
+                    // minHeight: '100%',
+                    // borderWidth: '0px',
+                    // outline: 'none' ,
+                    // borderRadius:'10px'
+            }} />
+                </div>
+                </div>
+            </div>
             <div style={{
                 display:'flex',
                 flexDirection:'column',

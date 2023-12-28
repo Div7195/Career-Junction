@@ -148,7 +148,7 @@ export default function CompanyHeader() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem >
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={() => { if(location.pathname.includes('messaging') === false) navigate('/messaging')}} >
+        <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={() => { if(location.pathname.includes('messages') === false) navigate('/messages')}} >
           <Badge badgeContent={4} color="error">
             <MailIcon  />
           </Badge>
@@ -226,11 +226,11 @@ export default function CompanyHeader() {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit" style={{marginLeft:'10px'}} onClick={() => { if(location.pathname.includes('messaging') === false) navigate('/messaging')}}>
+            {/* <IconButton size="large" aria-label="show 4 new mails" color="inherit" style={{marginLeft:'10px'}} onClick={() => { if(location.pathname.includes('messaging') === false) navigate('/messaging')}}>
               <Badge badgeContent={4} color="error">
                 <MailIcon style={{ color: '#00ecff' , fontSize:'30px'}} />
               </Badge>
-            </IconButton>
+            </IconButton> */}
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
@@ -313,11 +313,11 @@ export default function CompanyHeader() {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit" style={{marginLeft:'10px'}} onClick={() => { if(location.pathname.includes('messaging') === false) navigate('/messaging')}}>
+            {/* <IconButton size="large" aria-label="show 4 new mails" color="inherit" style={{marginLeft:'10px'}} onClick={() => { if(location.pathname.includes('messaging') === false) navigate('/messaging')}}>
               <Badge badgeContent={4} color="error">
                 <MailIcon style={{ color: '#00ecff' , fontSize:'30px'}} />
               </Badge>
-            </IconButton>
+            </IconButton> */}
             <IconButton
               size="large"
               aria-label="show 17 new notifications"

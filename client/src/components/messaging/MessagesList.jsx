@@ -1,19 +1,17 @@
+import CompanySidebar from "../sidebar/CompanySidebar"
+import AspirantSidebar from "../sidebar/AspirantSidebar"
 import { useState, useEffect, useContext } from "react"
 import { useNavigate, Link, useParams } from "react-router-dom"
 import { DataContext } from "../../context/DataProvider"
 import { getAccessToken } from "../../utility functions/util"
-import AspirantSidebar from "../sidebar/AspirantSidebar"
-import CompanySidebar from "../sidebar/CompanySidebar"
-import { TextField } from "@mui/material"
-const Companies = () => {
-    const navigate = useNavigate();
-    const {companyAccountId} = useParams();
+const MessagesList = () => {
     const {account}=useContext(DataContext);
-    const [companies, setCompanies] = useState([])
+    const [chatsList, setChatsList] = useState([])
+    const navigate = useNavigate()
 
-    useEffect( () => {
-        const myFunction = async () => {
-            const url = `http://localhost:8000/getAllCompanies?searchInput=`;
+    useEffect(() => {
+        const myFunction = async() => {
+            const url = `http://localhost:8000/getAllChats?aspirantAccountId=${account.id}`;
             const settings = {
             method: 'GET',
             headers: {
@@ -24,81 +22,47 @@ const Companies = () => {
             try {
                 const fetchResponse = await fetch(url, settings);
                 const response = await fetchResponse.json();
-                setCompanies(response.data);
-                
+                setChatsList(response.data)
                 } catch (e) {
                 console.log(e);
                 }
-        };
-        
-        myFunction();
-    },[]);
+        }
+        myFunction()
+        }, [])
+    
 
-    const searchApi = async(text) => {
-        const url = `http://localhost:8000/getAllCompanies?searchInput=${text}`;
-            const settings = {
-            method: 'GET',
-            headers: {
-                accept: 'application/json',
-                authorization : getAccessToken()
-            }
-            };
-            try {
-                const fetchResponse = await fetch(url, settings);
-                const response = await fetchResponse.json();
-                setCompanies(response.data);
-                
-                } catch (e) {
-                console.log(e);
-                }
-    }
+
 
 
 
 
     return(
-    <>
+        <>
         <div style={{
             display:'flex',
-            flexDirection:'row'
-          }}>
-          {account.role === 'aspirant'? <AspirantSidebar/> : <CompanySidebar/>}
-            <div style={{
-                display:'flex',
-                width:'100%',
-                justifyContent:'center',
+            flexDirection:'row',
+            justifyContent:'center'
             }}>
+            {
+                account.role === 'company'?<CompanySidebar/>:<AspirantSidebar/>
+            }
             
             <div style={{
+            width:'100%',
+            display:'flex',
+            justifyContent:'center',
+        }}>
+
+        <div style={{
             display:'flex',
             flexDirection:'column',
             flexBasis:'40%',
         }}>
-        <div style={{
-                    margin:'auto'
-                }}>
-                <TextField
-                onChange = {(e) => {searchApi(e.target.value)}}
-                inputProps={{
-                    style: {color:'black',fontSize:'16px',fontWeight:'400', borderRadius:'35px', border:'3px solid #c1cdd8', padding:'17px', background:'aliceblue' },
-                }}
-                placeholder="Search companies..."
-                 id="outlined-basic" 
-                 variant="standard" 
-                 InputProps={{
-                    disableUnderline: true,
-                    style:{
-                        width:600,
-                        background:''
-                        }
-                    }}
-                
-                 />
-                </div>
 
             {
-                companies && companies.length > 0 ?
-                companies.map(e => (
+                chatsList && chatsList.length > 0 ?
+                chatsList.map(e => (
+
                     <div style={{
                         display:'flex',
                         flexDirection:'row',
@@ -107,10 +71,8 @@ const Companies = () => {
                         padding:'5px',
                         cursor:'pointer',
                         background:'#c7dff5',
-                        marginTop:'10px',
-                    }}
-                    onClick={() => {navigate(`/companypublic/${e.companyAccountId}`)}}
-                    >
+                        marginTop:'10px'
+                    }}>
 
                      <div style={{
                     display: 'block',
@@ -144,6 +106,9 @@ const Companies = () => {
                     marginLeft:'5px',
                     flexGrow:2
                 }}
+                onClick={() => {
+                    navigate(`/company/job/${e.jobId}/messages/${account.id}`)
+                }}
                 >
                 <div style={{
                     display:'flex',
@@ -163,6 +128,16 @@ const Companies = () => {
 
                 </div>
 
+                <div style={{
+                    fontFamily:'DM Sans',
+                    color:'#566474',
+                    fontSize:'12px',
+                    marginRight:'0px',
+                    marginLeft:'auto',
+                    marginTop:'5px'
+                }}>
+                    {new Date(e.lastMessageTime).getDate()}/{new Date(e.lastMessageTime).getMonth()+1}/{new Date(e.lastMessageTime).getFullYear()}
+                </div>
 
                 </div>
 
@@ -172,42 +147,53 @@ const Companies = () => {
                     color:'black'
                 }}>
                         {
-                            e.industryType
+                            e.jobTitle
                         }
-                        
-                </div>
-                <div style={{
-                    fontFamily:'DM Sans',
-                    fontSize:'14px',
-                    color:'black'
-                }}>
                         {
-                            `${e.jobsPosted} jobs posted`
+                            e.jobType === 'Internship'?
+                            ' Internship':
+                            ''
                         }
-                        
                 </div>
 
-                
+                <div style={{
+                    marginTop:'5px',
+                    fontFamily:'DM Sans',
+                    fontSize:'14px',
+                    color:'#566474'
+                }}>
+                {
+                    e.lastMessageSentBy === 'aspirant'?
+                    'You: '
+                    :
+                    ''
+                }
+                        {
+                            e.lastMessage.split("").length > 40?
+                            e.lastMessage.slice(0, 39)+'...'
+                            :
+                            e.lastMessage
+                        }
+                </div>
 
 
 
                 </div>
                 </div>
                 ))
+                
                 :
-                <></>
+                <div>
+                </div>
             }
 
-
-
-        </div>
-
-            </div>
+            
 
         </div>
 
-    </>
+        </div>
+        </div>
+        </>
     )
-    
 }
-export default Companies;
+export default MessagesList

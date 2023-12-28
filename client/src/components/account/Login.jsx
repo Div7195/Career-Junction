@@ -98,8 +98,6 @@ const Login = ()=>{
             document.getElementById('aspirantB').style.color = 'black';
             document.getElementById('companyB').style.backgroundColor = 'black';
             document.getElementById('companyB').style.color = '#41ef1a';
-            document.getElementById('adminB').style.backgroundColor = 'black';
-            document.getElementById('adminB').style.color = '#41ef1a';
            
     }
     const toCompany = (e) => {
@@ -110,20 +108,7 @@ const Login = ()=>{
             document.getElementById('companyB').style.color = 'black';
             document.getElementById('aspirantB').style.backgroundColor = 'black';
             document.getElementById('aspirantB').style.color = '#41ef1a';
-            document.getElementById('adminB').style.backgroundColor = 'black';
-            document.getElementById('adminB').style.color = '#41ef1a';
             
-    }
-    const toAdmin = (e) => {
-        setSignup({...signup, role : 'admin'});
-            setLogin({...login, role : 'admin'});
-           
-            document.getElementById('adminB').style.backgroundColor = '#41ef1a';
-            document.getElementById('adminB').style.color = 'black';
-            document.getElementById('aspirantB').style.backgroundColor = 'black';
-            document.getElementById('aspirantB').style.color = '#41ef1a';
-            document.getElementById('companyB').style.backgroundColor = 'black';
-            document.getElementById('companyB').style.color = '#41ef1a';
             
     }
     
@@ -184,9 +169,8 @@ const Login = ()=>{
         <Box display='flex' width='100%'>
         <SignupButton id='aspirantB'  onClick={toAspirant}>Aspirant</SignupButton>
 
-        <SignupButton id='companyB' style={{margin:'auto'}} onClick={toCompany}>Company</SignupButton>
+        <SignupButton id='companyB' style={{marginRight:'0px', marginLeft:'auto'}} onClick={toCompany}>Company</SignupButton>
 
-        <SignupButton id='adminB'  onClick={toAdmin}>Admin</SignupButton>
 
         </Box>
             <Image src = {imageUrl} />

@@ -34,10 +34,15 @@ const companySchema = mongoose.Schema({
         type:String,
         required:false
     },
+    companyImage:{
+        type:String,
+        required:false
+    },
     jobsList :{
         type:[String],
         required:false
     },
+    
     employeesList :{
         type:[String],
         required:false

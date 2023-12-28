@@ -5,6 +5,7 @@ import dotenv from 'dotenv'
 import jwt from 'jsonwebtoken'
 import token from '../model/token-schema.js'
 import Aspirant from '../model/aspirant-schema.js';
+import company from '../model/company-schema.js';
 
 export const getAspirantProfileController = async(request, response) => {
     
@@ -30,7 +31,8 @@ export const updateAspirantProfileController = async(request, response) => {
         for(const key in request.body){
             temp[key] = request.body[key];
         }
-        await Aspirant.findOneAndReplace({aspirantAccountId:request.query.aspirantAccountId}, temp);
+        const options = { new: true };
+        await Aspirant.findOneAndUpdate({aspirantAccountId:request.query.aspirantAccountId}, temp, options);
         return response.status(200).json(temp);
     }
     catch(error){
@@ -46,8 +48,8 @@ export const saveJobsController = async(request, response) => {
             return response.status(409).json({msg:'unsuccessfull'});
         }
         temp = {...temp._doc, savedJobs:[...temp._doc.savedJobs, request.query.jobId]};
-        
-        await Aspirant.findOneAndReplace({aspirantAccountId:request.query.aspirantAccountId}, temp);
+        const options = { new: true };
+        await Aspirant.findOneAndUpdate({aspirantAccountId:request.query.aspirantAccountId}, temp, options);
         return response.status(200).json({msg:'success'});
     }
     catch(error){
@@ -152,13 +154,99 @@ export const applyJobController = async(request, response) => {
             applicationStatus:'Applied',
             messages:[]
         })
-        await Job.findOneAndReplace({_id:request.body.jobId}, job);
-        await Aspirant.findOneAndReplace({aspirantAccountId:request.body.aspirantAccountId}, aspirant)
+        const options = { new: true };
+        await Job.findOneAndUpdate({_id:request.body.jobId}, job, options);
+        await Aspirant.findOneAndUpdate({aspirantAccountId:request.body.aspirantAccountId}, aspirant, options)
         return response.status(200).json({msg:'success job update'});
     } catch (error) {
         return response.status(500).json(error);
     }
 }
+
+export const getAllChatsController = async(request, response) => {
+    try {
+        
+        let aspirantObj = await Aspirant.findOne({aspirantAccountId:request.query.aspirantAccountId});
+        let chatsList = [];
+        
+        // let company = await Company.findOne({companyAccountId:jobObj.companyId});
+
+        for(let i = 0;i<aspirantObj.applications.length;i++){
+            if(aspirantObj.applications[i].messages.length > 0){
+            let job = await Job.findOne({_id:aspirantObj.applications[i].jobId});
+                if(job){
+                    let company = await Company.findOne({companyAccountId:job.companyId});
+                    if(company){
+                        chatsList.push({
+                            jobId:job._id,
+                            companyName:company.companyName,
+                            lastMessage:aspirantObj.applications[i].messages[aspirantObj.applications[i].messages.length - 1].messageBody,
+                            lastMessageTime:aspirantObj.applications[i].messages[aspirantObj.applications[i].messages.length - 1].messageTimestamp,
+                            lastMessageSentBy:aspirantObj.applications[i].messages[aspirantObj.applications[i].messages.length - 1].senderRole,
+                            jobTitle:job.jobTitle,
+                            jobType:job.jobType,
+                            companyImage:company.companyImage
+                        })
+                    }
+                }
+                }
+            }
+        
+       
+        return response.status(200).json({data:chatsList});
+    } catch (error) {
+        return response.status(500).json('failed messages fetch');
+    }
+}
+
+export const getCompaniesController = async(request, response) => {
+    try {
+        let companiesList = []
+        let temp = await Company.find({})
+        let queryLength = request.query.searchInput.length
+        
+        if(request.query.searchInput === ''){
+            for(let i = 0;i<temp.length;i++){
+           
+                companiesList.push({
+                    companyAccountId:temp[i].companyAccountId,
+                    companyName:temp[i].companyName,
+                    industryType:temp[i].industryType,
+                    companyImage:temp[i].companyImage,
+                    jobsPosted: temp[i].jobsList.length 
+                })
+            }
+        }else{
+            for(let i = 0;i<temp.length;i++){
+                
+                if(temp[i].companyName.length >= queryLength){
+                    let slicedString = temp[i].companyName.slice(0, queryLength)
+                    
+                    if(slicedString.toLowerCase() === request.query.searchInput.toLowerCase()){
+                        console.log(slicedString.toLowerCase())
+                        companiesList.push({
+                            companyAccountId:temp[i].companyAccountId,
+                            companyName:temp[i].companyName,
+                            industryType:temp[i].industryType,
+                            companyImage:temp[i].companyImage,
+                            jobsPosted: temp[i].jobsList.length 
+                        })
+                }
+                
+            }
+            }
+        }
+        
+        return response.status(200).json({
+            data:companiesList
+        })
+    } catch (error) {
+        console.log(error)
+        return response.status(500).json('failed companies fetch')
+    }
+}
+
+
 
 
 

@@ -12,7 +12,8 @@ export const updateCompanyProfileController=async(request , response)=>{
         if(!temp){
             return response.status(409).json({msg:'unsuccessfull'});
         }
-        await Company.findOneAndReplace({companyAccountId:request.body.companyAccountId}, request.body);
+        const options = { new: true };
+        await Company.findOneAndUpdate({companyAccountId:request.body.companyAccountId}, request.body, options);
         
         return response.status(200).json("Company profile updated success!")
     } 
@@ -65,7 +66,8 @@ export const createJobController = async(request, response) => {
         await newJob.save();
         temp.jobsList.push(newJob._id);
         console.log(temp)
-        await Company.findOneAndReplace({companyAccountId:request.body.companyId}, temp);
+        const options = { new: true };
+        await Company.findOneAndUpdate({companyAccountId:request.body.companyId}, temp, options);
         return response.status(200).json({msg:'created job successfull'})
     } catch (error) {
 
@@ -106,7 +108,8 @@ export const updateJobController = async(request, response) => {
         if(!temp){
             return response.status(404).json('failed job update not found');
         }
-        await Job.findOneAndReplace({_id:request.query.jobId}, request.body);
+        const options = { new: true };
+        await Job.findOneAndUpdate({_id:request.query.jobId}, request.body, options);
         return response.status(200).json('success job update');
     } catch (error) {
         return response.status(500).json('failed job updating');
@@ -192,7 +195,8 @@ export const updateJobMessages = async(request, response) => {
             }
         }
         console.log(aspirantObj)
-        await Aspirant.findOneAndReplace({aspirantAccountId:request.body.aspirantAccountId}, aspirantObj);
+        const options = { new: true };
+        await Aspirant.findOneAndUpdate({aspirantAccountId:request.body.aspirantAccountId}, aspirantObj, options);
         
         
         return response.status(200).json({msg:'success'});

@@ -73,6 +73,7 @@ const CompanyAspirantProfile = () => {
                 aspirantName:'',
                 aspirantEmail:'',
                 aspirantLocation:'',
+                aspirantChats:[],
                 appliedJobs:[],
                 savedJobs:[],
                 domains:[],

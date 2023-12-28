@@ -648,7 +648,12 @@ const DetailedJob = () => {
                     <div style={{
                         color: '#445ee2',
                         fontFamily: 'DM Sans, sans-serif',
-                    }}>
+                        cursor:'pointer'
+                    }}
+                    onClick={() =>{
+                        navigate(`/companypublic/${jobState.companyId}`)
+                    }}
+                    >
                         Profile
                     </div>
                     <div style={{

@@ -170,8 +170,13 @@ return(
                     lineHeight: '1.75rem',
                     letterSpacing: '-.02em',
                     color: '#9eaab7',
-                    fontFamily: "DM Sans"
-                }}>
+                    fontFamily: "DM Sans",
+                    cursor:'pointer'
+                }}
+                onClick={() => {
+                    navigate(`/companypublic/${job.companyId}`)
+                }}
+                >
                     {companyName !== ''?companyName:job.companyName} | {locationBased !== ''?locationBased:job.locationBased}
                 </div>
 

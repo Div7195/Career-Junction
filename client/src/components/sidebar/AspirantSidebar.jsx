@@ -85,9 +85,9 @@ export default function AspirantSidebar() {
         </List>
         <Divider style={{backgroundColor:'#00ecff'}} />
         <List>
-          {["Search people", "Search companies"].map((text, index) => (
+          {["Messaging", "Search companies"].map((text, index) => (
             <ListItem key={text} disablePadding>
-            {index % 2 === 0 ? <ListItemButton onClick={() => { if(location.pathname.includes('people') === false) navigate('/people')}} >
+            {index % 2 === 0 ? <ListItemButton onClick={() => { if(location.pathname.includes('messaging') === false) navigate('/messaging')}} >
                 <ListItemIcon style={{ color: '#00ecff' }} >
                    <PeopleIcon/>
                 </ListItemIcon>
