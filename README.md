@@ -11,12 +11,14 @@ An enhanced web application for job aspirants and companies
 - Apply to jobs
 - Keep track of applied jobs
 - Chat with recruiter
+- Search companies
 - View company profile
 ### Company
 - Authentication
 - Create company profile
 - Post jobs(with detailed information)
 - View applicant profiles
+- Search companies
 - Chat with applicants
 ### Tech used
 - ReactJS
