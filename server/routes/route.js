@@ -2,7 +2,7 @@ import express from "express";
 
 import { loginUserController, signupUserController } from "../controllers/user-controllers.js";
 import { authenticateToken } from "../controllers/token-controllers.js";
-import { createJobController, deleteJobController, getCompanyProfileController, getJobApplicants, getJobMessages, getJobsController, getSingleJobController, getSingleJobSecondController, updateCompanyProfileController, updateJobController, updateJobMessages } from "../controllers/company-controllers.js";
+import { createJobController, deleteJobController, getCompanyChatsController, getCompanyProfileController, getJobApplicants, getJobMessages, getJobsController, getSingleJobController, getSingleJobSecondController, updateCompanyProfileController, updateJobController, updateJobMessages } from "../controllers/company-controllers.js";
 import { applyJobController,  getAllChatsController,  getAllJobsController, getAspirantProfileController, getCompaniesController, saveJobsController, updateAspirantProfileController } from "../controllers/aspirant-controllers.js";
 import { getImageController, uploadImageController } from "../controllers/image-controllers.js";
 import upload from "../middleware/upload.js";
@@ -30,4 +30,5 @@ Router.get('/getAllChats',authenticateToken, getAllChatsController);
 Router.post('/image/upload', upload.single('file'), uploadImageController);
 Router.get('/file/:filename',getImageController);
 Router.get('/getAllCompanies', authenticateToken, getCompaniesController)
+Router.get('/getCompanyChats', authenticateToken, getCompanyChatsController)
 export default Router;

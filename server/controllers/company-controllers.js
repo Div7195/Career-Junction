@@ -204,3 +204,44 @@ export const updateJobMessages = async(request, response) => {
         return response.status(500).json('failed messages update');
     }
 }
+
+export const getCompanyChatsController = async(request, response) => {
+    try {
+        let result = []
+        let companyJobs = await Job.find({companyId:request.query.companyAccountId});
+        if(companyJobs){
+            for(let i = 0; i < companyJobs.length; i++){
+                for(let j = 0; j<companyJobs[i].appliedAspirantsId.length; j++){
+                    let aspirant = await Aspirant.findOne({aspirantAccountId:companyJobs[i].appliedAspirantsId[j]});
+                    
+                    if(aspirant){
+                        for(let k = 0; k < aspirant.applications.length;k++){
+                            
+                            if(aspirant.applications[k].jobId === companyJobs[i]._id.toString()){
+                                
+                                if(aspirant.applications[k].messages.length > 0){
+                                    result.push({
+                                        jobId:companyJobs[i]._id,
+                                        aspirantAccountId:aspirant.aspirantAccountId,
+                                        aspirantName:aspirant.aspirantName,
+                                        jobTitle:companyJobs[i].jobTitle,
+                                        jobType:companyJobs[i].jobType,
+                                        lastMessage:aspirant.applications[k].messages[aspirant.applications[k].messages.length-1].messageBody,
+                                        lastMessageTimestamp:aspirant.applications[k].messages[aspirant.applications[k].messages.length-1].messageTimestamp,
+                                        lastMessageSentBy:aspirant.applications[k].messages[aspirant.applications[k].messages.length-1].senderRole,
+                                    })
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        
+       
+        return response.status(200).json({data:result});
+    } catch (error) {
+        return response.status(500).json('failed messages fetch');
+    }
+}

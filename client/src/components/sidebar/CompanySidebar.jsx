@@ -68,7 +68,7 @@ export default function CompanySidebar() {
         <List>
           {["Messaging", "Search companies"].map((text, index) => (
             <ListItem key={text} disablePadding>
-            {index % 2 === 0 ? <ListItemButton onClick={() => { if(location.pathname.includes('messaging') === false) navigate('/messaging')}} >
+            {index % 2 === 0 ? <ListItemButton onClick={() => { if(location.pathname.includes('companymessaging') === false) navigate('/companymessaging')}} >
                 <ListItemIcon style={{ color: '#00ecff' }} >
                    <PeopleIcon/>
                 </ListItemIcon>

@@ -5,6 +5,7 @@ import { getAccessToken } from "../../utility functions/util"
 import AspirantSidebar from "../sidebar/AspirantSidebar"
 import { Avatar } from "@mui/material"
 import Job from "../jobs/Job"
+import CompanySidebar from "../sidebar/CompanySidebar"
 const CompanyPublicProfile = () => {
     const navigate = useNavigate();
     const {companyAccountId} = useParams();
@@ -82,7 +83,7 @@ const CompanyPublicProfile = () => {
             display:'flex',
             flexDirection:'row'
           }}>
-          <AspirantSidebar/>
+          {account.role === 'aspirant'?<AspirantSidebar/>:<CompanySidebar/>}
             <div style={{
                 display:'flex',
                 width:'100%',

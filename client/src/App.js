@@ -26,6 +26,7 @@ import CompanyApplicants from './components/people/CompanyApplicants.jsx';
 import CompanyAspirantProfile from './components/people/CompanyAspirantProfile.jsx';
 import MessagesList from './components/messaging/MessagesList.jsx';
 import CompanyPublicProfile from './components/companies/CompanyPublicProfile.jsx';
+import CompanyMessagesList from './components/messaging/CompanyMessagesList.jsx';
 
 
 
@@ -58,6 +59,7 @@ function App() {
               <Route  path = '/companypublic/:companyAccountId' element = {<CompanyPublicProfile/>}/>
               <Route  path = '/company/job/:id/messages/:aspirantAccountId' element = {<JobMessages/>}/>
               <Route  path = '/messaging' element = {<MessagesList/>}/>
+              <Route  path = '/companymessaging' element = {<CompanyMessagesList/>}/>
               <Route  path = '/job/:id/applicants' element = {<CompanyApplicants/>}/>
               <Route  path = '/company/aspirantprofile/:id' element = {<CompanyAspirantProfile/>}/>
             </Routes>
