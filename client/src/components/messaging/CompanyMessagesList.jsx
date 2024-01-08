@@ -107,7 +107,7 @@ const CompanyMessagesList = () => {
                     flexGrow:2
                 }}
                 onClick={() => {
-                    navigate(`/company/job/${e.jobId}/messages/${e.aspirantAccountId}`)
+                    navigate(`/company/job/${e.jobId}/messages/${e.aspirantAccountId}/chatId/${e.chatId}`)
                 }}
                 >
                 <div style={{

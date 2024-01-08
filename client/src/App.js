@@ -57,7 +57,7 @@ function App() {
               <Route  path = '/applied' element = {<AppliedJobs/>}/>
               <Route  path = '/saved/jobs' element = {<SavedJobs/>}/>
               <Route  path = '/companypublic/:companyAccountId' element = {<CompanyPublicProfile/>}/>
-              <Route  path = '/company/job/:id/messages/:aspirantAccountId' element = {<JobMessages/>}/>
+              <Route  path = '/company/job/:id/messages/:aspirantAccountId/chatId/:chatId' element = {<JobMessages/>}/>
               <Route  path = '/messaging' element = {<MessagesList/>}/>
               <Route  path = '/companymessaging' element = {<CompanyMessagesList/>}/>
               <Route  path = '/job/:id/applicants' element = {<CompanyApplicants/>}/>

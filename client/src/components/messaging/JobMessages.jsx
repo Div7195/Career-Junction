@@ -7,7 +7,9 @@ import { TextField } from "@mui/material";
 import dayjs from "dayjs";
 import SendIcon from '@mui/icons-material/Send';
 import AspirantSidebar from "../sidebar/AspirantSidebar";
+import { socket } from "../../service/socket";
 const JobMessages = () => {
+    
     const {account}=useContext(DataContext);
     const newMessageInitial = {
         senderRole:account.role,
@@ -16,10 +18,19 @@ const JobMessages = () => {
         seenFlag:false
     }
     const navigate = useNavigate();
-    const {id,aspirantAccountId} = useParams();
+    const {id,aspirantAccountId, chatId} = useParams();
     console.log('we are here')
-    const [data, setData] = useState({})
+    const [data, setData] = useState({
+        jobId:'',
+        applicationStatus:'',
+        _id:'',
+        messages:[]
+    })
     const [newMessage, setNewMessage] = useState(newMessageInitial)
+    const [check, setCheck] = useState(false)
+    
+    
+
     const sendMessage = async() => {
         newMessage.messageTimestamp = dayjs(new Date()).$d
         const settings = {
@@ -40,11 +51,15 @@ const JobMessages = () => {
              const fetchResponse = await fetch(`http://localhost:8000/updateJobMessages`, settings);
              const response = await fetchResponse.json();
             if(response.msg === 'success'){
-                data.messages.reverse();
-                data.messages.push(newMessage);
-                data.messages.reverse();
-                setData({...data, messages:data.messages});
+                // data.messages.reverse();
+                // data.messages.push(newMessage);
+                // data.messages.reverse();
+                socket.emit('send', {
+                    msg:newMessage,
+                })
+                // setData({...data, messages:data.messages});
                 setNewMessage(newMessageInitial)
+                
             }else{
 
             }
@@ -55,8 +70,10 @@ const JobMessages = () => {
          }    
     }
 
+    
 
     useEffect(() => {
+        
     const myFunction = async() => {
         const url = `http://localhost:8000/getJobMessages?jobId=${id}&aspirantAccountId=${aspirantAccountId}`;
         const settings = {
@@ -70,7 +87,10 @@ const JobMessages = () => {
             const fetchResponse = await fetch(url, settings);
             const response = await fetchResponse.json();
             response.messagesObj.messages.reverse();
+            
             setData(response.messagesObj)
+            setCheck(true)
+            socket.emit('joinroom', chatId);
             
             } catch (e) {
             console.log(e);
@@ -78,8 +98,18 @@ const JobMessages = () => {
     }
     myFunction()
     }, [])
+   
+   useEffect(() => {
+    socket.on('receive',(obj)=>{
+        console.log(data.messages)
+        data.messages.reverse();
+        data.messages.push(obj.msg);
+        data.messages.reverse();
+        setData({...data, messages:data.messages});
+        })
+   }, [check])
+   
     
-
 
 
 
@@ -207,6 +237,8 @@ const JobMessages = () => {
           </div>
         </>
     )
+
+    
 
 }
 export default JobMessages;

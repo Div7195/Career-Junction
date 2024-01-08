@@ -15,7 +15,7 @@ Router.get('/getCompanyProfile',authenticateToken, getCompanyProfileController);
 Router.post('/createJob',authenticateToken, createJobController);
 Router.get('/getJobs', authenticateToken, getJobsController);
 Router.get('/getSingleJob', authenticateToken, getSingleJobController);
-Router.get('/updateJob', authenticateToken, updateJobController);
+Router.post('/updateJob', authenticateToken, updateJobController);
 Router.get('/deleteJob', authenticateToken, deleteJobController);
 Router.get('/getSingleJobAndCompany', authenticateToken, getSingleJobSecondController);
 Router.get('/getAspirantProfile',authenticateToken, getAspirantProfileController);

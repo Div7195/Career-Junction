@@ -23,7 +23,7 @@ export const getAspirantProfileController = async(request, response) => {
 export const updateAspirantProfileController = async(request, response) => {
     
     try{
-        console.log(request.body)
+        
         let temp = await Aspirant.findOne({aspirantAccountId:request.query.aspirantAccountId});
         if(!temp){
             return response.status(409).json({msg:'unsuccessfull'});
@@ -43,7 +43,7 @@ export const saveJobsController = async(request, response) => {
     
     try{
         let temp = await Aspirant.findOne({aspirantAccountId:request.query.aspirantAccountId});
-        console.log(temp)
+        
         if(!temp){
             return response.status(409).json({msg:'unsuccessfull'});
         }
@@ -93,7 +93,7 @@ export const getAllJobsController = async(request, response) => {
             if(request.query.skillsRequired.length > 0){
                 objArrayOfJobs = objArrayOfJobs.filter((obj) => {
                     for(let i = 0;i<obj.skillsRequired.length;i++){
-                        console.log(obj)
+                        
                         if(request.query.skillsRequired.includes(obj.skillsRequired[i])){
                             return obj
                         }
@@ -144,7 +144,7 @@ export const applyJobController = async(request, response) => {
             return response.status(404).json('cant find job');
         }
         let aspirant = await Aspirant.findOne({aspirantAccountId:request.body.aspirantAccountId});
-        console.log(aspirant)
+        
         if(!aspirant){
             return response.status(404).json('cant find aspirant')
         }
@@ -185,7 +185,8 @@ export const getAllChatsController = async(request, response) => {
                             lastMessageSentBy:aspirantObj.applications[i].messages[aspirantObj.applications[i].messages.length - 1].senderRole,
                             jobTitle:job.jobTitle,
                             jobType:job.jobType,
-                            companyImage:company.companyImage
+                            companyImage:company.companyImage,
+                            chatId:aspirantObj.applications[i]._id.toString()
                         })
                     }
                 }
@@ -223,7 +224,7 @@ export const getCompaniesController = async(request, response) => {
                     let slicedString = temp[i].companyName.slice(0, queryLength)
                     
                     if(slicedString.toLowerCase() === request.query.searchInput.toLowerCase()){
-                        console.log(slicedString.toLowerCase())
+                        
                         companiesList.push({
                             companyAccountId:temp[i].companyAccountId,
                             companyName:temp[i].companyName,

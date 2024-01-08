@@ -7,7 +7,7 @@ import token from '../model/token-schema.js'
 import Aspirant from '../model/aspirant-schema.js';
 export const updateCompanyProfileController=async(request , response)=>{
     try {
-        console.log(request.body.companyAccountId);
+        
         let temp = await Company.findOne({companyAccountId:request.body.companyAccountId});
         if(!temp){
             return response.status(409).json({msg:'unsuccessfull'});
@@ -65,7 +65,7 @@ export const createJobController = async(request, response) => {
         
         await newJob.save();
         temp.jobsList.push(newJob._id);
-        console.log(temp)
+        
         const options = { new: true };
         await Company.findOneAndUpdate({companyAccountId:request.body.companyId}, temp, options);
         return response.status(200).json({msg:'created job successfull'})
@@ -104,7 +104,9 @@ export const getSingleJobController = async(request, response) => {
 export const updateJobController = async(request, response) => {
 
     try {
+        
         let temp = Job.findOne({_id:request.query.jobId});
+        
         if(!temp){
             return response.status(404).json('failed job update not found');
         }
@@ -175,7 +177,7 @@ export const getJobMessages = async(request, response) => {
                 break;
             }
         }
-        console.log(messagesObj)
+        
         return response.status(200).json({messagesObj});
     } catch (error) {
         return response.status(500).json('failed messages fetch');
@@ -194,7 +196,7 @@ export const updateJobMessages = async(request, response) => {
                 break;
             }
         }
-        console.log(aspirantObj)
+        
         const options = { new: true };
         await Aspirant.findOneAndUpdate({aspirantAccountId:request.body.aspirantAccountId}, aspirantObj, options);
         
@@ -229,6 +231,7 @@ export const getCompanyChatsController = async(request, response) => {
                                         lastMessage:aspirant.applications[k].messages[aspirant.applications[k].messages.length-1].messageBody,
                                         lastMessageTimestamp:aspirant.applications[k].messages[aspirant.applications[k].messages.length-1].messageTimestamp,
                                         lastMessageSentBy:aspirant.applications[k].messages[aspirant.applications[k].messages.length-1].senderRole,
+                                        chatId:aspirant.applications[i]._id.toString()
                                     })
                                 }
                             }
