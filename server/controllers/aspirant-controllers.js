@@ -76,7 +76,8 @@ export const unsaveJobController = async(request, response) => {
 export const getAllJobsController = async(request, response) => {
 
     try{
-        
+        let aspirant = {}
+        aspirant = await Aspirant.findOne({aspirantAccountId:request.query.aspirantAccountId})
         let objArrayOfJobs = [];
         // console.log(request.query.jobType === '')
         // console.log(request.query.minSalary === '')
@@ -87,8 +88,14 @@ export const getAllJobsController = async(request, response) => {
         if(request.query.jobType === '' && request.query.minSalary === ''&& request.query.location === '' && request.query.sortBy === '' && request.query.skillsRequired.length === 0) {
             
             for(let i = 0;i<objArrayOfJobs.length;i++){
+                let chatId = ''
+                for(let j = 0; j<aspirant.applications.length;j++){
+                    if(aspirant.applications[j].jobId === objArrayOfJobs[i]._id.toString()){
+                        chatId = aspirant.applications[j]._id.toString()
+                    }
+                }
             let tempCompany = await Company.findOne({companyAccountId:objArrayOfJobs[i].companyId});
-            objArrayOfJobs[i] = {...objArrayOfJobs[i]._doc,companyName:tempCompany.companyName, locationBased:tempCompany.locationBased};
+            objArrayOfJobs[i] = {...objArrayOfJobs[i]._doc,companyName:tempCompany.companyName, locationBased:tempCompany.locationBased, chatId:chatId};
             
         }
         return response.status(200).json({objArrayOfJobs});
@@ -138,10 +145,18 @@ export const getAllJobsController = async(request, response) => {
                 }
             }
             for(let i = 0;i<objArrayOfJobs.length;i++){
+                let chatId = ''
+                for(let j = 0; j<aspirant.applications.length;j++){
+                    if(aspirant.applications[j].jobId === objArrayOfJobs[i]._id.toString()){
+                        chatId = aspirant.applications[j]._id.toString()
+                    }
+                }
                 let tempCompany = await Company.findOne({companyAccountId:objArrayOfJobs[i].companyId});
-                objArrayOfJobs[i] = {...objArrayOfJobs[i]._doc,companyName:tempCompany.companyName, locationBased:tempCompany.locationBased};
+                objArrayOfJobs[i] = {...objArrayOfJobs[i]._doc,companyName:tempCompany.companyName, locationBased:tempCompany.locationBased, chatId:chatId};
                 
             }
+            
+
             return response.status(200).json({objArrayOfJobs});
 
             
@@ -150,6 +165,7 @@ export const getAllJobsController = async(request, response) => {
         
 
     }catch(error){
+        console.log(error.message)
         return response.status(500).json('failed job fetching');
     }
 }

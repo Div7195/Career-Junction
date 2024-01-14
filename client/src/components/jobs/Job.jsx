@@ -631,8 +631,8 @@ return(
                                 
                             }}
                             onClick={() => {
-                                navigate(`/company/job/${job._id}/messages/${account.id}`)
-                            }}
+                    navigate(`/company/job/${job._id}/messages/${account.id}/chatId/${job.chatId}`)
+                }}
                             >
                                View Messages
                             </div>
