@@ -14,6 +14,7 @@ import { useParams } from "react-router-dom";
 import { DataContext } from "../../context/DataProvider";
 import { useContext } from "react";
 import { getAccessToken } from "../../utility functions/util.js";
+import moment from 'moment'
 const job = {
     companyId: '3123123',
     companyName:'Microsoft',
@@ -103,7 +104,10 @@ const DetailedJob = () => {
       
     }, [])
     
-
+    const jobPostTimeStamp = new Date(jobState.jobCreateDate);
+    const currentTime = new Date();
+    const timeDifference = moment(jobPostTimeStamp).from(currentTime);
+    console.log(timeDifference);
 
 
     return(
@@ -187,10 +191,10 @@ const DetailedJob = () => {
                         color: '#445ee2',
                         fontFamily: 'DM Sans, sans-serif',
                     }}>
-                        Apply by {new Date(jobState.applyDeadlineDate).getDate()} {monthMap[new Date(jobState.applyDeadlineDate).getMonth()+1]} {new Date(jobState.applyDeadlineDate).getFullYear()} • Posted {new Date().getDate() === new Date(jobState.jobCreateDate).getDate() ? new Date().getHours() - new Date(jobState.jobCreateDate).getHours():''} ago
+                        Apply by {new Date(jobState.applyDeadlineDate).getDate()} {monthMap[new Date(jobState.applyDeadlineDate).getMonth()+1]} {new Date(jobState.applyDeadlineDate).getFullYear()} • Posted {timeDifference} 
                     </div>
                     
-                    <div style={{
+                    {/* <div style={{
                         marginRight:'10px',
                         marginLeft:'auto'
                     }}>
@@ -207,7 +211,7 @@ const DetailedJob = () => {
                     color:'white'
                     
                 }}>Apply Now</div>
-                    </div>
+                    </div> */}
                     
 
                 </div>

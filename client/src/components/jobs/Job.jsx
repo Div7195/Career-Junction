@@ -14,6 +14,7 @@ import { getAccessToken } from '../../utility functions/util.js';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
+import moment from  'moment'
 // const job = {
 //     companyId: '3123123',
 //     companyName:'Microsoft',
@@ -97,6 +98,29 @@ const Job = ({job, saved, locationBased, companyName}) =>{
                 } 
         }   
 
+        const unsaveJob = async() => {
+            const settings = {
+                method: "POST",
+                body: JSON.stringify({}),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                    'authorization' : getAccessToken()
+                }
+                }
+                try {
+                    console.log(settings.body)
+                    const fetchResponse = await fetch(`http://localhost:8000/unsaveJobs?aspirantAccountId=${account.id}&jobId=${job._id}`, settings);
+                    const response = await fetchResponse.json();
+                    if(response.msg === 'success'){
+                        setSaved(false)
+                    }
+                    
+                } catch (e) {
+                    
+                    return e;
+                } 
+        }  
+
 const applyToJob = async() => {
     const settings = {
         method: "POST",
@@ -122,6 +146,12 @@ const applyToJob = async() => {
             return e;
         } 
 }
+
+const jobPostTimeStamp = new Date(job.jobCreateDate);
+    const currentTime = new Date();
+    const timeDifference = moment(jobPostTimeStamp).from(currentTime);
+    console.log(timeDifference);
+
     
 return(
     <div>
@@ -193,7 +223,7 @@ return(
             <div style={{
 
             }}
-            onClick={() => {console.log('fdsfs')}}
+            onClick={() => {unsaveJob()}}
             >
             <BookmarkIcon style={{
                 cursor:'pointer'
@@ -202,7 +232,17 @@ return(
             </div>
             :
             job.appliedAspirantsId.includes(account.id)?
-                    <div></div>
+                    <div style={{
+                        color:'black',
+                        fontSize:'16px',
+                        fontFamily:'DM Sans',
+                        fontWeight:'500',
+                        padding:'5px',
+                        border:'3px solid black',
+                        borderRadius:'5px'
+                    }}>
+                        Applied
+                    </div>
                     :
                     <div style={{
 
@@ -211,6 +251,7 @@ return(
                     >
                     <BookmarkBorderIcon 
                     style={{
+                        
                         cursor:'pointer'
                     }}
                     />
@@ -505,7 +546,7 @@ return(
                             lineHeight: '1.1rem',
                             minHeight: '28px',
                     }}>
-                    Apply by {new Date(job.applyDeadlineDate).getDate()} {monthMap[new Date(job.applyDeadlineDate).getMonth()+1]} {new Date(job.applyDeadlineDate).getFullYear()} • Posted {new Date().getDate() === new Date(job.jobCreateDate).getDate() ? new Date().getHours() - new Date(job.jobCreateDate).getHours():''} ago
+                    Apply by {new Date(job.applyDeadlineDate).getDate()} {monthMap[new Date(job.applyDeadlineDate).getMonth()+1]} {new Date(job.applyDeadlineDate).getFullYear()} • Posted {timeDifference} 
                     </div>
                     <div style={{
                         display:'flex',

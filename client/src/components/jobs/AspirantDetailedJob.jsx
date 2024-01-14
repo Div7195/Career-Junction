@@ -15,6 +15,7 @@ import { DataContext } from "../../context/DataProvider";
 import { useContext } from "react";
 import { getAccessToken } from "../../utility functions/util.js";
 import AspirantSidebar from "../sidebar/AspirantSidebar.jsx";
+import moment from 'moment'
 const job = {
     companyId: '3123123',
     companyName:'Microsoft',
@@ -50,6 +51,7 @@ const AspirantDetailedJob = () => {
     const navigate = useNavigate();
     const {id} = useParams();
     const {account}=useContext(DataContext);
+    const [appliedOrNot, setAppliedOrNot] = useState('Apply Now')
     const jobInitialValues = {
         companyId:'',
         jobTitle:'',
@@ -103,7 +105,36 @@ const AspirantDetailedJob = () => {
         myFunction()
       
     }, [])
-    
+    const applyToJob = async() => {
+        const settings = {
+            method: "POST",
+            body: JSON.stringify({
+                jobId:job._id,
+                aspirantAccountId:account.id
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8",
+                'authorization' : getAccessToken()
+            }
+            }
+            try {
+                console.log(settings.body)
+                const fetchResponse = await fetch(`http://localhost:8000/applyToJob`, settings);
+                const response = await fetchResponse.json();
+                if(response.msg === 'success job update'){
+                    setAppliedOrNot('Applied')
+                }
+                
+            } catch (e) {
+                
+                return e;
+            } 
+    }
+
+    const jobPostTimeStamp = new Date(jobState.jobCreateDate);
+    const currentTime = new Date();
+    const timeDifference = moment(jobPostTimeStamp).from(currentTime);
+    console.log(timeDifference);
 
 
 
@@ -188,9 +219,12 @@ const AspirantDetailedJob = () => {
                         color: '#445ee2',
                         fontFamily: 'DM Sans, sans-serif',
                     }}>
-                        Apply by {new Date(jobState.applyDeadlineDate).getDate()} {monthMap[new Date(jobState.applyDeadlineDate).getMonth()+1]} {new Date(jobState.applyDeadlineDate).getFullYear()} • Posted {new Date().getDate() === new Date(jobState.jobCreateDate).getDate() ? new Date().getHours() - new Date(jobState.jobCreateDate).getHours():''} ago
+                        Apply by {new Date(jobState.applyDeadlineDate).getDate()} {monthMap[new Date(jobState.applyDeadlineDate).getMonth()+1]} {new Date(jobState.applyDeadlineDate).getFullYear()} • Posted {timeDifference} 
                     </div>
                     
+                    {
+
+                    !jobState.appliedAspirantsId.includes(account.id)?
                     <div style={{
                         marginRight:'10px',
                         marginLeft:'auto'
@@ -207,9 +241,27 @@ const AspirantDetailedJob = () => {
                     padding: '8px 20px 8px 16px',
                     color:'white'
                     
-                }}>Apply Now</div>
+                }}
+                onClick={() =>{applyToJob()}}
+                >
+                
+                {appliedOrNot}</div>
                     </div>
-                    
+                    :
+                    <div style={{
+                        color:'black',
+                        fontSize:'16px',
+                        fontFamily:'DM Sans',
+                        fontWeight:'500',
+                        padding:'5px',
+                        border:'3px solid black',
+                        borderRadius:'5px',
+                        marginLeft:'auto',
+                        marginRight:'10px',
+                    }}>
+                        Applied
+                    </div>
+                }
 
                 </div>
 

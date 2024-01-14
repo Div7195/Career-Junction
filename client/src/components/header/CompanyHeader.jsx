@@ -215,7 +215,7 @@ export default function CompanyHeader() {
           >
            
           </Typography>
-          <Search>
+          {/* <Search>
             <SearchIconWrapper>
               <SearchIcon style={{ color: '#00ecff' }} />
             </SearchIconWrapper>
@@ -223,7 +223,7 @@ export default function CompanyHeader() {
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
             />
-          </Search>
+          </Search> */}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             {/* <IconButton size="large" aria-label="show 4 new mails" color="inherit" style={{marginLeft:'10px'}} onClick={() => { if(location.pathname.includes('messaging') === false) navigate('/messaging')}}>
@@ -302,7 +302,7 @@ export default function CompanyHeader() {
           >
            
           </Typography>
-          <Search>
+          {/* <Search>
             <SearchIconWrapper>
               <SearchIcon style={{ color: '#00ecff' }} />
             </SearchIconWrapper>
@@ -310,7 +310,7 @@ export default function CompanyHeader() {
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
             />
-          </Search>
+          </Search> */}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             {/* <IconButton size="large" aria-label="show 4 new mails" color="inherit" style={{marginLeft:'10px'}} onClick={() => { if(location.pathname.includes('messaging') === false) navigate('/messaging')}}>

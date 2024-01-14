@@ -56,6 +56,23 @@ export const saveJobsController = async(request, response) => {
         return response.status(500).json(error);
     }
 }
+export const unsaveJobController = async(request, response) => {
+    try {
+        let temp = await Aspirant.findOne({aspirantAccountId:request.query.aspirantAccountId});
+        
+        if(!temp){
+            return response.status(409).json({msg:'unsuccessfull'});
+        }
+        temp = {...temp._doc, savedJobs:temp._doc.savedJobs.filter((e) => {
+            return e !== request.query.jobId
+          })}
+        const options = { new: true };
+        await Aspirant.findOneAndUpdate({aspirantAccountId:request.query.aspirantAccountId}, temp, options);
+        return response.status(200).json({msg:'success'});
+    } catch (error) {
+        return response.status(500).json('failed remove bookmarking job ')
+    }
+}
 export const getAllJobsController = async(request, response) => {
 
     try{
