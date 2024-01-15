@@ -27,7 +27,7 @@ const JobMessages = () => {
         messages:[]
     })
     const [newMessage, setNewMessage] = useState(newMessageInitial)
-    const [check, setCheck] = useState(false)
+    
     
     
 
@@ -89,7 +89,7 @@ const JobMessages = () => {
             response.messagesObj.messages.reverse();
             
             setData(response.messagesObj)
-            setCheck(true)
+            
             socket.emit('joinroom', chatId);
             
             } catch (e) {
@@ -99,15 +99,14 @@ const JobMessages = () => {
     myFunction()
     }, [])
    
-   useEffect(() => {
-    socket.on('receive',(obj)=>{
-        console.log(data.messages)
-        data.messages.reverse();
-        data.messages.push(obj.msg);
-        data.messages.reverse();
-        setData({...data, messages:data.messages});
-        })
-   }, [check])
+   
+   socket.on('receive',(obj)=>{
+    console.log(data.messages)
+    data.messages.reverse();
+    data.messages.push(obj.msg);
+    data.messages.reverse();
+    setData({...data, messages:data.messages});
+    })
    
     
 
