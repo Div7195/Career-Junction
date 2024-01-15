@@ -26,7 +26,7 @@ const server = app.listen(PORT, () => console.log(`server is running on port ${P
 const io = new Server(server, {
   cors: {
     origin: 'https://career-junction-app.vercel.app',
-    methods: ['GET', 'POST', 'DELETE'],
+    methods: ['GET', 'POST'],
   },
   });
   
