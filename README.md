@@ -26,6 +26,5 @@ An enhanced web application for job aspirants and companies
 - MongoDB Atlas as database
 - NodeJS Express for server
 #### Sample account credentials
-##### Student - Username ('aa') Password ('aa')
-##### Mentor1 - Username('mm') Password('mm')
-##### Mentor2 - Username('nn') Password('nn')
+##### Aspirant - Username ('aa') Password ('aa')
+##### Company1 - Username('cc') Password('cc')
