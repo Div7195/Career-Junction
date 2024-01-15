@@ -10,7 +10,7 @@ const CompanyOpenings = () => {
     const [jobs, setJobs] = useState({})
     useEffect(() => {
         const myFunction = async() => {
-        const url = `http://localhost:8000/getJobs?companyAccountId=${account.id}`;
+        const url = `https://career-junction.vercel.app/getJobs?companyAccountId=${account.id}`;
         const settings = {
         method: 'GET',
         headers: {

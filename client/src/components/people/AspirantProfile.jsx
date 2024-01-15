@@ -114,7 +114,7 @@ const AspirantProfile = () => {
          }
          try {
              console.log(settings.body)
-             const fetchResponse = await fetch(`http://localhost:8000/updateAspirantProfile?aspirantAccountId=${account.id}`, settings);
+             const fetchResponse = await fetch(`https://career-junction.vercel.app/updateAspirantProfile?aspirantAccountId=${account.id}`, settings);
              const response = await fetchResponse.json();
             
              
@@ -126,7 +126,7 @@ const AspirantProfile = () => {
 
     useEffect(() => {
       const myFunction = async() => {
-        const url = `http://localhost:8000/getAspirantProfile?aspirantAccountId=${account.id}`;
+        const url = `https://career-junction.vercel.app/getAspirantProfile?aspirantAccountId=${account.id}`;
         const settings = {
         method: 'GET',
         headers: {

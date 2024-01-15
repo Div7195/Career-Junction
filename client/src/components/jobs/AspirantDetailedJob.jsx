@@ -83,7 +83,7 @@ const AspirantDetailedJob = () => {
     console.log(jobState)
     useEffect(() => {
         const myFunction = async() => {
-        const url = `http://localhost:8000/getSingleJobAndCompany?jobId=${id}`;
+        const url = `https://career-junction.vercel.app/getSingleJobAndCompany?jobId=${id}`;
         const settings = {
         method: 'GET',
         headers: {
@@ -119,7 +119,7 @@ const AspirantDetailedJob = () => {
             }
             try {
                 console.log(settings.body)
-                const fetchResponse = await fetch(`http://localhost:8000/applyToJob`, settings);
+                const fetchResponse = await fetch(`https://career-junction.vercel.app/applyToJob`, settings);
                 const response = await fetchResponse.json();
                 if(response.msg === 'success job update'){
                     setAppliedOrNot('Applied')

@@ -11,7 +11,7 @@ const MessagesList = () => {
 
     useEffect(() => {
         const myFunction = async() => {
-            const url = `http://localhost:8000/getAllChats?aspirantAccountId=${account.id}`;
+            const url = `https://career-junction.vercel.app/getAllChats?aspirantAccountId=${account.id}`;
             const settings = {
             method: 'GET',
             headers: {

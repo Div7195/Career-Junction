@@ -13,7 +13,7 @@ const Companies = () => {
 
     useEffect( () => {
         const myFunction = async () => {
-            const url = `http://localhost:8000/getAllCompanies?searchInput=`;
+            const url = `https://career-junction.vercel.app/getAllCompanies?searchInput=`;
             const settings = {
             method: 'GET',
             headers: {
@@ -35,7 +35,7 @@ const Companies = () => {
     },[]);
 
     const searchApi = async(text) => {
-        const url = `http://localhost:8000/getAllCompanies?searchInput=${text}`;
+        const url = `https://career-junction.vercel.app/getAllCompanies?searchInput=${text}`;
             const settings = {
             method: 'GET',
             headers: {

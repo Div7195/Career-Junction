@@ -80,7 +80,7 @@ const CreateNewJob = () => {
          }
          try {
              console.log(settings.body)
-             const fetchResponse = await fetch(`http://localhost:8000/createJob`, settings);
+             const fetchResponse = await fetch(`https://career-junction.vercel.app/createJob`, settings);
              const response = await fetchResponse.json();
              setJob(jobInitialValues);
             
