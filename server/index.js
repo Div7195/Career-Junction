@@ -15,6 +15,9 @@ app.use(cors({
   origin: 'https://career-junction-app.vercel.app',
   methods: ['GET', 'POST', 'DELETE'],
 }));
+app.get('/', (req, res) => {
+  res.send('hellp')
+})
 app.use('/',Router);
 const PORT = process.env.PORT || 8000;
 const USERNAME = process.env.DB_USERNAME;
