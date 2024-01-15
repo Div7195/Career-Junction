@@ -54,7 +54,7 @@ const Job = ({job, saved, locationBased, companyName}) =>{
     const [appliedOrNot, setAppliedOrNot] = useState('Apply Now')
     const navigate = useNavigate();
     const deleteJob = async(jobId) => {
-        const url = `https://career-junction.vercel.app/deleteJob?jobId=${jobId}`;
+        const url = `http://localhost:8000/deleteJob?jobId=${jobId}`;
         const settings = {
         method: 'DELETE',
         headers: {
@@ -86,7 +86,7 @@ const Job = ({job, saved, locationBased, companyName}) =>{
                 }
                 try {
                     console.log(settings.body)
-                    const fetchResponse = await fetch(`https://career-junction.vercel.app/saveJobs?aspirantAccountId=${account.id}&jobId=${job._id}`, settings);
+                    const fetchResponse = await fetch(`http://localhost:8000/saveJobs?aspirantAccountId=${account.id}&jobId=${job._id}`, settings);
                     const response = await fetchResponse.json();
                     if(response.msg === 'success'){
                         setSaved(true)
@@ -109,7 +109,7 @@ const Job = ({job, saved, locationBased, companyName}) =>{
                 }
                 try {
                     console.log(settings.body)
-                    const fetchResponse = await fetch(`https://career-junction.vercel.app/unsaveJobs?aspirantAccountId=${account.id}&jobId=${job._id}`, settings);
+                    const fetchResponse = await fetch(`http://localhost:8000/unsaveJobs?aspirantAccountId=${account.id}&jobId=${job._id}`, settings);
                     const response = await fetchResponse.json();
                     if(response.msg === 'success'){
                         setSaved(false)
@@ -135,7 +135,7 @@ const applyToJob = async() => {
         }
         try {
             console.log(settings.body)
-            const fetchResponse = await fetch(`https://career-junction.vercel.app/applyToJob`, settings);
+            const fetchResponse = await fetch(`http://localhost:8000/applyToJob`, settings);
             const response = await fetchResponse.json();
             if(response.msg === 'success job update'){
                 setAppliedOrNot('Applied')

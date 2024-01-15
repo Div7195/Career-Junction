@@ -11,7 +11,7 @@ const CompanyApplicants = () => {
     const {account}=useContext(DataContext);
     useEffect(() => {
       const myFunction = async() => {
-        const url = `https://career-junction.vercel.app/getJobApplicants?jobId=${id}`;
+        const url = `http://localhost:8000/getJobApplicants?jobId=${id}`;
         const settings = {
         method: 'GET',
         headers: {

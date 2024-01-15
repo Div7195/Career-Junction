@@ -11,10 +11,7 @@ const app = express();
 
 app.use(bodyParser.json({extended:true}))
 app.use(bodyParser.urlencoded({extended:true}))
-app.use(cors({
-  origin: 'https://career-junction-app.vercel.app',
-  methods: ['GET', 'POST', 'DELETE'],
-}));
+app.use(cors());
 app.get('/', (req, res) => {
   res.send('hellp')
 })
@@ -25,8 +22,8 @@ const PASSWORD = process.env.DB_PASSWORD;
 const server = app.listen(PORT, () => console.log(`server is running on port ${PORT}`));
 const io = new Server(server, {
   cors: {
-    origin: 'https://career-junction-app.vercel.app',
-    methods: ['GET', 'POST', 'DELETE'],
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST'],
   },
   });
   
