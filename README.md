@@ -25,3 +25,7 @@ An enhanced web application for job aspirants and companies
 - Material UI package
 - MongoDB Atlas as database
 - NodeJS Express for server
+## Sample account credentials
+# Student - Username ('aa') Password ('aa')
+# Mentor1 - Username('mm') Password('mm')
+# Mentor2 - Username('nn') Password('nn')
