@@ -11,7 +11,10 @@ const app = express();
 
 app.use(bodyParser.json({extended:true}))
 app.use(bodyParser.urlencoded({extended:true}))
-app.use(cors());
+app.use(cors({
+  origin: 'https://career-junction-app.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+}));
 app.use('/',Router);
 const PORT = process.env.PORT || 8000;
 const USERNAME = process.env.DB_USERNAME;
