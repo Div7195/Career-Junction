@@ -30,28 +30,33 @@ const io = new Server(server, {
   },
   });
   
-io.on('connection', (socket) => {
-  console.log('new socket')
-    socket.on('forceDisconnect', function() {
-      console.log(socket.id)
+  io.sockets.on('connection', (socket) => {
+    console.log('new socket')
+      socket.on('forceDisconnect', function() {
+        console.log(socket.id)
+          
+          socket.disconnect()
+          console.log('User disconnected'+socket.id);
+      });
+  
+      socket.on("joinroom", (room) => {
+          socket.room = room
+          socket.join(room);
+          console.log("User Joined Room: " + room);
+          
+      });
+      socket.on('send', function(msg){
         
-        socket.disconnect()
-        console.log('Client disconnected'+socket.id);
+        console.log(msg.msg)
+        io.to(socket.room).emit('receive', msg);
+      });
+      socket.on('disconnect', function () {
+
+        console.log('user disconnected')
+  
     });
 
-    socket.on("joinroom", (room) => {
-        socket.room = room
-        socket.join(room);
-        console.log("User Joined Room: " + room);
-        console.log('socket id is' + socket.id)
-        
-    });
-    socket.on('send', function(msg){
-      console.log(msg)
-      io.to(socket.room).emit('receive', msg);
-    });
-   
-});
+  })
 
 
 dbConnection(USERNAME, PASSWORD);
