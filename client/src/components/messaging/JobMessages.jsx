@@ -107,11 +107,11 @@ const JobMessages = () => {
     data.messages.reverse();
     setData({...data, messages:data.messages});
     })
-    useEffect(() => {
-        return () => {
-          socket.disconnect()
-        };
-      }, []);
+    // useEffect(() => {
+    //     return () => {
+    //       socket.disconnect()
+    //     };
+    //   }, []);
     
 
 
