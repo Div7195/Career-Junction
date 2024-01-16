@@ -7,7 +7,7 @@ import { TextField } from "@mui/material";
 import dayjs from "dayjs";
 import SendIcon from '@mui/icons-material/Send';
 import AspirantSidebar from "../sidebar/AspirantSidebar";
-import { socket } from "../../service/socket";
+import { socket } from "../../service/socket.js";
 const JobMessages = () => {
     
     const {account}=useContext(DataContext);
@@ -75,6 +75,8 @@ const JobMessages = () => {
     useEffect(() => {
         
     const myFunction = async() => {
+        
+       
         const url = `http://localhost:8000/getJobMessages?jobId=${id}&aspirantAccountId=${aspirantAccountId}`;
         const settings = {
         method: 'GET',
@@ -98,17 +100,22 @@ const JobMessages = () => {
     }
     myFunction()
     }, [])
-   
-   
-   socket.on('receive',(obj)=>{
-    console.log(data.messages)
-    data.messages.reverse();
-    data.messages.push(obj.msg);
-    data.messages.reverse();
-    setData({...data, messages:data.messages});
-    })
-   
+
     
+    
+    socket.on('receive',(obj)=>{
+        let tempArray = []
+        for(let i = 0; i<data.messages.length;i++){
+            tempArray.push(data.messages[i])
+        }
+        console.log(data.messages)
+        tempArray.reverse();
+        tempArray.push(obj.msg);
+        tempArray.reverse();
+        setData({...data, messages:tempArray});
+        })
+   
+   
 
 
 

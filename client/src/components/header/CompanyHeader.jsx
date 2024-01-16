@@ -126,7 +126,7 @@ export default function CompanyHeader() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={() => {account.role === 'company'?navigate(`/companyprofile`):navigate('/aspirantprofile')}}>Profile</MenuItem>
-      <MenuItem onClick={() => { if(location.pathname.includes('login') === false) setAccount({username :'', loggedIn:false, id:'', role:''}); navigate('/login')}}>Logout</MenuItem>
+      <MenuItem onClick={() => { if(location.pathname.includes('login') === false) setAccount({username :'', loggedIn:false, id:'', role:''}); window.open('http://localhost:3000', "_self")}}>Logout</MenuItem>
     </Menu>
   );
 

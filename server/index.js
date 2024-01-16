@@ -27,8 +27,8 @@ const io = new Server(server, {
   },
   });
   
-io.on('connection', (socket) => {
-  console.log('new socket')
+io.sockets.on('connection', (socket) => {
+  // console.log(socket.id)
     socket.on('forceDisconnect', function() {
       console.log(socket.id)
         
@@ -41,12 +41,20 @@ io.on('connection', (socket) => {
         socket.join(room);
         console.log("User Joined Room: " + room);
         console.log('socket id is' + socket.id)
-        
+        io.in(room).fetchSockets().then((sockets) => {
+          console.log(sockets.length)
+        })
     });
     socket.on('send', function(msg){
       console.log(msg)
       io.to(socket.room).emit('receive', msg);
     });
+    socket.on('disconnect', function(){
+      console.log('a socket disconnected')
+      io.in('65845556fe57e674acc4cd86').fetchSockets().then((sockets) => {
+        console.log(sockets.length)
+      })
+    })
    
 });
 
