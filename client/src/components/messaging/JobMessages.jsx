@@ -7,7 +7,7 @@ import { TextField } from "@mui/material";
 import dayjs from "dayjs";
 import SendIcon from '@mui/icons-material/Send';
 import AspirantSidebar from "../sidebar/AspirantSidebar";
-import { socket } from "../../service/socket";
+// import { socket } from "../../service/socket";
 const JobMessages = () => {
     
     const {account}=useContext(DataContext);
@@ -54,9 +54,9 @@ const JobMessages = () => {
                 // data.messages.reverse();
                 // data.messages.push(newMessage);
                 // data.messages.reverse();
-                socket.emit('send', {
-                    msg:newMessage,
-                })
+                // socket.emit('send', {
+                //     msg:newMessage,
+                // })
                 // setData({...data, messages:data.messages});
                 setNewMessage(newMessageInitial)
                 
@@ -90,7 +90,7 @@ const JobMessages = () => {
             
             setData(response.messagesObj)
             
-            socket.emit('joinroom', chatId);
+            // socket.emit('joinroom', chatId);
             
             } catch (e) {
             console.log(e);
@@ -100,13 +100,13 @@ const JobMessages = () => {
     }, [])
    
    
-   socket.on('receive',(obj)=>{
-    console.log(data.messages)
-    data.messages.reverse();
-    data.messages.push(obj.msg);
-    data.messages.reverse();
-    setData({...data, messages:data.messages});
-    })
+//    socket.on('receive',(obj)=>{
+//     console.log(data.messages)
+//     data.messages.reverse();
+//     data.messages.push(obj.msg);
+//     data.messages.reverse();
+//     setData({...data, messages:data.messages});
+//     })
     // useEffect(() => {
     //     return () => {
     //       socket.disconnect()

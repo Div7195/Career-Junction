@@ -23,40 +23,40 @@ const PORT = process.env.PORT || 8000;
 const USERNAME = process.env.DB_USERNAME;
 const PASSWORD = process.env.DB_PASSWORD;
 const server = app.listen(PORT, () => console.log(`server is running on port ${PORT}`));
-const io = new Server(server, {
-  cors: {
-    origin: ['https://career-junction-app.vercel.app','https://localhost:3000'],
-    methods: ['GET', 'POST'],
-  },
-  });
-  io.sockets.on('connection', (socket) => {
-    console.log('new socket')
-      socket.on('forceDisconnect', function() {
-        console.log(socket.id)
+// const io = new Server(server, {
+//   cors: {
+//     origin: ['https://career-junction-app.vercel.app','https://localhost:3000'],
+//     methods: ['GET', 'POST'],
+//   },
+//   });
+//   io.sockets.on('connection', (socket) => {
+//     console.log('new socket')
+//       socket.on('forceDisconnect', function() {
+//         console.log(socket.id)
           
-          socket.disconnect()
-          console.log('User disconnected'+socket.id);
-      });
+//           socket.disconnect()
+//           console.log('User disconnected'+socket.id);
+//       });
   
-      socket.on("joinroom", (room) => {
-        console.log('want to join room')
-          socket.room = room
-          socket.join(room);
-          console.log("User Joined Room: " + room);
+//       socket.on("joinroom", (room) => {
+//         console.log('want to join room')
+//           socket.room = room
+//           socket.join(room);
+//           console.log("User Joined Room: " + room);
           
-      });
-      socket.on('send', function(msg){
+//       });
+//       socket.on('send', function(msg){
         
-        console.log(msg.msg)
-        io.to(socket.room).emit('receive', msg);
-      });
-      socket.on('disconnect', function () {
+//         console.log(msg.msg)
+//         io.to(socket.room).emit('receive', msg);
+//       });
+//       socket.on('disconnect', function () {
 
-        console.log('user disconnected')
+//         console.log('user disconnected')
   
-    });
+//     });
 
-  })
+//   })
 
 
 dbConnection(USERNAME, PASSWORD);
