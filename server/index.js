@@ -40,6 +40,7 @@ const io = new Server(server, {
       });
   
       socket.on("joinroom", (room) => {
+        console.log('want to join room')
           socket.room = room
           socket.join(room);
           console.log("User Joined Room: " + room);
