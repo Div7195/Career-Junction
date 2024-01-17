@@ -29,7 +29,6 @@ const io = new Server(server, {
     methods: ['GET', 'POST'],
   },
   });
-  
   io.sockets.on('connection', (socket) => {
     console.log('new socket')
       socket.on('forceDisconnect', function() {
