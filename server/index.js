@@ -25,7 +25,7 @@ const PASSWORD = process.env.DB_PASSWORD;
 const server = app.listen(PORT, () => console.log(`server is running on port ${PORT}`));
 const io = new Server(server, {
   cors: {
-    origin: '*',
+    origin: 'https://career-junction-app.vercel.app,https://localhost:3000',
     methods: ['GET', 'POST'],
   },
   });
