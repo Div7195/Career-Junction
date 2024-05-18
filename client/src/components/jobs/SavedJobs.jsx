@@ -73,7 +73,7 @@ const SavedJobs = () => {
          try {
              console.log(settings.body)
              
-             const fetchResponse = await fetch(`https://career-junction.vercel.app/getAllJobs?aspirantAccountId=${account.id}&jobType=${jobFilter.jobType}&minSalary=${jobFilter.minSalary}&sortBy=${jobFilter.sortBy}&location=${jobFilter.location}&skillsRequired=${jobFilter.skillsRequired}`, settings);
+             const fetchResponse = await fetch(`http://localhost:8000/getAllJobs?aspirantAccountId=${account.id}&jobType=${jobFilter.jobType}&minSalary=${jobFilter.minSalary}&sortBy=${jobFilter.sortBy}&location=${jobFilter.location}&skillsRequired=${jobFilter.skillsRequired}`, settings);
              const response = await fetchResponse.json();
              setJobs(response);
              
@@ -86,7 +86,7 @@ const SavedJobs = () => {
 
     useEffect(() => {
         const myFunction = async() => {
-        const url = `https://career-junction.vercel.app/getAllJobs?aspirantAccountId=${account.id}&jobType=${jobFilter.jobType}&minSalary=${jobFilter.minSalary}&sortBy=${jobFilter.sortBy}&location=${jobFilter.location}&skillsRequired=${jobFilter.skillsRequired}`;
+        const url = `http://localhost:8000/getAllJobs?aspirantAccountId=${account.id}&jobType=${jobFilter.jobType}&minSalary=${jobFilter.minSalary}&sortBy=${jobFilter.sortBy}&location=${jobFilter.location}&skillsRequired=${jobFilter.skillsRequired}`;
         const settings = {
         method: 'GET',
         headers: {
@@ -106,7 +106,7 @@ const SavedJobs = () => {
     
         }
         const myFunctionSecond = async () => {
-            const url = `https://career-junction.vercel.app/getAspirantProfile?aspirantAccountId=${account.id}`;
+            const url = `http://localhost:8000/getAspirantProfile?aspirantAccountId=${account.id}`;
         const settings = {
         method: 'GET',
         headers: {

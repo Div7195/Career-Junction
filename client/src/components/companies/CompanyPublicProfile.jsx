@@ -30,7 +30,7 @@ const CompanyPublicProfile = () => {
     const [company, setCompany] = useState(companyObj)
     useEffect( () => {
         const myFunction = async () => {
-            const url = `https://career-junction.vercel.app/getCompanyProfile?companyAccountId=${companyAccountId}`;
+            const url = `http://localhost:8000/getCompanyProfile?companyAccountId=${companyAccountId}`;
             const settings = {
             method: 'GET',
             headers: {
@@ -48,7 +48,7 @@ const CompanyPublicProfile = () => {
                 }
         };
         const mySecondFunction = async() => {
-            const url = `https://career-junction.vercel.app/getJobs?companyAccountId=${companyAccountId}`;
+            const url = `http://localhost:8000/getJobs?companyAccountId=${companyAccountId}`;
             const settings = {
             method: 'GET',
             headers: {

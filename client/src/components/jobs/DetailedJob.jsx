@@ -82,7 +82,7 @@ const DetailedJob = () => {
     console.log(jobState)
     useEffect(() => {
         const myFunction = async() => {
-        const url = `https://career-junction.vercel.app/getSingleJobAndCompany?jobId=${id}`;
+        const url = `http://localhost:8000/getSingleJobAndCompany?jobId=${id}`;
         const settings = {
         method: 'GET',
         headers: {

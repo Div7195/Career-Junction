@@ -12,7 +12,7 @@ const CompanyMessagesList = () => {
 
     useEffect(() => {
         const myFunction = async() => {
-            const url = `https://career-junction.vercel.app/getCompanyChats?companyAccountId=${account.id}`;
+            const url = `http://localhost:8000/getCompanyChats?companyAccountId=${account.id}`;
             const settings = {
             method: 'GET',
             headers: {

@@ -48,7 +48,7 @@ const JobMessages = () => {
          }
          try {
              console.log(settings.body)
-             const fetchResponse = await fetch(`https://career-junction.vercel.app/updateJobMessages`, settings);
+             const fetchResponse = await fetch(`http://localhost:8000/updateJobMessages`, settings);
              const response = await fetchResponse.json();
             if(response.msg === 'success'){
                 // data.messages.reverse();
@@ -75,7 +75,9 @@ const JobMessages = () => {
     useEffect(() => {
         
     const myFunction = async() => {
-        const url = `https://career-junction.vercel.app/getJobMessages?jobId=${id}&aspirantAccountId=${aspirantAccountId}`;
+        
+       
+        const url = `http://localhost:8000/getJobMessages?jobId=${id}&aspirantAccountId=${aspirantAccountId}`;
         const settings = {
         method: 'GET',
         headers: {

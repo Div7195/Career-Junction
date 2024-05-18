@@ -83,7 +83,7 @@ const CompanyProfile = () => {
          }
          try {
              console.log(settings.body)
-             const fetchResponse = await fetch(`https://career-junction.vercel.app/updateCompanyProfile`, settings);
+             const fetchResponse = await fetch(`http://localhost:8000/updateCompanyProfile`, settings);
              const response = await fetchResponse.json();
          } catch (e) {  
              return e;
@@ -93,7 +93,7 @@ const CompanyProfile = () => {
 
      useEffect( () => {
         const myFunction = async () => {
-            const url = `https://career-junction.vercel.app/getCompanyProfile?companyAccountId=${company.companyAccountId}`;
+            const url = `http://localhost:8000/getCompanyProfile?companyAccountId=${company.companyAccountId}`;
             const settings = {
             method: 'GET',
             headers: {
@@ -130,7 +130,7 @@ const CompanyProfile = () => {
                   
                   }
                   try {
-                      const fetchResponse = await fetch(`https://career-junction.vercel.app/image/upload`, settings);
+                      const fetchResponse = await fetch(`http://localhost:8000/image/upload`, settings);
                       const response = await fetchResponse.json();
                       setCompany({...company, companyImage:response});
                       
