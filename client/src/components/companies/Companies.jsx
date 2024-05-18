@@ -5,6 +5,7 @@ import { getAccessToken } from "../../utility functions/util"
 import AspirantSidebar from "../sidebar/AspirantSidebar"
 import CompanySidebar from "../sidebar/CompanySidebar"
 import { TextField } from "@mui/material"
+import '../../css/companies.css'
 const Companies = () => {
     const navigate = useNavigate();
     const {companyAccountId} = useParams();
@@ -52,10 +53,6 @@ const Companies = () => {
                 console.log(e);
                 }
     }
-
-
-
-
     return(
     <>
         <div style={{
@@ -99,43 +96,12 @@ const Companies = () => {
             {
                 companies && companies.length > 0 ?
                 companies.map(e => (
-                    <div style={{
-                        display:'flex',
-                        flexDirection:'row',
-                        border:'2px solid #ebe1f0',
-                        borderRadius:'5px',
-                        padding:'5px',
-                        cursor:'pointer',
-                        background:'#c7dff5',
-                        marginTop:'10px',
-                    }}
+                    <div className="company-container"
                     onClick={() => {navigate(`/companypublic/${e.companyAccountId}`)}}
                     >
-
-                     <div style={{
-                    display: 'block',
-                    minWidth: '40px',
-                    borderRadius:'25px',
-                    background:'#cda8ff',
-                    width:'40px',
-                    height:'40px',
-                    
-                   
-                }}>
-                    <img src={e.companyImage && e.companyImage !== ""?e.companyImage:'https://e7.pngegg.com/pngimages/178/595/png-clipart-user-profile-computer-icons-login-user-avatars-monochrome-black.png'}alt="Company Image" style={{
-                   
-                    display: 'block',     
-                    width: '100%',
-                    minWidth: '100%',
-                    height: '100%',
-                    minHeight: '100%',
-                    borderWidth: '0px',
-                    outline: 'none' ,
-                    borderRadius:'60px',
-                    objectFit:'cover'
-                }} />
+                     <div className="company-container-child">
+                    <img src={e.companyImage && e.companyImage !== ""?e.companyImage:'https://e7.pngegg.com/pngimages/178/595/png-clipart-user-profile-computer-icons-login-user-avatars-monochrome-black.png'}alt="Company Image" className="company-image" />
                 </div>
-
 
 
                     <div style={{
@@ -150,15 +116,7 @@ const Companies = () => {
                     flexDirection:"row",
                     
                 }}>
-                <div style={{
-                    fontSize:'16px',
-                    fontFamily:'DM Sans',
-                    fontWeight:'800',
-                    color:'#566474',
-                    borderRadius:'5px',
-                    padding:'5px',
-                    background:"#dad4f0"
-                }}>
+                <div className="company-name" >
                 {e.companyName}
 
                 </div>
@@ -166,31 +124,18 @@ const Companies = () => {
 
                 </div>
 
-                <div style={{
-                    fontFamily:'DM Sans',
-                    fontSize:'14px',
-                    color:'black'
-                }}>
+                <div className="some-text">
                         {
                             e.industryType
                         }
                         
                 </div>
-                <div style={{
-                    fontFamily:'DM Sans',
-                    fontSize:'14px',
-                    color:'black'
-                }}>
+                <div className="some-text">
                         {
                             `${e.jobsPosted} jobs posted`
                         }
                         
                 </div>
-
-                
-
-
-
                 </div>
                 </div>
                 ))

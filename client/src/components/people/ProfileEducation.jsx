@@ -25,6 +25,7 @@ import { DataContext } from '../../context/DataProvider.jsx';
 import dayjs from 'dayjs';
 import { DatePicker } from '@mui/x-date-pickers';
 import { useContext } from 'react';
+import '../../css/education.css'
 const ProfileEducation = ({aspirant, onUpdate}) =>{
     const {account}=useContext(DataContext);
     const {setAccount} = useContext(DataContext);
@@ -139,21 +140,8 @@ const deleteEducationApi = () => {
                 flexDirection:'column'
             }}>
                 {/* Start of add new top view */}
-                <div style={{
-                    display:'flex',
-                    flexDirection:'row',
-                    fontSize:'16px',
-                    marginTop:'15px',
-                    fontFamily:'DM Sans',
-                    
-                }}>
-                <div style={{
-                    display:'flex',
-                    flexDirection:'column',
-                    fontSize:'16px',
-                    fontWeight: 700,
-                    fontFamily:'DM Sans'
-                }}>
+                <div className='top'>
+                <div className='top-sub-left'>
                 <div>
                 Add Education Details
                 </div>
@@ -167,15 +155,7 @@ const deleteEducationApi = () => {
                 </div>
                 {
                     account.role !== 'company'?
-                    <div onClick={handleClickOpen} style={{
-                    marginLeft:'auto',
-                    marginRight:'0px',
-                    borderRadius:'5px',
-                    cursor:'pointer',
-                    border: '1px solid #142683',
-                    padding: '4px',
-                    color:'#142683'
-                }}>
+                    <div onClick={handleClickOpen} className='add-new'>
                 <AddCircleOutlineIcon/> Add New
                 </div>
 
@@ -189,12 +169,7 @@ const deleteEducationApi = () => {
                 <Dialog open={open} onClose={handleClose}>
                     <DialogTitle>Add New School</DialogTitle>
                     <DialogContent>
-                    <div style={{
-                        display:'flex',
-                        justifyContent:'center',
-                        flexDirection:'column',
-                        marginTop:'10px',
-                        fontSize:'15px'}}>
+                    <div className='dialog-container'>
 
                         {/* Start of school name */}
                     <div style={{
@@ -350,13 +325,7 @@ const deleteEducationApi = () => {
                             flexDirection:'column',
                             fontFamily:'DM Sans'
                         }}>
-                        <div style={{
-                            display:'flex',
-                            flexDirection:'row',
-                            border:'1px solid #ebf0f5',
-                            padding: '30px 30px 30px 45px',
-                            marginTop:'10px'
-                        }}>
+                        <div className='education-container'>
 
                         <div style={{
                             display:'flex',
@@ -389,17 +358,7 @@ const deleteEducationApi = () => {
                         </div>
                         {
                             account.role !== 'company'?
-                            <div style={{
-                            marginLeft:'auto',
-                            marginRight:'0px',
-                            borderRadius:'5px',
-                            border: '1px solid #142683',
-                            
-                            padding: '4px 4px 4px 4px',
-                            color:'#142683',
-                            height:'fit-content',
-                            cursor:'pointer',
-                        }}
+                            <div className='edit'
                         onClick={() => {
                             
                             handleClickOpen2(education);
@@ -415,12 +374,7 @@ const deleteEducationApi = () => {
                             <Dialog open={open2} onClose={handleClose2}>
                     <DialogTitle>Edit education</DialogTitle>
                     <DialogContent>
-                    <div style={{
-                        display:'flex',
-                        justifyContent:'center',
-                        flexDirection:'column',
-                        marginTop:'10px',
-                        fontSize:'15px'}}>
+                    <div className='dialog-container'>
 
                         {/* Start of school name */}
                     <div style={{

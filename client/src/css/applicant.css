@@ -1,0 +1,41 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #ebf0f5;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+.applicant-name{
+    font-size: 20px;
+    color: #1e272e;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: bold;
+}
+.buttons{
+    margin-left: auto;
+    margin-right: 10px;
+    font-size: 16px;
+    display: flex;
+    flex-direction: row;
+}
+.view-profile-button{
+    margin-left: auto;
+    margin-right: 10px;
+    background: rgb(66, 142, 81);
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 5px;
+    color: white;
+}
+.view-messages-button{
+    margin-right: 10px;
+    background: rgb(66, 142, 81);
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 5px;
+    color: white;
+    cursor: pointer;
+}

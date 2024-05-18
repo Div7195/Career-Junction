@@ -27,6 +27,7 @@ import ProfileExperience from "./ProfileExperience";
 import ProfileCertifications from "./ProfileCertifications";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import '../../css/aspirantProfile.css'
 
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -159,23 +160,9 @@ const CompanyAspirantProfile = () => {
             flexDirection:'row'
           }}>
                 <CompanySidebar/>
-                <div style={{
-            
-                display:'flex',
-                width:'100%',
-                justifyContent:'center',
-                fontSize:'20px',
-                color:'black'
+                <div className="main-container">
 
-        }}>
-        <div style={{
-                display:'flex',
-                justifyContent:'center',
-                flexDirection:'column',
-                marginTop:'10px',
-                fontSize:'15px'
-                
-            }}>
+         <div className="sub-container">
                 <div style={{
                 display:'flex',
                 flexDirection:'column',
@@ -252,15 +239,7 @@ const CompanyAspirantProfile = () => {
                     aspirant.domains.map((domain) =>
                         (
                         <div>
-                        <div  style={{
-                        background:'black',
-                        color:'white',
-                        borderRadius:'20px',
-                        width:'fit-content',
-                        padding:'5px',
-                        display:'flex',
-                        flexDirection:'row'
-                    }}>
+                        <div  className="domain">
                             <div>
                                 {domain}
                             </div>
@@ -288,18 +267,7 @@ const CompanyAspirantProfile = () => {
             </div>
             {
                 account.role !== 'company'?
-                <div style={{
-                    fontSize:'16px',
-                    fontFamily:'DM Sans',
-                    marginTop:'10px',
-                    backgroundColor:'#142683',
-                    borderRadius:'5px',
-                    fontWeight:400,
-                    cursor:'pointer',
-                    padding: '4px 4px 8px 4px',
-                    color:'white',
-                    width:'fit-content'
-                }}
+                <div className="save-changes-button"
                 // onClick={()=>{updateProfile()}}
                 >Save Changes</div>
 

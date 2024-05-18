@@ -1,0 +1,76 @@
+.top{
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+    margin-top: 15px;
+    font-family: 'DM Sans', sans-serif;
+}
+.top-sub-left{
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'DM Sans', sans-serif;
+}
+.dialog-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 10px;
+    font-size: 15px;
+}
+.add-new{
+    margin-left: auto;
+    margin-right: 0px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid #142683;
+    padding: 4px;
+    color: #142683;
+}
+.skill{
+    background: black;
+    color: white;
+    border-radius: 20px;
+    width: fit-content;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+}
+.edit{
+    margin-left: auto;
+    margin-right: 0px;
+    border-radius: 5px;
+    border: 1px solid #142683;
+    padding: 4px;
+    color: #142683;
+    height: fit-content;
+    cursor: pointer;
+}
+.experience-container{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ebf0f5;
+    padding: 30px 30px 30px 45px;
+    margin-top: 10px;
+}
+.about-work{
+    color: #566474;
+    font-size: 16px;
+    margin-top: 5px;
+    font-weight: 400;
+    width: 750px;
+}
+.experience-skill{
+    background: #f0f0f0;
+    color: #566474;
+    border-radius: 20px;
+    width: fit-content;
+    padding: 4.5px 10px;
+    display: flex;
+    flex-direction: row;
+    font-family: "DM Sans", sans-serif;
+    margin-right: 5px;
+    margin-top: 10px;
+    font-size: 16px;
+}

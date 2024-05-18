@@ -27,6 +27,7 @@ import CompanySidebar from "../sidebar/CompanySidebar.jsx";
 import { styled } from '@mui/material/styles';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import Image from "@mui/icons-material/Image.js"
+import '../../css/companies.css'
 const CompanyProfile = () => {
     const {account}=useContext(DataContext);
     const {setAccount} = useContext(DataContext);
@@ -153,25 +154,8 @@ const CompanyProfile = () => {
             flexDirection:'row'
           }}>
           <CompanySidebar/>
-        <div style={{
-            
-            display:'flex',
-            width:'100%',
-            justifyContent:'center',
-            fontSize:'20px',
-            color:'black'
-
-        }}>
-        
-        
-            <div style={{
-                display:'flex',
-                justifyContent:'center',
-                flexDirection:'column',
-                marginTop:'10px',
-                fontSize:'15px'
-                
-            }}>
+        <div className="container">
+            <div >
             <div>   
         <FormControl>
       <FormLabel id="demo-row-radio-buttons-group-label">Status</FormLabel>
@@ -205,14 +189,7 @@ const CompanyProfile = () => {
                 }}>
 
                 
-                <div style={{
-                    background:'black',
-                    borderRadius:'30px',
-                    width:'fit-content',
-                    height:'fit-content',
-                    padding:'5px 5px 1px 3px',
-                    cursor:'pointer'
-                }}>
+                <div className="company-form">
                 <FormControl>
                     <label htmlFor="fileInput">
                         <CameraAltIcon style={{
@@ -236,43 +213,17 @@ const CompanyProfile = () => {
                     
                     
                 </div>
-                <div style={{
-                    
-                    borderRadius:'50px',
-                    
-                    background:'#cda8ff',
-                    padding:'1px'
-                }}>
-                    <img src={company.companyImage && company.companyImage !== ""?company.companyImage:'https://e7.pngegg.com/pngimages/178/595/png-clipart-user-profile-computer-icons-login-user-avatars-monochrome-black.png'}alt="Company Image" style={{
-                    width:'100%',
-                    height:'100%',
-                    borderRadius:'50px',
-                    height:'100px',
-                    width:'100px',
-                    objectFit:'cover'
-                    // display: 'block',     
-                    // width: '100%',
-                    // minWidth: '100%',
-                    // height: '100%',
-                    // minHeight: '100%',
-                    // borderWidth: '0px',
-                    // outline: 'none' ,
-                    // borderRadius:'10px'
-            }} />
+                <div className="company-form-image-container">
+                    <img src={company.companyImage && company.companyImage !== ""?company.companyImage:'https://e7.pngegg.com/pngimages/178/595/png-clipart-user-profile-computer-icons-login-user-avatars-monochrome-black.png'}alt="Company Image" className="company-form-image"  />
                 </div>
                 </div>
             </div>
-            <div style={{
-                display:'flex',
-                flexDirection:'column',
-                marginTop:'15px'
-            }}>
+            <div className="box">
                 <div style={{
                     color:'black'
                 }}>
                     Company Name
                 </div>
-
                 <div>
                     <TextField
                         name="companyName"
@@ -292,11 +243,7 @@ const CompanyProfile = () => {
 
             {
                 jobType === 'Internship' ?
-                <div style={{
-                display:'flex',
-                flexDirection:'column',
-                marginTop:'15px'
-            }}>
+                <div className="box">
                 <div style={{
                     color:'black'
                 }}>
@@ -323,11 +270,7 @@ const CompanyProfile = () => {
             <div></div>
             }
             
-            <div style={{
-                display:'flex',
-                flexDirection:'column',
-                marginTop:'15px'
-            }}>
+            <div className="box">
                 <div style={{
                     color:'black'
                 }}>
@@ -361,11 +304,7 @@ const CompanyProfile = () => {
                 </FormControl>
                 </div>
             </div>
-            <div style={{
-                display:'flex',
-                flexDirection:'column',
-                marginTop:'15px'
-            }}>
+            <div className="box">
                 <div style={{
                     color:'black'
                 }}>
@@ -401,11 +340,7 @@ const CompanyProfile = () => {
             </div>
             
             
-            <div style={{
-                display:'flex',
-                flexDirection:'column',
-                marginTop:'15px'
-            }}>
+            <div className="box">
                 <div style={{
                     color:'black'
                 }}>
@@ -433,17 +368,12 @@ const CompanyProfile = () => {
                         ))
                     
                     }
-                        
                     </NativeSelect>
 
                 </FormControl>
                 </div>
             </div>
-            <div style={{
-                display:'flex',
-                flexDirection:'column',
-                marginTop:'15px'
-            }}>
+            <div className="box">
                 <div style={{
                     color:'black'
                 }}>
@@ -466,11 +396,7 @@ const CompanyProfile = () => {
                         />
                 </div>
             </div>
-            <div style={{
-                display:'flex',
-                flexDirection:'column',
-                marginTop:'15px'
-            }}>
+            <div className="box">
                 <div style={{
                     color:'black'
                 }}>
@@ -493,23 +419,9 @@ const CompanyProfile = () => {
                         />
                 </div>
             </div>
-            <div style={{
-                display:'flex',
-                flexDirection:'column',
-                marginTop:'15px'
-            }}>
-                <Button onClick={() => {updateCompanyProfile()}} style={{
-                    background:'#131c30',
-                    color:'rgb(0, 236, 255)',
-                    fontWeight: 'bold',
-                }}  variant="contained">Save changes</Button>
+            <div className="box">
+                <Button onClick={() => {updateCompanyProfile()}} className="company-save-button"  variant="contained">Save changes</Button>
             </div>
-            
-            
-            
-            
-
-
         </div>
             
         

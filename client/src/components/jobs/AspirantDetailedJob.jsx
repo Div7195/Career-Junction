@@ -16,6 +16,7 @@ import { useContext } from "react";
 import { getAccessToken } from "../../utility functions/util.js";
 import AspirantSidebar from "../sidebar/AspirantSidebar.jsx";
 import moment from 'moment'
+import '../../css/detailedJob.css'
 const job = {
     companyId: '3123123',
     companyName:'Microsoft',
@@ -150,61 +151,27 @@ const AspirantDetailedJob = () => {
                 width:'100%',
                 justifyContent:'center',
             }}>
-                <div style={{
-                    display:'flex',
-                    flexDirection:'column',
-                    flexWrap:'wrap',
-                    flexBasis:'95%',
-                    // border:'2px solid red',
-                    padding:'10px'
-                }}>
+                <div className="main-container">
 
                 {/* {Start of main details of job div} */}
-                <div style={{
-                    display:'flex',
-                    flexDirection:'column',
-                    border: '2px solid #ebf0f5',
-                    boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)',
-                    boxSizing: 'border-box',
-                    borderRadius: '5px 5px 5px 5px',
-                    padding:'10px'
-                }}>
+                <div className="main-details-container">
                 <div style={{
                     display:'flex',
                     flexDirection:'row',
                     padding:'5px',
                     // border:'2px solid green'
                 }}>
-                    <div style={{
-                            fontWeight: 'bold',
-                            color: '#222f3e',
-                            fontFamily: 'DM Sans, sans-serif',
-                            fontSize:'18px'
-                    }}>
+                    <div className="jobType">
                     {jobState.jobTitle}{jobState.jobType === 'Internship'?' internship':''}
                     </div>
 
-                    <div style={{
-                        marginRight:'0px',
-                        marginLeft:'auto',
-                        borderRadius: '5px',
-                        color: '#445ee2',
-                        backgroundColor: '#dcddde',
-                        fontFamily: 'DM Sans, sans-serif',
-                        padding: '5px 10px'
-                    }}>
+                    <div className="jobMode">
                     {jobState.location.includes('remote') || jobState.location.toLowerCase().includes('home') ? 'Work From Home':'In-Office'}
 
                     </div>
                 </div>
 
-                <div style={{
-                    // border:'2px solid blue',
-                    padding:'5px',
-                    color: '#566474',
-                    fontSize:'16px',
-                    fontFamily: 'DM Sans, sans-serif',
-                }}>
+                <div className="company-name">
                 {companyState.companyName} | {companyState.locationBased}
                 </div>
 
@@ -229,36 +196,14 @@ const AspirantDetailedJob = () => {
                         marginRight:'10px',
                         marginLeft:'auto'
                     }}>
-                    <div style={{
-                    
-                    marginLeft:'10px',
-                    fontSize:'16px',
-                    fontFamily: 'DM Sans, sans-serif',
-                    backgroundColor:'#142683',
-                    borderRadius:'5px',
-                    fontWeight:700,
-                    cursor:'pointer',
-                    padding: '8px 20px 8px 16px',
-                    color:'white'
-                    
-                }}
+                    <div className="apply-button"
                 onClick={() =>{applyToJob()}}
                 >
                 
                 {appliedOrNot}</div>
                     </div>
                     :
-                    <div style={{
-                        color:'black',
-                        fontSize:'16px',
-                        fontFamily:'DM Sans',
-                        fontWeight:'500',
-                        padding:'5px',
-                        border:'3px solid black',
-                        borderRadius:'5px',
-                        marginLeft:'auto',
-                        marginRight:'10px',
-                    }}>
+                    <div className="applied">
                         Applied
                     </div>
                 }
@@ -272,18 +217,7 @@ const AspirantDetailedJob = () => {
 
 
                 {/* {Start of Job details div} */}
-                <div style={{
-                    display:'flex',
-                    flexDirection:'row',
-                    justifyContent:'space-between',
-                    marginBottom:'10px',
-                    marginTop:'30px',
-                    padding:'10px',
-                    border: '2px solid #ebf0f5',
-                    boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)',
-                    boxSizing: 'border-box',
-                    borderRadius: '5px 5px 5px 5px',
-                }}>
+                <div className="job-details-container">
                     <div style={{
                         display:'flex',
                         flexDirection:'column',
@@ -291,17 +225,7 @@ const AspirantDetailedJob = () => {
                         
                         
                     }}>
-                        <div style={{
-                            display:'flex',
-                            flexDirection:'row',
-                            fontSize: '16px',
-                            fontStyle: 'normal',
-                            lineHeight: '1.75rem',
-                            letterSpacing: '-.02em',
-                            fontWeight: '500',
-                            color: '#9eaab7',
-                            fontFamily: "DM Sans"
-                        }}>
+                        <div className="detail-title">
                         <div>
                         <AttachMoneyIcon style={{
                             margin:-5
@@ -316,12 +240,7 @@ const AspirantDetailedJob = () => {
                         
                         </div>
                         </div>
-                        <div style={{
-                            color:'#566474',
-                            fontSize:'16px',
-                            fontFamily:'DM Sans',
-                            fontWeight:'bold'
-                        }}>
+                        <div className="detail-value">
                             {
                             
                                 jobState.jobType === 'Internship'? 
@@ -345,17 +264,7 @@ const AspirantDetailedJob = () => {
                         flexDirection:'column',
                         
                     }}>
-                        <div style={{
-                            display:'flex',
-                            flexDirection:'row',
-                            fontSize: '16px',
-                            fontStyle: 'normal',
-                            lineHeight: '1.75rem',
-                            letterSpacing: '-.02em',
-                            fontWeight: '500',
-                            color: '#9eaab7',
-                            fontFamily: "DM Sans"
-                        }}>
+                        <div className="detail-title">
                         <div>
                         <AccessTimeIcon style={{
                             margin:-5
@@ -367,12 +276,7 @@ const AspirantDetailedJob = () => {
                         Duration
                         </div>
                         </div>
-                        <div style={{
-                            color:'#566474',
-                            fontSize:'16px',
-                            fontFamily:'DM Sans',
-                            fontWeight:'bold'
-                        }}>
+                        <div className="detail-value">
                             {jobState.duration}
                         </div>
                     </div>:
@@ -384,17 +288,7 @@ const AspirantDetailedJob = () => {
                         flexDirection:'column',
                         
                     }}>
-                        <div style={{
-                            display:'flex',
-                            flexDirection:'row',
-                            fontSize: '16px',
-                            fontStyle: 'normal',
-                            lineHeight: '1.75rem',
-                            letterSpacing: '-.02em',
-                            fontWeight: '500',
-                            color: '#9eaab7',
-                            fontFamily: "DM Sans"
-                        }}>
+                        <div className="detail-title">
                         <div>
                         <WorkOutlineIcon style={{
                             margin:-5
@@ -406,12 +300,7 @@ const AspirantDetailedJob = () => {
                         Work hours
                         </div>
                         </div>
-                        <div style={{
-                            color:'#566474',
-                            fontSize:'16px',
-                            fontFamily:'DM Sans',
-                            fontWeight:'bold'
-                        }}>
+                        <div className="detail-value">
                             {jobState.workHours}
                         </div>
                     </div>
@@ -420,17 +309,7 @@ const AspirantDetailedJob = () => {
                         flexDirection:'column',
                         
                     }}>
-                        <div style={{
-                            display:'flex',
-                            flexDirection:'row',
-                            fontSize: '16px',
-                            fontStyle: 'normal',
-                            lineHeight: '1.75rem',
-                            letterSpacing: '-.02em',
-                            fontWeight: '500',
-                            color: '#9eaab7',
-                            fontFamily: "DM Sans"
-                        }}>
+                        <div className="detail-title">
                         <div>
                         <CalendarMonthIcon style={{
                             margin:-5
@@ -442,12 +321,7 @@ const AspirantDetailedJob = () => {
                         Start date
                         </div>
                         </div>
-                        <div style={{
-                            color:'#566474',
-                            fontSize:'16px',
-                            fontFamily:'DM Sans',
-                            fontWeight:'bold'
-                        }}>
+                        <div className="detail-value">
                             {new Date(jobState.startDate).getDate()} {monthMap[new Date(jobState.startDate).getMonth()+1]} {new Date(jobState.startDate).getFullYear() %2000}
                         </div>
                     </div>
@@ -456,17 +330,7 @@ const AspirantDetailedJob = () => {
                         flexDirection:'column',
                         
                     }}>
-                        <div style={{
-                            display:'flex',
-                            flexDirection:'row',
-                            fontSize: '16px',
-                            fontStyle: 'normal',
-                            lineHeight: '1.75rem',
-                            letterSpacing: '-.02em',
-                            fontWeight: '500',
-                            color: '#9eaab7',
-                            fontFamily: "DM Sans"
-                        }}>
+                        <div className="detail-title">
                         <div>
                         <TagIcon style={{
                             margin:-5
@@ -480,12 +344,7 @@ const AspirantDetailedJob = () => {
                         </div>
 
                         
-                        <div style={{
-                            color:'#566474',
-                            fontSize:'16px',
-                            fontFamily:'DM Sans',
-                            fontWeight:'bold'
-                        }}>
+                        <div className="detail-value">
                             {jobState.openings}
                         </div>
                     </div>
@@ -495,17 +354,7 @@ const AspirantDetailedJob = () => {
                         flexDirection:'column',
                         
                     }}>
-                        <div style={{
-                            display:'flex',
-                            flexDirection:'row',
-                            fontSize: '16px',
-                            fontStyle: 'normal',
-                            lineHeight: '1.75rem',
-                            letterSpacing: '-.02em',
-                            fontWeight: '500',
-                            color: '#9eaab7',
-                            fontFamily: "DM Sans"
-                        }}>
+                        <div className="detail-title">
                         <div>
                         <LocationOnIcon style={{
                             margin:-5
@@ -519,12 +368,7 @@ const AspirantDetailedJob = () => {
                         </div>
 
                         
-                        <div style={{
-                            color:'#566474',
-                            fontSize:'16px',
-                            fontFamily:'DM Sans',
-                            fontWeight:'bold'
-                        }}>
+                        <div className="detail-value">
                             {jobState.location}
                         </div>
                     </div>
@@ -542,72 +386,23 @@ const AspirantDetailedJob = () => {
                     }}> 
 
                     {/* Start of job desc div */}
-                        <div style={{
-                            display:'flex',
-                            flexDirection:'column',
-                            border: '2px solid #ebf0f5',
-                            boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)',
-                            boxSizing: 'border-box',
-                            borderRadius: '5px 5px 5px 5px',
-                            
-                            width:'100%',
-                            padding:'10px'
-                        }}>
-                        <div style={{
-                            marginTop:'10px',
-                            // border:'2px solid green',
-                            fontFamily: 'DM Sans, sans-serif',
-                            fontSize:'18px',
-                            textDecoration:'underline',
-                            fontWeight: 'bold',
-                        }}>
+                        <div className="other-detail-container">
+                        <div className="other-detail-title">
                             Job requirements
                         </div>
-                        <div style={{
-                            marginTop:'5px',
-                            // border:'2px solid green',
-                            color:'#566474',
-                            fontSize:'16px',
-                            fontFamily:'DM Sans'
-                        }}>
+                        <div className="other-detail-value">
                             {jobState.jobRequirements}
                         </div>
-                        <div style={{
-                            marginTop:'10px',
-                            // border:'2px solid green',
-                            fontSize:'18px',
-                            textDecoration:'underline',
-                            fontWeight: 'bold',
-                            fontFamily: 'DM Sans, sans-serif',
-                        }}>
+                        <div className="other-detail-title">
                             Job responsibilities
                         </div >
-                        <div style={{
-                            marginTop:'5px',
-                            // border:'2px solid green',
-                            color:'#566474',
-                            fontSize:'16px',
-                            fontFamily:'DM Sans'
-                        }}>
+                        <div className="other-detail-value">
                             {jobState.responsibilities}
                         </div>
-                        <div style={{
-                            marginTop:'10px',
-                            // border:'2px solid green',
-                            fontSize:'18px',
-                            textDecoration:'underline',
-                            fontWeight: 'bold',
-                            fontFamily: 'DM Sans, sans-serif',
-                        }}>
+                        <div className="other-detail-title">
                             Hiring process
                         </div>
-                        <div style={{
-                            marginTop:'5px',
-                            // border:'2px solid green',
-                            color:'#566474',
-                            fontSize:'16px',
-                            fontFamily:'DM Sans'
-                        }}>
+                        <div className="other-detail-value">
                             {jobState.hiringProcess}
                         </div>
                     
@@ -616,23 +411,8 @@ const AspirantDetailedJob = () => {
                         {/* Start of skills div */}
                         
                         
-                        <div style={{
-                            display:'flex',
-                            flexDirection:'column',
-                            border: '2px solid #ebf0f5',
-                            boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)',
-                            boxSizing: 'border-box',
-                            borderRadius: '5px 5px 5px 5px',
-                            marginRight:'0px',
-                            marginLeft:'auto'
-                        }}>
-                        <div style={{
-                            marginTop:'20px',
-                            fontFamily: 'DM Sans, sans-serif',
-                            fontSize:'18px',
-                            textDecoration:'underline',
-                            fontWeight: 'bold',
-                        }}>
+                        <div className="side-container-container">
+                        <div className="side-container-title">
                             Skills required
                         </div>
                         <div style={{
@@ -645,19 +425,7 @@ const AspirantDetailedJob = () => {
                     jobState.skillsRequired.map((skill) =>
                         (
                         <div>
-                        <div  style={{
-                        background:'#d5d5d5',
-                        color: '#566474',
-                        borderRadius:'20px',
-                        width:'fit-content',
-                        padding:'4.5px 10px',
-                        fontWeight:'400',
-                        display:'flex',
-                        flexDirection:'row',
-                        fontFamily: "DM Sans",
-                        marginRight:'5px',
-                        marginTop:'10px'
-                    }}>
+                        <div className="skill">
                              <div>
                                 {skill}
                             </div>
@@ -673,17 +441,8 @@ const AspirantDetailedJob = () => {
                 </div>
                 {/* Start of about company div */}
 
+                    <div className="about-company-container">
                     <div style={{
-                        display:'flex',
-                        flexDirection:'column',
-                        border: '2px solid #ebf0f5',
-                        boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)',
-                        boxSizing: 'border-box',
-                        borderRadius: '5px 5px 5px 5px',
-                        marginTop:'30px'
-                    }}>
-                    <div style={{
-
                             fontSize:'18px',
                             textDecoration:'underline',
                             fontWeight: 'bold',

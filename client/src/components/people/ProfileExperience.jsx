@@ -153,21 +153,8 @@ const deleteProjectApi = () => {
                 flexDirection:'column'
             }}>
                 {/* Start of add new top view */}
-                <div style={{
-                    display:'flex',
-                    flexDirection:'row',
-                    fontSize:'16px',
-                    marginTop:'15px',
-                    fontFamily:'DM Sans',
-                    
-                }}>
-                <div style={{
-                    display:'flex',
-                    flexDirection:'column',
-                    fontSize:'16px',
-                    fontWeight: 700,
-                    fontFamily:'DM Sans'
-                }}>
+                <div className='top'>
+                <div className='top-sub-left'>
                 <div>
                 Add Work Experiences
                 </div>
@@ -182,15 +169,7 @@ const deleteProjectApi = () => {
                 {
                     account.role !== 'company'?
 
-                    <div onClick={handleClickOpen} style={{
-                    marginLeft:'auto',
-                    marginRight:'0px',
-                    borderRadius:'5px',
-                    cursor:'pointer',
-                    border: '1px solid #142683',
-                    padding: '4px',
-                    color:'#142683'
-                }}>
+                    <div onClick={handleClickOpen} className='add-new'>
                 <AddCircleOutlineIcon/> Add New
                 </div>
                     :
@@ -203,12 +182,7 @@ const deleteProjectApi = () => {
                 <Dialog open={open} onClose={handleClose}>
                     <DialogTitle>Add New Experience</DialogTitle>
                     <DialogContent>
-                    <div style={{
-                        display:'flex',
-                        justifyContent:'center',
-                        flexDirection:'column',
-                        marginTop:'10px',
-                        fontSize:'15px'}}>
+                    <div className='dialog-container'>
 
                         {/* Start of school name */}
                     <div style={{
@@ -374,15 +348,7 @@ const deleteProjectApi = () => {
                     tempWork.workSkills.map((skill) =>
                         (
                         <div>
-                        <div  style={{
-                        background:'black',
-                        color:'white',
-                        borderRadius:'20px',
-                        width:'fit-content',
-                        padding:'5px',
-                        display:'flex',
-                        flexDirection:'row'
-                    }}>
+                        <div  className='skill'>
                             <div>
                                 {skill}
                             </div>
@@ -477,13 +443,7 @@ const deleteProjectApi = () => {
                     aspirant.workExperiences &&  aspirant.workExperiences.length > 0 ? aspirant.workExperiences.map((work) => (
                         
                         
-                        <div style={{
-                            display:'flex',
-                            flexDirection:'column',
-                            border:'1px solid #ebf0f5',
-                            padding: '30px 30px 30px 45px',
-                            marginTop:'10px'
-                        }}>
+                        <div className='experience-container'>
                         <div style={{
                             display:'flex',
                             flexDirection:'row',
@@ -499,17 +459,7 @@ const deleteProjectApi = () => {
                             {
                             account.role !== 'company'?
 
-                            <div style={{
-                            marginLeft:'auto',
-                            marginRight:'0px',
-                            borderRadius:'5px',
-                            border: '1px solid #142683',
-                            
-                            padding: '1px 1px 1px 1px',
-                            color:'#142683',
-                            height:'fit-content',
-                            cursor:'pointer',
-                        }}
+                            <div className='edit'
                         onClick={() => {
                             
                             handleClickOpen2(work);
@@ -528,12 +478,7 @@ const deleteProjectApi = () => {
                         <Dialog open={open2} onClose={handleClose2}>
                     <DialogTitle>Edit Work Experience</DialogTitle>
                     <DialogContent>
-                    <div style={{
-                        display:'flex',
-                        justifyContent:'center',
-                        flexDirection:'column',
-                        marginTop:'10px',
-                        fontSize:'15px'}}>
+                    <div className='dialog-container'>
 
                         {/* Start of school name */}
                     <div style={{
@@ -699,15 +644,7 @@ const deleteProjectApi = () => {
                     tempWork.workSkills.map((skill) =>
                         (
                         <div>
-                        <div  style={{
-                        background:'black',
-                        color:'white',
-                        borderRadius:'20px',
-                        width:'fit-content',
-                        padding:'5px',
-                        display:'flex',
-                        flexDirection:'row'
-                    }}>
+                        <div  className='skill'>
                             <div>
                                 {skill}
                             </div>
@@ -807,13 +744,7 @@ const deleteProjectApi = () => {
 
                 
 
-                <div style={{
-                            color: '#566474',
-                            fontSize:'16px',
-                            marginTop: '5px',
-                            fontWeight: 400,
-                            width:750
-                }}>
+                <div className='about-work'>
                     {work.aboutWork}
 
                 </div>
@@ -831,19 +762,7 @@ const deleteProjectApi = () => {
                     work.workSkills.map((skill) =>
                         (
                         <div>
-                        <div  style={{
-                        background:'#f0f0f0',
-                        color: '#566474',
-                        borderRadius:'20px',
-                        width:'fit-content',
-                        padding:'4.5px 10px',
-                        display:'flex',
-                        flexDirection:'row',
-                        fontFamily: "DM Sans",
-                        marginRight:'5px',
-                        marginTop:'10px',
-                        fontSize:'16px'
-                    }}>
+                        <div className='experience-skill'>
                              <div>
                                 {skill}
                             </div>

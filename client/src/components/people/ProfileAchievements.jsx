@@ -28,6 +28,7 @@ import skills from '../../constants/skills.js';
 import { Link } from 'react-router-dom';
 import workTypes from '../../constants/workTypes.js';
 import monthMap from '../../constants/monthMap.js';
+import '../../css/achievements.css'
 const ProfileAchievements = ({aspirant, onUpdate}) =>{
     const {account}=useContext(DataContext);
     const {setAccount} = useContext(DataContext);
@@ -147,21 +148,8 @@ const deleteProjectApi = () => {
                 flexDirection:'column'
             }}>
                 {/* Start of add new top view */}
-                <div style={{
-                    display:'flex',
-                    flexDirection:'row',
-                    fontSize:'16px',
-                    marginTop:'15px',
-                    fontFamily:'DM Sans',
-                    
-                }}>
-                <div style={{
-                    display:'flex',
-                    flexDirection:'column',
-                    fontSize:'16px',
-                    fontWeight: 700,
-                    fontFamily:'DM Sans'
-                }}>
+                <div className='top'>
+                <div className='top-sub-left'>
                 <div>
                 Add Achievements
                 </div>
@@ -175,15 +163,7 @@ const deleteProjectApi = () => {
                 </div>
                 {
                     account.role !== 'company'?
-                    <div onClick={handleClickOpen} style={{
-                    marginLeft:'auto',
-                    marginRight:'0px',
-                    borderRadius:'5px',
-                    cursor:'pointer',
-                    border: '1px solid #142683',
-                    padding: '4px',
-                    color:'#142683'
-                }}>
+                    <div onClick={handleClickOpen} className='add-new'>
                 <AddCircleOutlineIcon/> Add New
                 </div>
                 :
@@ -196,12 +176,7 @@ const deleteProjectApi = () => {
                 <Dialog open={open} onClose={handleClose}>
                     <DialogTitle>Add New Achievements</DialogTitle>
                     <DialogContent>
-                    <div style={{
-                        display:'flex',
-                        justifyContent:'center',
-                        flexDirection:'column',
-                        marginTop:'10px',
-                        fontSize:'15px'}}>
+                    <div className='dialog-container'>
 
                         {/* Start of school name */}
                     <div style={{
@@ -264,13 +239,7 @@ const deleteProjectApi = () => {
                     aspirant.achievements &&  aspirant.achievements.length > 0 ? aspirant.achievements.map((achievement) => (
                         
                         
-                        <div style={{
-                            display:'flex',
-                            flexDirection:'column',
-                            border:'1px solid #ebf0f5',
-                            padding: '30px 30px 30px 45px',
-                            marginTop:'10px'
-                        }}>
+                        <div className='achivement-container'>
                         <div style={{
                             display:'flex',
                             flexDirection:'row',
@@ -286,19 +255,8 @@ const deleteProjectApi = () => {
 
                             {
                                 account.role !== 'company'?
-                                <div style={{
-                            marginLeft:'auto',
-                            marginRight:'0px',
-                            borderRadius:'5px',
-                            border: '1px solid #142683',
-                            
-                            padding: '1px 1px 1px 1px',
-                            color:'#142683',
-                            height:'fit-content',
-                            cursor:'pointer',
-                        }}
+                                <div className='edit'
                         onClick={() => {
-                            
                             handleClickOpen2(achievement);
                         }}
                         >
@@ -315,12 +273,7 @@ const deleteProjectApi = () => {
                         <Dialog open={open2} onClose={handleClose2}>
                     <DialogTitle>Add New Achievements</DialogTitle>
                     <DialogContent>
-                    <div style={{
-                        display:'flex',
-                        justifyContent:'center',
-                        flexDirection:'column',
-                        marginTop:'10px',
-                        fontSize:'15px'}}>
+                    <div className='dialog-container'>
 
                         {/* Start of school name */}
                     <div style={{

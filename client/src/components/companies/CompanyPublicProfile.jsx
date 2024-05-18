@@ -6,6 +6,7 @@ import AspirantSidebar from "../sidebar/AspirantSidebar"
 import { Avatar } from "@mui/material"
 import Job from "../jobs/Job"
 import CompanySidebar from "../sidebar/CompanySidebar"
+import '../../css/companies.css'
 const CompanyPublicProfile = () => {
     const navigate = useNavigate();
     const {companyAccountId} = useParams();
@@ -69,14 +70,6 @@ const CompanyPublicProfile = () => {
         mySecondFunction()
     },[]);
     const [jobs, setJobs] = useState({})
-
-
-
-
-
-
-
-
     return(
         <>
             <div style={{
@@ -89,30 +82,14 @@ const CompanyPublicProfile = () => {
                 width:'100%',
                 justifyContent:'center',
             }}>
-                <div style={{
-                    display:'flex',
-                    flexDirection:'column',
-                    flexWrap:'wrap',
-                    flexBasis:'95%',
-                    padding:'5px'
-                }}>
+                <div className="company-public-pfp-container" >
 
                         <div>
-                            <div style={{ position: 'relative', height: '240px', background: '#4d2d57', marginBottom: '20px', borderRadius:'5px' }}>
-                            <div style={{
-                                fontSize:'35px',
-                                fontFamily:'DM Sans',
-                                color:'white',
-                                margin:'5px'
-                            }}>
+                            <div className="company-public-pfp-container-div">
+                            <div className="ppfp-name">
                                  {company.companyName}
                             </div>
-                            <div style={{
-                                fontSize:'15px',
-                                fontFamily:'DM Sans',
-                                color:'white',
-                                margin:'5px'
-                            }}>
+                            <div className="ppfg-intro">
                                  {company.introOfCompany}
                             </div>
                                 <div style={{ position: 'absolute', bottom: '0', left: '0', padding: '10px' }}>
@@ -125,18 +102,7 @@ const CompanyPublicProfile = () => {
                             </div>
                         </div>
 
-                <div  style={{
-                    fontSize:'25px',
-                    fontFamily:"DM Sans",
-                    fontWeight:500,
-                    background:'rgb(32, 18, 50)',
-                    padding:'10px',
-                    width:'100%',
-                    marginTop:'10px',
-                    borderRadius:'5px',
-                    color:'white',
-
-                }}>
+                <div  className="overview">
                     Overview
                 </div>
 
@@ -145,170 +111,59 @@ const CompanyPublicProfile = () => {
                         flexDirection:'column',
                         width:'100%'
                     }}>
-                    <div style={{
-                        display:'flex',
-                        flexDirection:'row',
-                        minWidth:'30%',
-                        background:'aliceblue',
-                        padding:'10px',
-                        borderRadius:'5px',
-                        marginTop:"5px"
-                    }}>
+                    <div className="container-parent">
                     
-                    <div style={{
-                        fontFamily:'DM Sans',
-                        fontSize:'24px',
-                        fontWeight:'500',
-                        color:'black'
-                    }}>
+                    <div className="heading-container">
                         Location Based
                     </div>
-                    <div style={{
-                        marginRight:'0px',
-                        marginLeft:'auto',
-                        fontFamily:'DM Sans',
-                        fontSize:'24px',
-                        fontWeight:'400',
-                        color:'blue'
-                    }}>
+                    <div className="value-container">
                         {company.locationBased}
                     </div>
 
                     </div>
 
-                    <div style={{
-                        display:'flex',
-                        flexDirection:'row',
-                        minWidth:'30%',
-                        background:'aliceblue',
-                        padding:'10px',
-                        borderRadius:'5px',
-                        marginTop:"5px"
-                    }}>
+                    <div className="container-parent">
                     
-                    <div style={{
-                        fontFamily:'DM Sans',
-                        fontSize:'24px',
-                        fontWeight:'500',
-                        color:'black'
-                    }}>
+                    <div className="heading-container">
                         Company Size
                     </div>
-                    <div style={{
-                        marginRight:'0px',
-                        marginLeft:'auto',
-                        fontFamily:'DM Sans',
-                        fontSize:'24px',
-                        fontWeight:'400',
-                        color:'blue'
-                    }}>
+                    <div className="value-container">
                         {company.companySize}
                     </div>
 
                     </div>
-                    <div style={{
-                        display:'flex',
-                        flexDirection:'row',
-                        minWidth:'30%',
-                        background:'aliceblue',
-                        padding:'10px',
-                        borderRadius:'5px',
-                        marginTop:"5px"
-                    }}>
+                    <div className="container-parent">
                     
-                    <div style={{
-                        fontFamily:'DM Sans',
-                        fontSize:'24px',
-                        fontWeight:'500',
-                        color:'black'
-                    }}>
+                    <div className="heading-container">
                         Company Type
                     </div>
-                    <div style={{
-                        marginRight:'0px',
-                        marginLeft:'auto',
-                        fontFamily:'DM Sans',
-                        fontSize:'24px',
-                        fontWeight:'400',
-                        color:'blue'
-                    }}>
+                    <div className="value-container">
                         {company.companyType}
                     </div>
 
                     </div>
 
-                    <div style={{
-                        display:'flex',
-                        flexDirection:'row',
-                        minWidth:'30%',
-                        background:'aliceblue',
-                        padding:'10px',
-                        borderRadius:'5px',
-                        marginTop:"5px"
-                    }}>
+                    <div className="container-parent">
                     
-                    <div style={{
-                        fontFamily:'DM Sans',
-                        fontSize:'24px',
-                        fontWeight:'500',
-                        color:'black'
-                    }}>
+                    <div className="heading-container">
                         Industry Type
                     </div>
-                    <div style={{
-                        marginRight:'0px',
-                        marginLeft:'auto',
-                        fontFamily:'DM Sans',
-                        fontSize:'24px',
-                        fontWeight:'400',
-                        color:'blue'
-                    }}>
+                    <div className="value-container">
                         {company.industryType}
                     </div>
 
                     </div>
 
 
-                    <div  style={{
-                    fontSize:'25px',
-                    fontFamily:"DM Sans",
-                    fontWeight:500,
-                    background:'rgb(32, 18, 50)',
-                    padding:'10px',
-                    width:'100%',
-                    marginTop:'10px',
-                    borderRadius:'5px',
-                    color:'white',
-
-                }}>
+                    <div className="big-text">
                     About company
                 </div>
-                <div style={{
-                        fontSize:'16px',
-                        minWidth:'30%',
-                        background:'aliceblue',
-                        padding:'10px',
-                        fontFamily:'DM Sans',
-                        fontWeight:'400',
-                        borderRadius:'5px',
-                        marginTop:"5px"
-                    }}>
+                <div className="about-text-content">
                     {company.aboutCompany}
                     </div>
 
                     </div>
-                    <div  style={{
-                    fontSize:'25px',
-                    fontFamily:"DM Sans",
-                    fontWeight:500,
-                    background:'rgb(32, 18, 50)',
-                    padding:'10px',
-                    width:'100%',
-                    marginTop:'10px',
-                    borderRadius:'5px',
-                    color:'white',
-
-                }}>
+                    <div  className="big-text">
                     Openings
                 </div>
                     <div style={{

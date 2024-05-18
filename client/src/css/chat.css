@@ -1,0 +1,51 @@
+.main-container{
+    display: flex;
+    flex-basis: 70%;
+    flex-direction: column;
+    height: 600px;
+}
+.sub-container{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+    margin-top: auto;
+}
+.old-messages-container{
+    display: flex;
+    flex-direction: column-reverse;
+    max-height: 580px;
+    overflow-y: auto;
+}
+.sent{
+    margin-bottom: 10px;
+    margin-right: 0px;
+    margin-left: auto;
+    border-radius: 5px;
+    background: rgb(186, 201, 255);
+    max-width: 60%;
+    padding: 10px;
+    font-family: 'DM Sans', sans-serif;
+    color: rgb(7, 10, 10);
+}
+.receive{
+    margin-bottom: 10px;
+    margin-right: auto;
+    margin-left: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    background: rgb(255, 186, 247);
+    max-width: 60%;
+    font-family: 'DM Sans', sans-serif;
+    color: rgb(7, 10, 10);
+}
+.send-button{
+    flex-basis: 2%;
+    margin-bottom: 0px;
+    margin-top: auto;
+    background: rgb(66, 142, 81);
+    border-radius: 5px;
+    padding: 15px;
+    color: white;
+    height: fit-content;
+    cursor: pointer;
+}

@@ -19,6 +19,7 @@ import { DataContext } from '../../context/DataProvider';
 import dayjs from 'dayjs';
 import { getAccessToken } from "../../utility functions/util.js";
 import CompanySidebar from "../sidebar/CompanySidebar.jsx";
+import '../../css/createJob.css'
 const CreateNewJob = () => {
     const {account}=useContext(DataContext);
     const jobInitialValues = {
@@ -100,23 +101,12 @@ const CreateNewJob = () => {
           }}>
           <CompanySidebar/>
         <div style={{
-            display:'flex',
-            justifyContent:'center',
-            width:'100%',
-            fontSize:'20px',
-            color:'black'
+            
 
         }}>
         
         
-            <div style={{
-                display:'flex',
-                justifyContent:'center',
-                flexDirection:'column',
-                marginTop:'10px',
-                fontSize:'15px'
-                
-            }}>
+            <div className="main-container">
             <div>   
         <FormControl>
       <FormLabel id="demo-row-radio-buttons-group-label">Job type</FormLabel>
@@ -390,15 +380,7 @@ const CreateNewJob = () => {
                     jobState.skillsRequired.map((skill) =>
                         (
                         <div>
-                        <div  style={{
-                        background:'black',
-                        color:'white',
-                        borderRadius:'20px',
-                        width:'fit-content',
-                        padding:'5px',
-                        display:'flex',
-                        flexDirection:'row'
-                    }}>
+                        <div  className="skill">
                             <div>
                                 {skill}
                             </div>

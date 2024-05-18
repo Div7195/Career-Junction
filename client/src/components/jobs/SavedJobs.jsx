@@ -21,7 +21,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 import skills from "../../constants/skills"
-import { cleanDigitSectionValue } from "@mui/x-date-pickers/internals/hooks/useField/useField.utils"
+import '../../css/jobs.css'
+
 const SavedJobs = () => {
     const {account}=useContext(DataContext);
     const jobFilterInitial = {
@@ -187,52 +188,16 @@ const SavedJobs = () => {
         
         </div>
             
-            <div style={{
-                display:'flex',
-                flexDirection:'column',
-                flexBasis:'30%',
-                marginLeft:'20px',
-                fontFamily:'DM Sans'
+        <div className="filter-container">
 
-            }}>
-
-                <div style={{
-                    fontSize:'20px',
-                    display:'flex',
-                    flexDirection:'row',
-                    marginTop:'5px'
-                }}>
+        <div className="top">
                 <div>
                 Jobs Filter
                 </div>
-                <div style={{
-                    marginRight:'5px',
-                    marginLeft:'auto',
-                    
-                    fontSize:'16px',
-                    fontFamily:'DM Sans',
-                    backgroundColor:'#142683',
-                    borderRadius:'5px',
-                    fontWeight:700,
-                    cursor:'pointer',
-                    padding: '4px 4px 4px 4px',
-                    color:'white'
-                }}
+                <div className="top-button"
                 onClick={() => {applyFilter()}}
                 >Apply Filter</div>
-                <div style={{
-                    marginRight:'5px',
-                    marginLeft:'auto',
-                    
-                    fontSize:'16px',
-                    fontFamily:'DM Sans',
-                    backgroundColor:'#142683',
-                    borderRadius:'5px',
-                    fontWeight:700,
-                    cursor:'pointer',
-                    padding: '4px 4px 4px 4px',
-                    color:'white'
-                }}
+                <div className="top-button-2"
                 onClick={() => {setJobFilter(jobFilterInitial)}}
                 >
                 
@@ -285,11 +250,7 @@ const SavedJobs = () => {
                
 
 
-                <div style={{
-                display:'flex',
-                flexDirection:'column',
-                marginTop:'5px'
-            }}>
+                <div className="small-box">
                 <div style={{
                     color:'black'
                 }}>Min Salary{"(in Rs)"}
@@ -312,11 +273,7 @@ const SavedJobs = () => {
 
             
 
-                <div style={{
-                display:'flex',
-                flexDirection:'column',
-                marginTop:'5px'
-            }}>
+            <div className="small-box">
                 <div style={{
                     color:'black'
                 }}>Preferred Location
@@ -337,11 +294,7 @@ const SavedJobs = () => {
                 </div>
             </div>
 
-            <div style={{
-                display:'flex',
-                flexDirection:'column',
-                marginTop:'15px'
-            }}>
+            <div className="small-box" style={{marginTop:'10px'}}>
                 <div style={{
                     color:'black'
                 }}>
@@ -373,12 +326,7 @@ const SavedJobs = () => {
                     </NativeSelect>
 
                 </FormControl>
-                <div style={{
-                    display:'flex',
-                    flexDirection:'row',
-                    width:400,
-                    flexWrap:'wrap'
-                }}>
+                <div className="skills-box">
 
                         
 
@@ -387,15 +335,7 @@ const SavedJobs = () => {
                     jobFilter.skillsRequired.map((skill) =>
                         (
                         <div>
-                        <div  style={{
-                        background:'black',
-                        color:'white',
-                        borderRadius:'20px',
-                        width:'fit-content',
-                        padding:'5px',
-                        display:'flex',
-                        flexDirection:'row'
-                    }}>
+                        <div  className="skills-sub-box">
                             <div>
                                 {skill}
                             </div>

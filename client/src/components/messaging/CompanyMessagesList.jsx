@@ -4,6 +4,7 @@ import { useState, useEffect, useContext } from "react"
 import { useNavigate, Link, useParams } from "react-router-dom"
 import { DataContext } from "../../context/DataProvider"
 import { getAccessToken } from "../../utility functions/util"
+import '../../css/messageList.css'
 const CompanyMessagesList = () => {
     const {account}=useContext(DataContext);
     const [chatsList, setChatsList] = useState([])
@@ -29,13 +30,6 @@ const CompanyMessagesList = () => {
         }
         myFunction()
         }, [])
-    
-
-
-
-
-
-
     return(
         <>
         <div style={{
@@ -63,49 +57,15 @@ const CompanyMessagesList = () => {
                 chatsList && chatsList.length > 0 ?
                 chatsList.map(e => (
 
-                    <div style={{
-                        display:'flex',
-                        flexDirection:'row',
-                        border:'2px solid #ebe1f0',
-                        borderRadius:'5px',
-                        padding:'5px',
-                        cursor:'pointer',
-                        background:'#c7dff5',
-                        marginTop:'10px'
-                    }}>
+                    <div className="message-box">
 
-                     <div style={{
-                    display: 'block',
-                    minWidth: '40px',
-                    borderRadius:'25px',
-                    background:'#cda8ff',
-                    width:'40px',
-                    height:'40px',
-                    
-                   
-                }}>
-                    <img src={'https://e7.pngegg.com/pngimages/178/595/png-clipart-user-profile-computer-icons-login-user-avatars-monochrome-black.png'}alt="Aspirant Image" style={{
-                   
-                    display: 'block',     
-                    width: '100%',
-                    minWidth: '100%',
-                    height: '100%',
-                    minHeight: '100%',
-                    borderWidth: '0px',
-                    outline: 'none' ,
-                    borderRadius:'60px',
-                    objectFit:'cover'
-                }} />
+                     <div className="image-box">
+                    <img src={'https://e7.pngegg.com/pngimages/178/595/png-clipart-user-profile-computer-icons-login-user-avatars-monochrome-black.png'}alt="Aspirant Image" className="company-image" />
                 </div>
 
 
 
-                    <div style={{
-                    display:'flex',
-                    flexDirection:'column',
-                    marginLeft:'5px',
-                    flexGrow:2
-                }}
+                    <div className="chat-detail-box"
                 onClick={() => {
                     navigate(`/company/job/${e.jobId}/messages/${e.aspirantAccountId}/chatId/${e.chatId}`)
                 }}
@@ -115,27 +75,12 @@ const CompanyMessagesList = () => {
                     flexDirection:"row",
                     
                 }}>
-                <div style={{
-                    fontSize:'16px',
-                    fontFamily:'DM Sans',
-                    fontWeight:'800',
-                    color:'#566474',
-                    borderRadius:'5px',
-                    padding:'5px',
-                    background:"#dad4f0"
-                }}>
+                <div className="aspirant-name">
                 {e.aspirantName}
 
                 </div>
 
-                <div style={{
-                    fontFamily:'DM Sans',
-                    color:'#566474',
-                    fontSize:'12px',
-                    marginRight:'0px',
-                    marginLeft:'auto',
-                    marginTop:'5px'
-                }}>
+                <div className="timestamp">
                     {new Date(e.lastMessageTimestamp).getDate()}/{new Date(e.lastMessageTimestamp).getMonth()+1}/{new Date(e.lastMessageTimestamp).getFullYear()}
                 </div>
 
@@ -155,13 +100,7 @@ const CompanyMessagesList = () => {
                             ''
                         }
                 </div>
-
-                <div style={{
-                    marginTop:'5px',
-                    fontFamily:'DM Sans',
-                    fontSize:'14px',
-                    color:'#566474'
-                }}>
+                <div className="message-text">
                 {
                     e.lastMessageSentBy === 'company'?
                     'You: '

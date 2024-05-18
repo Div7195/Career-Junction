@@ -4,6 +4,7 @@ import { useState, useEffect, useContext } from "react"
 import { useNavigate, Link, useParams } from "react-router-dom"
 import { DataContext } from "../../context/DataProvider"
 import { getAccessToken } from "../../utility functions/util"
+import '../../css/messageList.css'
 const MessagesList = () => {
     const {account}=useContext(DataContext);
     const [chatsList, setChatsList] = useState([])
@@ -63,49 +64,15 @@ const MessagesList = () => {
                 chatsList && chatsList.length > 0 ?
                 chatsList.map(e => (
 
-                    <div style={{
-                        display:'flex',
-                        flexDirection:'row',
-                        border:'2px solid #ebe1f0',
-                        borderRadius:'5px',
-                        padding:'5px',
-                        cursor:'pointer',
-                        background:'#c7dff5',
-                        marginTop:'10px'
-                    }}>
+                    <div className="message-box">
 
-                     <div style={{
-                    display: 'block',
-                    minWidth: '40px',
-                    borderRadius:'25px',
-                    background:'#cda8ff',
-                    width:'40px',
-                    height:'40px',
-                    
-                   
-                }}>
-                    <img src={e.companyImage && e.companyImage !== ""?e.companyImage:'https://e7.pngegg.com/pngimages/178/595/png-clipart-user-profile-computer-icons-login-user-avatars-monochrome-black.png'}alt="Company Image" style={{
-                   
-                    display: 'block',     
-                    width: '100%',
-                    minWidth: '100%',
-                    height: '100%',
-                    minHeight: '100%',
-                    borderWidth: '0px',
-                    outline: 'none' ,
-                    borderRadius:'60px',
-                    objectFit:'cover'
-                }} />
+                     <div className="image-box">
+                    <img src={e.companyImage && e.companyImage !== ""?e.companyImage:'https://e7.pngegg.com/pngimages/178/595/png-clipart-user-profile-computer-icons-login-user-avatars-monochrome-black.png'}alt="Company Image" className="company-image" />
                 </div>
 
 
 
-                    <div style={{
-                    display:'flex',
-                    flexDirection:'column',
-                    marginLeft:'5px',
-                    flexGrow:2
-                }}
+                <div className="chat-detail-box"
                 onClick={() => {
                     navigate(`/company/job/${e.jobId}/messages/${account.id}/chatId/${e.chatId}`)
                 }}
@@ -115,27 +82,12 @@ const MessagesList = () => {
                     flexDirection:"row",
                     
                 }}>
-                <div style={{
-                    fontSize:'16px',
-                    fontFamily:'DM Sans',
-                    fontWeight:'800',
-                    color:'#566474',
-                    borderRadius:'5px',
-                    padding:'5px',
-                    background:"#dad4f0"
-                }}>
+                <div className="aspirant-name">
                 {e.companyName}
 
                 </div>
 
-                <div style={{
-                    fontFamily:'DM Sans',
-                    color:'#566474',
-                    fontSize:'12px',
-                    marginRight:'0px',
-                    marginLeft:'auto',
-                    marginTop:'5px'
-                }}>
+                <div className="timestamp">
                     {new Date(e.lastMessageTime).getDate()}/{new Date(e.lastMessageTime).getMonth()+1}/{new Date(e.lastMessageTime).getFullYear()}
                 </div>
 
@@ -156,12 +108,7 @@ const MessagesList = () => {
                         }
                 </div>
 
-                <div style={{
-                    marginTop:'5px',
-                    fontFamily:'DM Sans',
-                    fontSize:'14px',
-                    color:'#566474'
-                }}>
+                <div className="message-text">
                 {
                     e.lastMessageSentBy === 'aspirant'?
                     'You: '

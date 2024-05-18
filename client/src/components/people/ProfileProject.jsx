@@ -152,21 +152,8 @@ const deleteProjectApi = () => {
                 flexDirection:'column'
             }}>
                 {/* Start of add new top view */}
-                <div style={{
-                    display:'flex',
-                    flexDirection:'row',
-                    fontSize:'16px',
-                    marginTop:'15px',
-                    fontFamily:'DM Sans',
-                    
-                }}>
-                <div style={{
-                    display:'flex',
-                    flexDirection:'column',
-                    fontSize:'16px',
-                    fontWeight: 700,
-                    fontFamily:'DM Sans'
-                }}>
+                <div className='top'>
+                <div className='top-sub-left'>
                 <div>
                 Add Project Details
                 </div>
@@ -180,15 +167,7 @@ const deleteProjectApi = () => {
                 </div>
                 {
                     account.role !== 'company'?
-                    <div onClick={handleClickOpen} style={{
-                    marginLeft:'auto',
-                    marginRight:'0px',
-                    borderRadius:'5px',
-                    cursor:'pointer',
-                    border: '1px solid #142683',
-                    padding: '4px',
-                    color:'#142683'
-                }}>
+                    <div onClick={handleClickOpen} className='add-new'>
                 <AddCircleOutlineIcon/> Add New
                 </div>
 
@@ -202,12 +181,7 @@ const deleteProjectApi = () => {
                 <Dialog open={open} onClose={handleClose}>
                     <DialogTitle>Add New Project</DialogTitle>
                     <DialogContent>
-                    <div style={{
-                        display:'flex',
-                        justifyContent:'center',
-                        flexDirection:'column',
-                        marginTop:'10px',
-                        fontSize:'15px'}}>
+                    <div className='dialog-container'>
 
                         {/* Start of school name */}
                     <div style={{
@@ -316,15 +290,7 @@ const deleteProjectApi = () => {
                     tempProject.projectSkills.map((skill) =>
                         (
                         <div>
-                        <div  style={{
-                        background:'black',
-                        color:'white',
-                        borderRadius:'20px',
-                        width:'fit-content',
-                        padding:'5px',
-                        display:'flex',
-                        flexDirection:'row'
-                    }}>
+                        <div  className='skill'>
                             <div>
                                 {skill}
                             </div>
@@ -472,13 +438,7 @@ const deleteProjectApi = () => {
                     aspirant.projects &&  aspirant.projects.length > 0 ? aspirant.projects.map((project) => (
                         
                         
-                        <div style={{
-                            display:'flex',
-                            flexDirection:'column',
-                            border:'1px solid #ebf0f5',
-                            padding: '30px 30px 30px 45px',
-                            marginTop:'10px'
-                        }}>
+                        <div className='project-container'>
                         <div style={{
                             display:'flex',
                             flexDirection:'row',
@@ -493,17 +453,7 @@ const deleteProjectApi = () => {
 
                             {
                             account.role !== 'company'?
-                            <div style={{
-                            marginLeft:'auto',
-                            marginRight:'0px',
-                            borderRadius:'5px',
-                            border: '1px solid #142683',
-                            
-                            padding: '4px 4px 4px 4px',
-                            color:'#142683',
-                            height:'fit-content',
-                            cursor:'pointer',
-                        }}
+                            <div className='edit'
                         onClick={() => {
                             
                             handleClickOpen2(project);
@@ -523,12 +473,7 @@ const deleteProjectApi = () => {
                     <Dialog open={open2} onClose={handleClose2}>
                     <DialogTitle>Add New Project</DialogTitle>
                     <DialogContent>
-                    <div style={{
-                        display:'flex',
-                        justifyContent:'center',
-                        flexDirection:'column',
-                        marginTop:'10px',
-                        fontSize:'15px'}}>
+                    <div className='dialog-container'>
 
                         {/* Start of school name */}
                     <div style={{
@@ -637,15 +582,7 @@ const deleteProjectApi = () => {
                     tempProject.projectSkills.map((skill) =>
                         (
                         <div>
-                        <div  style={{
-                        background:'black',
-                        color:'white',
-                        borderRadius:'20px',
-                        width:'fit-content',
-                        padding:'5px',
-                        display:'flex',
-                        flexDirection:'row'
-                    }}>
+                        <div  className='skill'>
                             <div>
                                 {skill}
                             </div>
@@ -779,24 +716,13 @@ const deleteProjectApi = () => {
                     </DialogActions>
              </Dialog>
 
-                <div style={{
-                            color: '#566474',
-                            fontSize:'16px',
-                            marginTop: '5px',
-                            fontWeight: 400,
-                            width:750
-                }}>
+                <div className='about-project'>
                     {project.aboutProject}
 
                 </div>
 
                 <Link>
-                    <div  style={{
-                                color: '#445ee2',
-                                fontSize:'14px',
-                                marginTop: '5px',
-                                fontWeight:700
-                    }}
+                    <div  className='project-repo-link'
                     onClick = {() => {
                         window.open(project.repoLink,'_blank' )
                     }}
@@ -806,12 +732,7 @@ const deleteProjectApi = () => {
                     </div>
                 </Link>
                 <Link>
-                    <div  style={{
-                                color: 'red',
-                                fontSize:'14px',
-                                marginTop: '5px',
-                                fontWeight:700
-                    }}
+                    <div  className='project-live-link'
                     onClick = {() => {
                         window.open(project.liveLink,'_blank' )
                     }}
@@ -831,19 +752,7 @@ const deleteProjectApi = () => {
                     project.projectSkills.map((skill) =>
                         (
                         <div>
-                        <div  style={{
-                        background:'#f0f0f0',
-                        color: '#566474',
-                        borderRadius:'20px',
-                        width:'fit-content',
-                        padding:'4.5px 10px',
-                        display:'flex',
-                        flexDirection:'row',
-                        fontFamily: "DM Sans",
-                        marginRight:'5px',
-                        marginTop:'10px',
-                        fontSize:'16px'
-                    }}>
+                        <div  className='project-skills'>
                              <div>
                                 {skill}
                             </div>

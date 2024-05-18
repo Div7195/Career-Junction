@@ -127,59 +127,21 @@ const JobMessages = () => {
                 account.role === 'company'?<CompanySidebar/>:<AspirantSidebar/>
             }
             
-            <div style={{
-            display:'flex',
-            flexBasis:"70%",
-            flexDirection:'column',
-            height:'600px'
-            
-            
-        }}>
-        <div style={{
-            display:'flex',
-            flexDirection:'column',
-            marginBottom:'5px',
-            marginTop:'auto',
-        }}>
-            <div style={{
-                display:'flex',
-                flexDirection:'column-reverse',
-                maxHeight:'580px',
-                overflowY:'auto',
-                
-                
-            }}>
+            <div className="main-container">
+
+        <div sub-container>
+            <div className="old-messages-container">
                 {
                     data.messages && data.messages.length > 0 ? data.messages.map((e =>(
                         <>
                             
                                 {
                                     e.senderRole === account.role?
-                                    <div style={{
-                                        marginBottom:'10px',
-                                        marginRight:'0px',
-                                        marginLeft:'auto',
-                                        borderRadius:'5px',
-                                        background:'rgb(186 201 255)',
-                                        maxWidth:'60%',
-                                        padding:'10px',
-                                        fontFamily:'DM Sans',
-                                        color:'rgb(7 10 10)'
-                                    }}>
+                                    <div className="sent">
                                     {e.messageBody}
                                     </div>
                                     :
-                                    <div style={{
-                                        marginBottom:'10px',
-                                        marginRight:'auto',
-                                        marginLeft:'5px',
-                                        padding:'10px',
-                                        borderRadius:'5px',
-                                        background:'rgb(255 186 247)',
-                                        maxWidth:'60%',
-                                        fontFamily:'DM Sans',
-                                        color:'rgb(7 10 10)'
-                                    }}>
+                                    <div className="receive">
                                     {e.messageBody}
                                     </div>
                                 }
@@ -214,17 +176,7 @@ const JobMessages = () => {
                     multiline
                     />
                 </div>
-                <div style={{
-                    flexBasis:'2%',
-                    marginBottom:'0px',
-                    marginTop:'auto',
-                    background:"rgb(66 142 81)",
-                    borderRadius:'5px',
-                    padding:'15px',
-                    color:'white',
-                    height:'fit-content',
-                    cursor:'pointer'
-                }}
+                <div className="send-button"
                 onClick={() => {sendMessage()}}
                 >
                 <SendIcon/>

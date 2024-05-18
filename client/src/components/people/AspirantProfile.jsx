@@ -154,23 +154,8 @@ const AspirantProfile = () => {
             flexDirection:'row'
           }}>
                 <AspirantSidebar/>
-                <div style={{
-            
-                display:'flex',
-                width:'100%',
-                justifyContent:'center',
-                fontSize:'20px',
-                color:'black'
-
-        }}>
-        <div style={{
-                display:'flex',
-                justifyContent:'center',
-                flexDirection:'column',
-                marginTop:'10px',
-                fontSize:'15px'
-                
-            }}>
+                <div className="main-container">
+        <div className="sub-container">
                 <div style={{
                 display:'flex',
                 flexDirection:'column',
@@ -240,7 +225,6 @@ const AspirantProfile = () => {
                 <div style={{
                     display:'flex',
                     flexDirection:'row',
-                    
                     flexWrap:'wrap'
                 }}>
 
@@ -251,15 +235,7 @@ const AspirantProfile = () => {
                     aspirant.domains.map((domain) =>
                         (
                         <div>
-                        <div  style={{
-                        background:'black',
-                        color:'white',
-                        borderRadius:'20px',
-                        width:'fit-content',
-                        padding:'5px',
-                        display:'flex',
-                        flexDirection:'row'
-                    }}>
+                        <div  className="domain">
                             <div>
                                 {domain}
                             </div>
@@ -278,18 +254,7 @@ const AspirantProfile = () => {
                 </div>
                 </div>
             </div>
-            <div style={{
-                    fontSize:'16px',
-                    fontFamily:'DM Sans',
-                    marginTop:'10px',
-                    backgroundColor:'#142683',
-                    borderRadius:'5px',
-                    fontWeight:400,
-                    cursor:'pointer',
-                    padding: '4px 4px 8px 4px',
-                    color:'white',
-                    width:'fit-content'
-                }}
+            <div className="save-changes-button"
                 onClick={()=>{updateProfile()}}
                 >Save Changes</div>
 

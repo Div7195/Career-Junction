@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import moment from  'moment'
+import '../../css/job.css'
 // const job = {
 //     companyId: '3123123',
 //     companyName:'Microsoft',
@@ -155,54 +156,23 @@ const jobPostTimeStamp = new Date(job.jobCreateDate);
     
 return(
     <div>
-        <div style={{
-            display:'flex',
-            flexDirection:'column',
-            padding:'10px',
-            
-            marginBottom:'20px',
-            border: '2px solid #ebf0f5',
-            boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
-            boxSizing: 'border-box',
-            borderRadius: '10px 10px 10px 10px',
-
-        }}>
+        <div className='main-container'>
             <div style={{
                 display:'flex',
                 flexDirection:'row',
 
             }}>
-
-            
             <div style={{
                 display:'flex',
                 flexDirection:'column',
-                
                 marginBottom:'10px'
-
             }}>
-                <div style={{
-                    
-                    fontSize:'20px',
-                    color:'#1e272e',
-                    fontFamily: "DM Sans",
-                    fontWeight: 'bold'
-                    
-                }}>
+                <div className='job-title'>
                     
                         {job.jobTitle}{job.jobType === 'Internship'?' internship':''}
                     
                 </div>
-                <div style={{
-                    fontSize:'10px',
-                    fontWeight: 400,
-                    fontSize: '1rem',
-                    lineHeight: '1.75rem',
-                    letterSpacing: '-.02em',
-                    color: '#9eaab7',
-                    fontFamily: "DM Sans",
-                    cursor:'pointer'
-                }}
+                <div className='company-name'
                 onClick={() => {
                     navigate(`/companypublic/${job.companyId}`)
                 }}
@@ -232,15 +202,7 @@ return(
             </div>
             :
             job.appliedAspirantsId.includes(account.id)?
-                    <div style={{
-                        color:'black',
-                        fontSize:'16px',
-                        fontFamily:'DM Sans',
-                        fontWeight:'500',
-                        padding:'5px',
-                        border:'3px solid black',
-                        borderRadius:'5px'
-                    }}>
+                    <div className='applied'>
                         Applied
                     </div>
                     :
@@ -259,12 +221,7 @@ return(
             
             
             :
-            <div style={{
-                display:'flex',
-                flexDirection:'row',
-                color:'#131c30',
-                fontSize:'24px',
-            }}>
+            <div className='side'>
             
             <Link to={`/job/${job._id}`} style={{textDecoration:'none' , color:'inherit'}}>
             <EditIcon style={{
@@ -290,7 +247,6 @@ return(
             <div style={{
                 display:'flex',
                 flexDirection:'row',
-                
                 marginBottom:'10px'
             }}>
                     {
@@ -298,18 +254,7 @@ return(
                     job.skillsRequired.map((skill) =>
                         (
                         <div>
-                        <div  style={{
-                        background:'#d5d5d5',
-                        color: '#566474',
-                        borderRadius:'20px',
-                        width:'fit-content',
-                        padding:'4.5px 10px',
-                        fontWeight:'400',
-                        display:'flex',
-                        flexDirection:'row',
-                        fontFamily: "DM Sans",
-                        marginRight:'5px'
-                    }}>
+                        <div className='skill'>
                              <div>
                                 {skill}
                             </div>
@@ -324,24 +269,8 @@ return(
                     flexDirection:'row',
                     marginBottom:'10px'
                 }}>
-                    <div style={{
-                        display:'flex',
-                        flexDirection:'column',
-                        paddingRight:'5px',
-                        marginRight:'50px'
-                        
-                    }}>
-                        <div style={{
-                            display:'flex',
-                            flexDirection:'row',
-                            fontSize: '16px',
-                            fontStyle: 'normal',
-                            lineHeight: '1.75rem',
-                            letterSpacing: '-.02em',
-                            fontWeight: '500',
-                            color: '#9eaab7',
-                            fontFamily: "DM Sans"
-                        }}>
+                    <div className='detail-title-box'>
+                        <div className='detail-title-heading'>
                         <div>
                         <AttachMoneyIcon style={{
                             margin:-5
@@ -356,12 +285,7 @@ return(
                         
                         </div>
                         </div>
-                        <div style={{
-                            color:'#566474',
-                            fontSize:'16px',
-                            fontFamily:'DM Sans',
-                            fontWeight:'bold'
-                        }}>
+                        <div className='detail-title-value'>
                         
                         {
                             
@@ -387,17 +311,7 @@ return(
                         flexDirection:'column',
                         marginRight:'50px'
                     }}>
-                        <div style={{
-                            display:'flex',
-                            flexDirection:'row',
-                            fontSize: '16px',
-                            fontStyle: 'normal',
-                            lineHeight: '1.75rem',
-                            letterSpacing: '-.02em',
-                            fontWeight: '500',
-                            color: '#9eaab7',
-                            fontFamily: "DM Sans"
-                        }}>
+                        <div className='detail-title-heading'>
                         <div>
                         <AccessTimeIcon style={{
                             margin:-5
@@ -409,12 +323,7 @@ return(
                         Duration
                         </div>
                         </div>
-                        <div style={{
-                            color:'#566474',
-                            fontSize:'16px',
-                            fontFamily:'DM Sans',
-                            fontWeight:'bold'
-                        }}>
+                        <div className='detail-title-value'>
                             {job.duration}
                         </div>
                     </div>:
@@ -426,17 +335,7 @@ return(
                         flexDirection:'column',
                         marginRight:'50px'
                     }}>
-                        <div style={{
-                            display:'flex',
-                            flexDirection:'row',
-                            fontSize: '16px',
-                            fontStyle: 'normal',
-                            lineHeight: '1.75rem',
-                            letterSpacing: '-.02em',
-                            fontWeight: '500',
-                            color: '#9eaab7',
-                            fontFamily: "DM Sans"
-                        }}>
+                        <div className='detail-title-heading'>
                         <div>
                         <WorkOutlineIcon style={{
                             margin:-5
@@ -448,12 +347,7 @@ return(
                         Work hours
                         </div>
                         </div>
-                        <div style={{
-                            color:'#566474',
-                            fontSize:'16px',
-                            fontFamily:'DM Sans',
-                            fontWeight:'bold'
-                        }}>
+                        <div className='detail-title-value'>
                             {job.workHours}
                         </div>
                     </div>
@@ -462,17 +356,7 @@ return(
                         flexDirection:'column',
                         marginRight:'50px'
                     }}>
-                        <div style={{
-                            display:'flex',
-                            flexDirection:'row',
-                            fontSize: '16px',
-                            fontStyle: 'normal',
-                            lineHeight: '1.75rem',
-                            letterSpacing: '-.02em',
-                            fontWeight: '500',
-                            color: '#9eaab7',
-                            fontFamily: "DM Sans"
-                        }}>
+                        <div className='detail-title-heading'>
                         <div>
                         <CalendarMonthIcon style={{
                             margin:-5
@@ -484,12 +368,7 @@ return(
                         Start date
                         </div>
                         </div>
-                        <div style={{
-                            color:'#566474',
-                            fontSize:'16px',
-                            fontFamily:'DM Sans',
-                            fontWeight:'bold'
-                        }}>
+                        <div className='detail-title-value'>
                             {new Date(job.startDate).getDate()} {monthMap[new Date(job.startDate).getMonth()+1]} {new Date(job.startDate).getFullYear() %2000}
                         </div>
                     </div>
@@ -498,17 +377,7 @@ return(
                         flexDirection:'column',
                         marginRight:'50px'
                     }}>
-                        <div style={{
-                            display:'flex',
-                            flexDirection:'row',
-                            fontSize: '16px',
-                            fontStyle: 'normal',
-                            lineHeight: '1.75rem',
-                            letterSpacing: '-.02em',
-                            fontWeight: '500',
-                            color: '#9eaab7',
-                            fontFamily: "DM Sans"
-                        }}>
+                        <div className='detail-title-heading'>
                         <div>
                         <TagIcon style={{
                             margin:-5
@@ -520,75 +389,29 @@ return(
                         Openings
                         </div>
                         </div>
-                        <div style={{
-                            color:'#566474',
-                            fontSize:'16px',
-                            fontFamily:'DM Sans',
-                            fontWeight:'bold'
-                        }}>
+                        <div className='detail-title-value'>
                             {job.openings}
                         </div>
                     </div>
                 </div>
 
-                <div style={{
-                    display:'flex',
-                    flexDirection:'row',
-                    width:'100%',
-                    marginBottom:'10px'
-                }}>
-                    <div style={{
-                        
-                            fontSize: '14px',
-                            color: '#445ee2',
-                            display: 'flex',
-                            alignItems: 'center',
-                            lineHeight: '1.1rem',
-                            minHeight: '28px',
-                    }}>
+                <div className='bottom-box'>
+                    <div className='apply-deadline'>
                     Apply by {new Date(job.applyDeadlineDate).getDate()} {monthMap[new Date(job.applyDeadlineDate).getMonth()+1]} {new Date(job.applyDeadlineDate).getFullYear()} • Posted {timeDifference} 
                     </div>
-                    <div style={{
-                        display:'flex',
-                        flexDirection:'row',
-                        marginRight:'10px',
-                        marginLeft:'auto'
-                    }}>
+                    <div className='bottom-right-box'>
 
                     {
                         account.role === 'company'?
                         <>
                         <Link to={`/job/${job._id}/applicants`} style={{textDecoration:'none' , color:'inherit'}}>
-                        <div style={{
-                                border: '1px solid #ebf0f5',
-                                borderRadius: '5px',
-                                display:'flex',
-                                justifyContent:'center',
-                                color: '#566474',
-                                fontSize:'16px',
-                                fontFamily:'DM Sans',
-                                alignItems:'center',
-                                cursor:'pointer',
-                                height:'44px',
-                                marginRight:'10px'
-                        }}>
+                        <div className='view-applicants-button'>
                         
                         View Applicants
                         </div>
                         </Link>
                         <Link to={`/job/details/${job._id}`} style={{textDecoration:'none' , color:'inherit'}}>
-                        <div style={{
-                                border: '1px solid #ebf0f5',
-                                borderRadius: '5px',
-                                display:'flex',
-                                justifyContent:'center',
-                                color: '#566474',
-                                fontSize:'16px',
-                                fontFamily:'DM Sans',
-                                alignItems:'center',
-                                cursor:'pointer',
-                                height:'44px'
-                        }}>
+                        <div className='view-details-button'>
                         
                         View Details
                         </div>
@@ -597,18 +420,7 @@ return(
                         :
                         <>
                         <Link to={`/aspirant/job/details/${job._id}`} style={{textDecoration:'none' , color:'inherit'}}>
-                        <div style={{
-                                border: '1px solid #ebf0f5',
-                                borderRadius: '5px',
-                                display:'flex',
-                                justifyContent:'center',
-                                color: '#566474',
-                                fontSize:'16px',
-                                fontFamily:'DM Sans',
-                                alignItems:'center',
-                                cursor:'pointer',
-                                height:'44px'
-                        }}>
+                        <div className='view-details-button'>
                         
                         View Details
                         </div>
@@ -620,16 +432,7 @@ return(
                         {
                             account.role !== 'company'?
                             job.appliedAspirantsId.includes(account.id)?
-                            <div style={{
-                                marginRight:'10px',
-                                background:"rgb(66 142 81)",
-                                borderRadius:'5px',
-                                fontSize:'16px',
-                                padding:'5px',
-                                color:'white',
-                                cursor:'pointer',
-                                
-                            }}
+                            <div className='view-messages-button'
                             onClick={() => {
                     navigate(`/company/job/${job._id}/messages/${account.id}/chatId/${job.chatId}`)
                 }}
@@ -638,18 +441,7 @@ return(
                             </div>
                             :
 
-                            <div style={{
-                    
-                            marginLeft:'10px',
-                            fontSize:'16px',
-                            fontFamily:'DM Sans',
-                            backgroundColor:'#142683',
-                            borderRadius:'5px',
-                            fontWeight:700,
-                            cursor:'pointer',
-                            padding: '8px 20px 8px 16px',
-                            color:'white'
-                        }}
+                            <div className='apply-job-button'
                         onClick={() => {
                             applyToJob()
                         }}
