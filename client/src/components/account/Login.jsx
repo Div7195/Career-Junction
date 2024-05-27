@@ -123,7 +123,7 @@ const Login = ()=>{
         }
         try {
             console.log(settings.body)
-            const fetchResponse = await fetch(`http://localhost:8000/signup`, settings);
+            const fetchResponse = await fetch(`https://career-junction.vercel.app/signup`, settings);
             const response = await fetchResponse.json();
             setSignup(signupInitialValues);
             toggleAccount('login');
@@ -142,7 +142,7 @@ const Login = ()=>{
             }
             }
             try {
-                const fetchResponse = await fetch(`http://localhost:8000/login`, settings);
+                const fetchResponse = await fetch(`https://career-junction.vercel.app/login`, settings);
                 const response = await fetchResponse.json();
                 setError('');
                 console.log(response)

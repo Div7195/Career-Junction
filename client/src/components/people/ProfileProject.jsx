@@ -26,7 +26,7 @@ import { useContext } from 'react';
 import NativeSelect from '@mui/material/NativeSelect';
 import skills from '../../constants/skills.js';
 import { Link } from 'react-router-dom';
-
+import '../../css/projects.css'
 const ProfileProject = ({aspirant, onUpdate}) =>{
     const {account}=useContext(DataContext);
     const {setAccount} = useContext(DataContext);
@@ -96,7 +96,7 @@ const addNewProjectApi = async(field)=> {
         }
         try {
             console.log(settings.body)
-            const fetchResponse = await fetch(`http://localhost:8000/updateAspirantProfile?aspirantAccountId=${account.id}`, settings);
+            const fetchResponse = await fetch(`https://career-junction.vercel.app/updateAspirantProfile?aspirantAccountId=${account.id}`, settings);
             const response = await fetchResponse.json();
             setTempProject(projectObjInitial)
             onUpdate(response)
@@ -128,7 +128,7 @@ const editProjectApi = async(field, id) => {
         }
         try {
            
-            const fetchResponse = await fetch(`http://localhost:8000/updateAspirantProfile?aspirantAccountId=${account.id}`, settings);
+            const fetchResponse = await fetch(`https://career-junction.vercel.app/updateAspirantProfile?aspirantAccountId=${account.id}`, settings);
             const response = await fetchResponse.json();
             setTempProject(projectObjInitial)
             onUpdate(response)
@@ -181,7 +181,7 @@ const deleteProjectApi = () => {
                 <Dialog open={open} onClose={handleClose}>
                     <DialogTitle>Add New Project</DialogTitle>
                     <DialogContent>
-                    <div className='dialog-container'>
+                    <div className='dialog-box'>
 
                         {/* Start of school name */}
                     <div style={{
@@ -438,7 +438,7 @@ const deleteProjectApi = () => {
                     aspirant.projects &&  aspirant.projects.length > 0 ? aspirant.projects.map((project) => (
                         
                         
-                        <div className='project-container'>
+                        <div className='project-box'>
                         <div style={{
                             display:'flex',
                             flexDirection:'row',
@@ -473,7 +473,7 @@ const deleteProjectApi = () => {
                     <Dialog open={open2} onClose={handleClose2}>
                     <DialogTitle>Add New Project</DialogTitle>
                     <DialogContent>
-                    <div className='dialog-container'>
+                    <div className='dialog-box'>
 
                         {/* Start of school name */}
                     <div style={{

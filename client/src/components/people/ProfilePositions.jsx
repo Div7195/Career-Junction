@@ -26,7 +26,7 @@ import { useContext } from 'react';
 import NativeSelect from '@mui/material/NativeSelect';
 import skills from '../../constants/skills.js';
 import { Link } from 'react-router-dom';
-
+import '../../css/positions.css'
 const ProfilePositions = ({aspirant, onUpdate}) =>{
     const {account}=useContext(DataContext);
     const {setAccount} = useContext(DataContext);
@@ -92,7 +92,7 @@ const addNewPositionApi = async(field)=> {
         }
         try {
             console.log(settings.body)
-            const fetchResponse = await fetch(`http://localhost:8000/updateAspirantProfile?aspirantAccountId=${account.id}`, settings);
+            const fetchResponse = await fetch(`https://career-junction.vercel.app/updateAspirantProfile?aspirantAccountId=${account.id}`, settings);
             const response = await fetchResponse.json();
             setTempPosition(positionObjInitial)
             onUpdate(response)
@@ -124,7 +124,7 @@ const editPositionApi = async(field, id) => {
         }
         try {
            
-            const fetchResponse = await fetch(`http://localhost:8000/updateAspirantProfile?aspirantAccountId=${account.id}`, settings);
+            const fetchResponse = await fetch(`https://career-junction.vercel.app/updateAspirantProfile?aspirantAccountId=${account.id}`, settings);
             const response = await fetchResponse.json();
             setTempPosition(positionObjInitial)
             onUpdate(response)

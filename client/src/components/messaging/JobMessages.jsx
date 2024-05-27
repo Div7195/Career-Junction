@@ -7,6 +7,7 @@ import { TextField } from "@mui/material";
 import dayjs from "dayjs";
 import SendIcon from '@mui/icons-material/Send';
 import AspirantSidebar from "../sidebar/AspirantSidebar";
+import '../../css/chat.css'
 // import { socket } from "../../service/socket";
 const JobMessages = () => {
     
@@ -48,7 +49,7 @@ const JobMessages = () => {
          }
          try {
              console.log(settings.body)
-             const fetchResponse = await fetch(`http://localhost:8000/updateJobMessages`, settings);
+             const fetchResponse = await fetch(`https://career-junction.vercel.app/updateJobMessages`, settings);
              const response = await fetchResponse.json();
             if(response.msg === 'success'){
                 // data.messages.reverse();
@@ -77,7 +78,7 @@ const JobMessages = () => {
     const myFunction = async() => {
         
        
-        const url = `http://localhost:8000/getJobMessages?jobId=${id}&aspirantAccountId=${aspirantAccountId}`;
+        const url = `https://career-junction.vercel.app/getJobMessages?jobId=${id}&aspirantAccountId=${aspirantAccountId}`;
         const settings = {
         method: 'GET',
         headers: {
@@ -129,10 +130,10 @@ const JobMessages = () => {
                 account.role === 'company'?<CompanySidebar/>:<AspirantSidebar/>
             }
             
-            <div className="main-container">
+            <div className="main-box">
 
-        <div sub-container>
-            <div className="old-messages-container">
+        <div className="sub-box">
+            <div className="old-messages-box">
                 {
                     data.messages && data.messages.length > 0 ? data.messages.map((e =>(
                         <>

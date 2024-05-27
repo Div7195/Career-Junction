@@ -84,7 +84,7 @@ const EditJob = () => {
          }
          try {
              console.log(settings.body)
-             const fetchResponse = await fetch(`http://localhost:8000/updateJob?jobId=${id}`, settings);
+             const fetchResponse = await fetch(`https://career-junction.vercel.app/updateJob?jobId=${id}`, settings);
              const response = await fetchResponse.json();
             
              
@@ -97,7 +97,7 @@ const EditJob = () => {
 
      useEffect(() => {
         const myFunction = async() => {
-        const url = `http://localhost:8000/getSingleJob?jobId=${id}`;
+        const url = `https://career-junction.vercel.app/getSingleJob?jobId=${id}`;
         const settings = {
         method: 'GET',
         headers: {

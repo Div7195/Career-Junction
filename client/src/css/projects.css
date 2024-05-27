@@ -12,7 +12,7 @@
     font-weight: 700;
     font-family: 'DM Sans', sans-serif;
 }
-.dialog-container{
+.dialog-box{
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -47,7 +47,7 @@
     height: fit-content;
     cursor: pointer;
 }
-.project-container{
+.project-box{
     display: flex;
     flex-direction: column;
     border: 1px solid #ebf0f5;

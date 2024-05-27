@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
-
+import '../../css/applicant.css'
 const Applicant = ({applicant, jobId}) => {
     const navigate = useNavigate()
     return(

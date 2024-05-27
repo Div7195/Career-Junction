@@ -96,7 +96,7 @@ const addNewCertificateApi = async(field)=> {
         }
         try {
             console.log(settings.body)
-            const fetchResponse = await fetch(`http://localhost:8000/updateAspirantProfile?aspirantAccountId=${account.id}`, settings);
+            const fetchResponse = await fetch(`https://career-junction.vercel.app/updateAspirantProfile?aspirantAccountId=${account.id}`, settings);
             const response = await fetchResponse.json();
             setTempCertificate(certificateObjInitial)
             onUpdate(response)
@@ -128,7 +128,7 @@ const editCertificateApi = async(field, id) => {
         }
         try {
            
-            const fetchResponse = await fetch(`http://localhost:8000/updateAspirantProfile?aspirantAccountId=${account.id}`, settings);
+            const fetchResponse = await fetch(`https://career-junction.vercel.app/updateAspirantProfile?aspirantAccountId=${account.id}`, settings);
             const response = await fetchResponse.json();
             setTempCertificate(certificateObjInitial)
             onUpdate(response)

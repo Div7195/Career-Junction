@@ -28,6 +28,7 @@ import skills from '../../constants/skills.js';
 import { Link } from 'react-router-dom';
 import workTypes from '../../constants/workTypes.js';
 import monthMap from '../../constants/monthMap.js';
+import '../../css/experiences.css'
 const ProfileExperience = ({aspirant, onUpdate}) =>{
     const {account}=useContext(DataContext);
     const {setAccount} = useContext(DataContext);
@@ -97,7 +98,7 @@ const addNewWorkApi = async(field)=> {
         }
         try {
             console.log(settings.body)
-            const fetchResponse = await fetch(`http://localhost:8000/updateAspirantProfile?aspirantAccountId=${account.id}`, settings);
+            const fetchResponse = await fetch(`https://career-junction.vercel.app/updateAspirantProfile?aspirantAccountId=${account.id}`, settings);
             const response = await fetchResponse.json();
             setTempWork(workObjInitial)
             onUpdate(response)
@@ -129,7 +130,7 @@ const editWorkApi = async(field, id) => {
         }
         try {
            
-            const fetchResponse = await fetch(`http://localhost:8000/updateAspirantProfile?aspirantAccountId=${account.id}`, settings);
+            const fetchResponse = await fetch(`https://career-junction.vercel.app/updateAspirantProfile?aspirantAccountId=${account.id}`, settings);
             const response = await fetchResponse.json();
             setTempWork(workObjInitial)
             onUpdate(response)
