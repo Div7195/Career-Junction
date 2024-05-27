@@ -11,7 +11,10 @@ const app = express();
 
 app.use(bodyParser.json({extended:true}))
 app.use(bodyParser.urlencoded({extended:true}))
-app.use(cors());
+app.use(cors({
+  origin: ['https:/career-junction.vercel.app','http://localhost:3000'],
+      methods: ['GET', 'POST', 'DELETE'],
+}));
 app.get('/', (req, res) => {
   res.send('hellp')
 })
