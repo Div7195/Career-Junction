@@ -126,7 +126,7 @@ export default function CompanyHeader() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={() => {account.role === 'company'?navigate(`/companyprofile`):navigate('/aspirantprofile')}}>Profile</MenuItem>
-      <MenuItem onClick={() => { if(location.pathname.includes('login') === false) setAccount({username :'', loggedIn:false, id:'', role:''}); window.open('https://career-junction-app.vercel.app', "_self")}}>Logout</MenuItem>
+      <MenuItem onClick={() => { if(location.pathname.includes('login') === false) setAccount({username :'', loggedIn:false, id:'', role:''}); window.open('http://localhost:3000', "_self")}}>Logout</MenuItem>
     </Menu>
   );
 
@@ -231,7 +231,7 @@ export default function CompanyHeader() {
                 <MailIcon style={{ color: '#00ecff' , fontSize:'30px'}} />
               </Badge>
             </IconButton> */}
-            <IconButton
+            {/* <IconButton
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
@@ -241,7 +241,7 @@ export default function CompanyHeader() {
               <Badge badgeContent={17} color="error">
                 <NotificationsIcon style={{ color: '#00ecff', fontSize:'30px'}} />
               </Badge>
-            </IconButton>
+            </IconButton> */}
             <IconButton
               size="large"
               edge="end"
@@ -318,7 +318,7 @@ export default function CompanyHeader() {
                 <MailIcon style={{ color: '#00ecff' , fontSize:'30px'}} />
               </Badge>
             </IconButton> */}
-            <IconButton
+            {/* <IconButton
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
@@ -328,7 +328,7 @@ export default function CompanyHeader() {
               <Badge badgeContent={17} color="error">
                 <NotificationsIcon style={{ color: '#00ecff', fontSize:'30px'}} />
               </Badge>
-            </IconButton>
+            </IconButton> */}
             <IconButton
               size="large"
               edge="end"

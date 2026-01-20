@@ -1,6 +1,6 @@
 import grid  from "gridfs-stream";
 import mongoose from "mongoose";
-const url = 'https://career-junction.vercel.app'
+const url = 'http://localhost:8000'
 
 let gfs, gridfsBucket;
 const conn = mongoose.connection;
@@ -30,6 +30,7 @@ export const uploadImageController=(request , response)=>{
 
 export const getImageController = async(request , response) => {
     try {
+        
         const file = await gfs.files.findOne({ filename: request.params.filename })
         const readStream = gridfsBucket.openDownloadStream(file._id);
         readStream.pipe(response);

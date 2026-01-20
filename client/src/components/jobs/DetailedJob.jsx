@@ -123,10 +123,10 @@ const DetailedJob = () => {
                 width:'100%',
                 justifyContent:'center',
             }}>
-                <div className="main-container">
+                <div className="maincontainer">
 
                 {/* {Start of main details of job div} */}
-                <div className="main-details-container">
+                <div className="maindetailscontainer">
                 <div style={{
                     display:'flex',
                     flexDirection:'row',
@@ -143,7 +143,7 @@ const DetailedJob = () => {
                     </div>
                 </div>
 
-                <div className="company-name">
+                <div className="namecompany">
                 {companyState.companyName} | {companyState.locationBased}
                 </div>
 
@@ -190,7 +190,7 @@ const DetailedJob = () => {
 
 
                 {/* {Start of Job details div} */}
-                <div className="job-details-container">
+                <div className="jobdetailscontainer">
                     <div style={{
                         display:'flex',
                         flexDirection:'column',
@@ -359,7 +359,7 @@ const DetailedJob = () => {
                     }}> 
 
                     {/* Start of job desc div */}
-                        <div className="other-detail-container">
+                        <div className="otherdetailcontainer">
                         <div className="other-detail-title">
                             Job requirements
                         </div>
@@ -384,7 +384,7 @@ const DetailedJob = () => {
                         {/* Start of skills div */}
                         
                         
-                        <div className="side-container-container">
+                        <div className="sidecontainercontainer">
                         <div className="side-container-title">
                             Skills required
                         </div>

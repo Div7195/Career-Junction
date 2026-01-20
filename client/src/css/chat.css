@@ -1,16 +1,16 @@
-.main-container{
+.main-box{
     display: flex;
     flex-basis: 70%;
     flex-direction: column;
     height: 600px;
 }
-.sub-container{
+.sub-box{
     display: flex;
     flex-direction: column;
     margin-bottom: 5px;
     margin-top: auto;
 }
-.old-messages-container{
+.old-messages-box{
     display: flex;
     flex-direction: column-reverse;
     max-height: 580px;

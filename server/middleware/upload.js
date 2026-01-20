@@ -7,7 +7,8 @@ const username = process.env.DB_USERNAME;
 const password = process.env.DB_PASSWORD;
 
 const storage = new GridFsStorage({
-    url: `mongodb+srv://${username}:${password}@movieverse-app.tpux4jp.mongodb.net/careerJunction?retryWrites=true&w=majority`,
+    // url: `mongodb+srv://${username}:${password}@movieverse-app.tpux4jp.mongodb.net/careerJunction?retryWrites=true&w=majority`,
+    url:`mongodb://localhost:27017/career-junction`,
     file: (request, file) => {
       
       const match = ["image/jpeg", "image/png", "image/jpg"];

@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
 const dbConnection = async (username, password) =>{
-    const URL = `mongodb+srv://${username}:${password}@movieverse-app.tpux4jp.mongodb.net/careerJunction?retryWrites=true&w=majority`
-
+    // const URL = `mongodb+srv://${username}:${password}@movieverse-app.tpux4jp.mongodb.net/careerJunction?retryWrites=true&w=majority`
+    const URL = `mongodb://localhost:27017/career-junction`
     try {
         await mongoose.connect(URL);
         console.log("Database connected succesfully");

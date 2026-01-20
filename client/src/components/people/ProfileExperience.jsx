@@ -28,6 +28,7 @@ import skills from '../../constants/skills.js';
 import { Link } from 'react-router-dom';
 import workTypes from '../../constants/workTypes.js';
 import monthMap from '../../constants/monthMap.js';
+import '../../css/experiences.css'
 const ProfileExperience = ({aspirant, onUpdate}) =>{
     const {account}=useContext(DataContext);
     const {setAccount} = useContext(DataContext);

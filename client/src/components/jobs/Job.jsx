@@ -156,7 +156,7 @@ const jobPostTimeStamp = new Date(job.jobCreateDate);
     
 return(
     <div>
-        <div className='main-container'>
+        <div className='fsadfdsfs'>
             <div style={{
                 display:'flex',
                 flexDirection:'row',
@@ -170,9 +170,10 @@ return(
                 <div className='job-title'>
                     
                         {job.jobTitle}{job.jobType === 'Internship'?' internship':''}
+
                     
                 </div>
-                <div className='company-name'
+                <div className='name-company'
                 onClick={() => {
                     navigate(`/companypublic/${job.companyId}`)
                 }}
@@ -254,7 +255,7 @@ return(
                     job.skillsRequired.map((skill) =>
                         (
                         <div>
-                        <div className='skill'>
+                        <div className='skill-job'>
                              <div>
                                 {skill}
                             </div>

@@ -27,6 +27,7 @@ import CompanyAspirantProfile from './components/people/CompanyAspirantProfile.j
 import MessagesList from './components/messaging/MessagesList.jsx';
 import CompanyPublicProfile from './components/companies/CompanyPublicProfile.jsx';
 import CompanyMessagesList from './components/messaging/CompanyMessagesList.jsx';
+import AspirantHome from './components/home/AspirantHome.jsx';
 
 
 
@@ -39,8 +40,8 @@ function App() {
         <div style={{marginTop:64}}>
             <Routes>
               {/* <Route path = '/login' element = {<Login/>}/> */}
-              <Route  path = '/home' element = {<CompanyHome/>}/>
-              
+              <Route  path = '/aspirant-home' element = {<AspirantHome/>}/>
+              <Route  path = '/company-home' element = {<CompanyHome/>}/>
               <Route  path = '/login' element = {<Login/>}/>
               <Route  path = '/createjob' element = {<CreateNewJob/>}/>
               <Route  path = '/youropenings' element = {<CompanyOpenings/>}/>

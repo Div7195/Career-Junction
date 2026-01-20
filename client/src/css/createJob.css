@@ -1,11 +1,13 @@
-.main-container{
+.out-box{
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     width: 100%;
     font-size: 20px;
     color: black;
 }
-.skill{
+.skill-value{
     background: black;
     color: white;
     border-radius: 20px;

@@ -150,8 +150,12 @@ const Login = ()=>{
                 sessionStorage.setItem('refreshToken', `Bearer ${response.refreshToken}`);
             
                 setAccount({username : response.username, loggedIn:true, id:response.mongoId, role:response.role});
-                
-                navigate('/home');
+                if(response.role == 'aspirant'){
+                    navigate('/aspirant-home')
+                }
+                else{
+                    navigate('/company-home')
+                }
                 
                 
                 

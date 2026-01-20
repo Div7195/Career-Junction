@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
-
+import '../../css/applicant.css'
 const Applicant = ({applicant, jobId}) => {
     const navigate = useNavigate()
     return(
@@ -27,7 +27,7 @@ const Applicant = ({applicant, jobId}) => {
                 {/* <Link to={`/job/${jobId}/messages/${applicant.aspirantAccountId}`} style={{textDecoration:'none' , color:'inherit'}}> */}
                 <div className="view-messages-button"
                 onClick={() => {
-                    navigate(`/company/job/${jobId}/messages/${applicant.aspirantAccountId}`)
+                    navigate(`/company/job/${jobId}/messages/${applicant.aspirantAccountId}/chatId/${applicant.chatId}`)
                 }}
                 >
                     Messages

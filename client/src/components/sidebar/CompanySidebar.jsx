@@ -41,7 +41,7 @@ export default function CompanySidebar() {
         variant="permanent"
         anchor="left"
       >
-      <Box display='flex' justifyContent='center' height='50px' marginTop='15px'  style= {{fontSize:'25px', cursor : 'pointer'}} onClick={() => { if(location.pathname.includes('home') === false || location.pathname === '/')  navigate('/home')}}>Career Junction</Box>
+      <Box display='flex' justifyContent='center' height='50px' marginTop='15px'  style= {{fontSize:'25px', cursor : 'pointer'}} onClick={() => { if(location.pathname.includes('home') === false || location.pathname === '/')  navigate('/company-home')}}>Career Junction</Box>
       
         
         

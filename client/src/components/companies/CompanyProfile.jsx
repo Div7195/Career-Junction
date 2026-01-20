@@ -154,7 +154,7 @@ const CompanyProfile = () => {
             flexDirection:'row'
           }}>
           <CompanySidebar/>
-        <div className="container">
+        <div className="company-profile-box">
             <div >
             <div>   
         <FormControl>

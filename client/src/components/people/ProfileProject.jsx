@@ -26,7 +26,7 @@ import { useContext } from 'react';
 import NativeSelect from '@mui/material/NativeSelect';
 import skills from '../../constants/skills.js';
 import { Link } from 'react-router-dom';
-
+import '../../css/projects.css'
 const ProfileProject = ({aspirant, onUpdate}) =>{
     const {account}=useContext(DataContext);
     const {setAccount} = useContext(DataContext);

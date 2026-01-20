@@ -153,7 +153,14 @@ export const getJobApplicants = async(request, response) => {
         for(let i = 0;i<jobObj.appliedAspirantsId.length;i++){
             
             let temp = await Aspirant.findOne({aspirantAccountId:jobObj.appliedAspirantsId[i]});
-           
+            
+            for(let i=0;i<temp.applications.length;i++){
+                
+                if(temp.applications[i].jobId === request.query.jobId){
+                    temp = {...temp._doc, chatId:temp.applications[i]._id.toString()};
+                    break;
+                }
+            }
             aspirantObjList.push(temp)
         }
         

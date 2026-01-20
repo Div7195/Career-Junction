@@ -102,11 +102,22 @@ const CreateNewJob = () => {
           <CompanySidebar/>
         <div style={{
             
-
+            display:'flex',
+            width:'100%',
+            justifyContent:'center',
+            fontSize:'20px',
+            color:'black'
         }}>
         
         
-            <div className="main-container">
+            <div style={{
+                display:'flex',
+                justifyContent:'center',
+                flexDirection:'column',
+                marginTop:'10px',
+                fontSize:'15px'
+                
+            }}>
             <div>   
         <FormControl>
       <FormLabel id="demo-row-radio-buttons-group-label">Job type</FormLabel>
@@ -380,7 +391,7 @@ const CreateNewJob = () => {
                     jobState.skillsRequired.map((skill) =>
                         (
                         <div>
-                        <div  className="skill">
+                        <div  className="skill-value">
                             <div>
                                 {skill}
                             </div>

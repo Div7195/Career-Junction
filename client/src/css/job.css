@@ -1,4 +1,4 @@
-.main-container{
+.fsadfdsfs{
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -14,7 +14,7 @@
     font-family: 'DM Sans', sans-serif;
     font-weight: bold;
 }
-.company-name{
+.name-company{
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.75rem;
@@ -38,7 +38,7 @@
     color: #131c30;
     font-size: 24px;
 }
-.skill{
+.skill-job{
     background: #d5d5d5;
     color: #566474;
     border-radius: 20px;

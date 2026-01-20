@@ -84,7 +84,7 @@ const AspirantDetailedJob = () => {
     console.log(jobState)
     useEffect(() => {
         const myFunction = async() => {
-        const url = `https://career-junction.vercel.app/getSingleJobAndCompany?jobId=${id}`;
+        const url = `http://localhost:8000/getSingleJobAndCompany?jobId=${id}`;
         const settings = {
         method: 'GET',
         headers: {
@@ -120,7 +120,7 @@ const AspirantDetailedJob = () => {
             }
             try {
                 console.log(settings.body)
-                const fetchResponse = await fetch(`https://career-junction.vercel.app/applyToJob`, settings);
+                const fetchResponse = await fetch(`http://localhost:8000/applyToJob`, settings);
                 const response = await fetchResponse.json();
                 if(response.msg === 'success job update'){
                     setAppliedOrNot('Applied')
@@ -151,10 +151,10 @@ const AspirantDetailedJob = () => {
                 width:'100%',
                 justifyContent:'center',
             }}>
-                <div className="main-container">
+                <div className="maincontainer">
 
                 {/* {Start of main details of job div} */}
-                <div className="main-details-container">
+                <div className="maindetailscontainer">
                 <div style={{
                     display:'flex',
                     flexDirection:'row',
@@ -171,7 +171,7 @@ const AspirantDetailedJob = () => {
                     </div>
                 </div>
 
-                <div className="company-name">
+                <div className="namecompany">
                 {companyState.companyName} | {companyState.locationBased}
                 </div>
 
@@ -217,7 +217,7 @@ const AspirantDetailedJob = () => {
 
 
                 {/* {Start of Job details div} */}
-                <div className="job-details-container">
+                <div className="jobdetailscontainer">
                     <div style={{
                         display:'flex',
                         flexDirection:'column',
@@ -386,7 +386,7 @@ const AspirantDetailedJob = () => {
                     }}> 
 
                     {/* Start of job desc div */}
-                        <div className="other-detail-container">
+                        <div className="otherdetailcontainer">
                         <div className="other-detail-title">
                             Job requirements
                         </div>
@@ -411,7 +411,7 @@ const AspirantDetailedJob = () => {
                         {/* Start of skills div */}
                         
                         
-                        <div className="side-container-container">
+                        <div className="sidecontainercontainer">
                         <div className="side-container-title">
                             Skills required
                         </div>
@@ -425,7 +425,7 @@ const AspirantDetailedJob = () => {
                     jobState.skillsRequired.map((skill) =>
                         (
                         <div>
-                        <div className="skill">
+                        <div className="skill-value">
                              <div>
                                 {skill}
                             </div>
@@ -441,7 +441,7 @@ const AspirantDetailedJob = () => {
                 </div>
                 {/* Start of about company div */}
 
-                    <div className="about-company-container">
+                    <div className="aboutcompanycontainer">
                     <div style={{
                             fontSize:'18px',
                             textDecoration:'underline',

@@ -25,7 +25,7 @@ import ProfilePositions from "./ProfilePositions";
 import ProfileAchievements from "./ProfileAchievements";
 import ProfileExperience from "./ProfileExperience";
 import ProfileCertifications from "./ProfileCertifications";
-
+import '../../css/aspirantProfile.css'
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
   

@@ -7,9 +7,10 @@ import { TextField } from "@mui/material";
 import dayjs from "dayjs";
 import SendIcon from '@mui/icons-material/Send';
 import AspirantSidebar from "../sidebar/AspirantSidebar";
-// import { socket } from "../../service/socket";
+import socket from "socket.io-client";
+import '../../css/chat.css'
 const JobMessages = () => {
-    
+    const io = socket.connect("http://localhost:8000");
     const {account}=useContext(DataContext);
     const newMessageInitial = {
         senderRole:account.role,
@@ -51,13 +52,13 @@ const JobMessages = () => {
              const fetchResponse = await fetch(`http://localhost:8000/updateJobMessages`, settings);
              const response = await fetchResponse.json();
             if(response.msg === 'success'){
-                // data.messages.reverse();
-                // data.messages.push(newMessage);
-                // data.messages.reverse();
-                // socket.emit('send', {
-                //     msg:newMessage,
-                // })
-                // setData({...data, messages:data.messages});
+                data.messages.reverse();
+                data.messages.push(newMessage);
+                data.messages.reverse();
+                io.emit('send', {
+                    msg:newMessage,
+                })
+                setData({...data, messages:data.messages});
                 setNewMessage(newMessageInitial)
                 
             }else{
@@ -75,8 +76,6 @@ const JobMessages = () => {
     useEffect(() => {
         
     const myFunction = async() => {
-        
-       
         const url = `http://localhost:8000/getJobMessages?jobId=${id}&aspirantAccountId=${aspirantAccountId}`;
         const settings = {
         method: 'GET',
@@ -92,7 +91,7 @@ const JobMessages = () => {
             
             setData(response.messagesObj)
             
-            // socket.emit('joinroom', chatId);
+            io.emit('joinroom', chatId);
             
             } catch (e) {
             console.log(e);
@@ -102,18 +101,18 @@ const JobMessages = () => {
     }, [])
    
    
-//    socket.on('receive',(obj)=>{
-//     console.log(data.messages)
-//     data.messages.reverse();
-//     data.messages.push(obj.msg);
-//     data.messages.reverse();
-//     setData({...data, messages:data.messages});
-//     })
-    // useEffect(() => {
-    //     return () => {
-    //       socket.disconnect()
-    //     };
-    //   }, []);
+    io.on('receive',(obj)=>{
+    console.log(data.messages)
+    data.messages.reverse();
+    data.messages.push(obj.msg);
+    data.messages.reverse();
+    setData({...data, messages:data.messages});
+    })
+    useEffect(() => {
+        return () => {
+            io.disconnect()
+        };
+      }, []);
     
 
 
@@ -129,10 +128,10 @@ const JobMessages = () => {
                 account.role === 'company'?<CompanySidebar/>:<AspirantSidebar/>
             }
             
-            <div className="main-container">
+            <div className="main-box">
 
-        <div sub-container>
-            <div className="old-messages-container">
+        <div className="sub-box">
+            <div className="old-messages-box">
                 {
                     data.messages && data.messages.length > 0 ? data.messages.map((e =>(
                         <>

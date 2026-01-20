@@ -1,0 +1,34 @@
+.boxcontainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-family: 'DM Sans', sans-serif;
+}
+.sub-boxcontainer{
+    display: flex;
+    flex-direction: column;
+    height: 250px;
+    background: #de4b7c;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    font-family: 'DM Sans', sans-serif;
+}
+.section-row-boxcontainer{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    padding: 10px;
+    font-family: 'DM Sans', sans-serif;
+    justify-content: space-between;
+}
+.card-heading{
+    font-size: 18px;
+    padding: 5px;
+    border-radius: 5px;
+    background: aliceblue;
+    font-weight: 700;
+}
+.classC{
+    object-fit: cover;display: flex;justify-content: center;margin-top: 2%;
+  }
